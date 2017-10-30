@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--<color name="colorPrimary">#3F51B5</color>-->
+    <!--<color name="colorPrimary">#00E676</color>-->
+    <!--<color name="colorPrimaryDark">#00E676</color>-->
+    <!--<color name="colorPrimary">#00aaec</color>-->
+    <!--<color name="colorPrimaryDark">#00aaec</color>-->
+
+    <color name="colorPrimary">#343947</color>
+    <color name="colorPrimaryDark">#343947</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="activity_fragment_background">#eeeeee</color>
+    <color name="divider_line_color">#e0e0e0</color>
+    <color name="text_tips_color">#bdbdbd</color>
+    <color name="number_key_pressed_color">#343947</color>
+    <color name="number_key_normal_color">#3d4353</color>
+    <color name="number_confirm_normal_color">#ff595f</color>
+    <color name="number_confirm_pressed_color">#ee484e</color>
+    <color name="number_key_divider_color">#2d3444</color>
+    <!--<color name="gray_color">#c4c4c4</color>-->
+    <color name="gray_color">#d4d4d4</color>
+
+</resources>

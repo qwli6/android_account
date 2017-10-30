@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="zhichu_yiban">一般</string>
+    <string name="zhichu_canyin">餐饮</string>
+    <string name="zhichu_jiaotong">交通</string>
+    <string name="zhichu_jiushuiyinliao">酒水饮料</string>
+    <string name="zhichu_shuiguo">水果</string>
+    <string name="zhichu_lingshi">零食</string>
+    <string name="zhichu_maicai">买菜</string>
+    <string name="zhichu_shenghuoyongpin">生活用品</string>
+    <string name="zhichu_dianying">电影</string>
+    <string name="zhichu_yule">娱乐</string>
+    <string name="zhichu_taobao">淘宝</string>
+    <string name="zhichu_lvyou">旅游</string>
+    <string name="zhichu_wanggou">网购</string>
+    <string name="zhichu_hongbao">红包</string>
+    <string name="zhichu_shuji">书籍</string>
+    <string name="zhichu_jujia">居家</string>
+    <string name="zhichu_yifuxiebao">衣服鞋包</string>
+    <string name="zhichu_huafeichongzhi">话费充值</string>
+    <string name="zhichu_jiechu">借出</string>
+    <string name="zhichu_hufucaizhuang">护肤彩妆</string>
+    <string name="zhichu_meirongjianshen">美容健身</string>
+    <string name="zhichu_fangzufangdai">房租房贷</string>
+    <string name="zhichu_renqingsongli">人情送礼</string>
+    <string name="zhichu_yaopin">药品</string>
+    <string name="zhichu_tianjia">添加</string>
+
+
+
+    <string name="shouru_gongzi">工资</string>
+    <string name="shouru_shenghuofei">生活费</string>
+    <string name="shouru_hongbao">红包</string>
+    <string name="shouru_linghuaqian">零花钱</string>
+    <string name="shouru_waikuaijianzhi">外快兼职</string>
+    <string name="shouru_touzishouru">投资收入</string>
+    <string name="shouru_jiangjin">奖金</string>
+    <string name="shouru_baoxiao">报销</string>
+    <string name="shouru_xianjin">现金</string>
+    <string name="shouru_tuikuan">退款</string>
+    <string name="shouru_zhifubao">支付宝</string>
+    <string name="shouru_jieru">借入</string>
+    <string name="shouru_qita">其他</string>
+</resources>

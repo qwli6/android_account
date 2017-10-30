@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="xx_normal_size">18sp</dimen>
+    <dimen name="x_normal_size">16sp</dimen>
+    <dimen name="normal_size">14sp</dimen>
+    <dimen name="s_normal_size">12sp</dimen>
+    <dimen name="m_normal_size">10sp</dimen>
+    <dimen name="money_size">30sp</dimen>
+
+    <dimen name="expend_income_type_pic_size">32dp</dimen>
+    <dimen name="activity_margin">16dp</dimen>
+    <dimen name="text_padding">8dp</dimen>
+    <dimen name="indicator_height">2dp</dimen>
+    <dimen name="image_text_margin">4dp</dimen>
+    <dimen name="divider_line_height">0.3dp</dimen>
+    <dimen name="relative_layout_item_height">56dp</dimen>
+    <dimen name="number_key_height">60dp</dimen>
+    <dimen name="border_radius">4dp</dimen>
+
+</resources>

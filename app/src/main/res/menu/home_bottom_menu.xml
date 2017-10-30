@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/fund_flow"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="流水"/>
+    <item android:id="@+id/keep_an_account"
+        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:title="记一笔"/>
+    <item android:id="@+id/mine"
+        android:icon="@drawable/ic_notifications_black_24dp"
+        android:title="我的"/>
+</menu>
