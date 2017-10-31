@@ -1,27 +1,22 @@
 package org.lqwit.android.account.fragment;
 
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.BaseAdapter;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.lqwit.android.account.R;
-import org.lqwit.android.account.activity.AccountDetailActivity;
 import org.lqwit.android.account.db.DataBaseHelper;
 import org.lqwit.android.account.entity.Account;
 import org.lqwit.android.account.utils.CurrencyUtils;
-import org.lqwit.android.account.utils.ViewUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,8 +40,10 @@ import io.reactivex.schedulers.Schedulers;
 
 public class HomeAccountFragment extends Fragment {
 
-    @BindView(R.id.account_list_view)
-    ListView accountListView;
+    @BindView(R.id.account_recycler_view)
+    RecyclerView accountRecyclerView;
+    @BindView(R.id.account_total_amount)
+    TextView accountTotalAmount;
 
 
     @Nullable
@@ -89,90 +86,45 @@ public class HomeAccountFragment extends Fragment {
         }).subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<List<Account>>() {
             @Override
             public void accept(List<Account> accounts) throws Exception {
-                  accountListView.setAdapter(new AccountAdapter(accounts));
-                  accountListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                      @Override
-                      public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                          Intent intent = new Intent(getActivity(), AccountDetailActivity.class);
-                          startActivity(intent);
-                      }
-                  });
+                Double totalAmount = 0.00;
+                LinearLayoutManager manager = new LinearLayoutManager(getActivity());
+                accountRecyclerView.setLayoutManager(manager);
+                accountRecyclerView.setAdapter(new AccountAdapter(accounts));
+                for (int i = 0; i < accounts.size(); i++) {
+                    totalAmount += Double.parseDouble(accounts.get(i).getTotalAmount());
+                }
+                accountTotalAmount.setText(CurrencyUtils.formatAmount(totalAmount.toString()));
             }
         });
     }
 
+    class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AccountViewHolder>{
 
-    public class AccountAdapter extends BaseAdapter {
 
-        List<Account> accountList;
+        List<Account> accounts;
 
-        public AccountAdapter(List<Account> accountList) {
-            this.accountList = accountList;
+        public AccountAdapter(List<Account> accounts) {
+            this.accounts = accounts;
         }
 
         @Override
-        public int getCount() {
-            return accountList.size();
+        public AccountViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_account_item, null);
+            return new AccountViewHolder(view);
         }
 
         @Override
-        public Object getItem(int position) {
-            return accountList.get(position);
+        public void onBindViewHolder(AccountViewHolder holder, int position) {
+            Account account = accounts.get(position);
+            holder.bindData(account, position);
         }
 
         @Override
-        public long getItemId(int position) {
-            return position;
+        public int getItemCount() {
+            return accounts.size();
         }
 
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            Account account = accountList.get(position);
-            View view = null;
-            ViewHolder viewHolder;
-            if(convertView == null){
-                view = ViewUtils.inflate(R.layout.layout_account_item);
-                viewHolder = new ViewHolder(view);
-                viewHolder.accountImageTitle.setText(account.getAccountName().substring(0,1));
-                viewHolder.accountImageTitle.setTypeface(Typeface.createFromAsset(getContext().getAssets(), "fonts/font_fzsongjianti.ttf"));
-                viewHolder.accountName.setText(account.getAccountName());
-                viewHolder.accountName.setTypeface(Typeface.createFromAsset(getContext().getAssets(), "fonts/font_fzsongjianti.ttf"));
-                viewHolder.accountDesc.setText(account.getAccountDesc());
-                viewHolder.accountDesc.setTypeface(Typeface.createFromAsset(getContext().getAssets(), "fonts/font_fzsongjianti.ttf"));
-                viewHolder.accountAmount.setText(account.getTotalAmount());
-                viewHolder.accountAmount.setTypeface(Typeface.createFromAsset(getContext().getAssets(), "fonts/font_fzsongjianti.ttf"));
-                view.setTag(viewHolder);
-            }else{
-                view = convertView;
-                viewHolder = (ViewHolder) view.getTag();
-            }
-            int cus = position % 6;
-            switch (cus){
-                case 0:
-                    viewHolder.accountItemLayout.setBackgroundResource(R.drawable.account_rect_border_one);
-                    break;
-                case 1:
-                    viewHolder.accountItemLayout.setBackgroundResource(R.drawable.account_rect_border_two);
-                    break;
-                case 2:
-                    viewHolder.accountItemLayout.setBackgroundResource(R.drawable.account_rect_border_three);
-                    break;
-                case 3:
-                    viewHolder.accountItemLayout.setBackgroundResource(R.drawable.account_rect_border_four);
-                    break;
-                case 4:
-                    viewHolder.accountItemLayout.setBackgroundResource(R.drawable.account_rect_border_five);
-                    break;
-                case 5:
-                    viewHolder.accountItemLayout.setBackgroundResource(R.drawable.account_rect_border_six);
-                    break;
-                default:
-                    break;
-            }
-            return view;
-        }
-
-         class ViewHolder {
+        class AccountViewHolder extends RecyclerView.ViewHolder {
             @BindView(R.id.account_item_layout)
             RelativeLayout accountItemLayout;
             @BindView(R.id.account_amount)
@@ -183,11 +135,46 @@ public class HomeAccountFragment extends Fragment {
             TextView accountName;
             @BindView(R.id.account_image_title)
             TextView accountImageTitle;
+            public AccountViewHolder(View itemView) {
+                super(itemView);
+                ButterKnife.bind(this, itemView);
+            }
 
-            ViewHolder(View view) {
-                ButterKnife.bind(this, view);
+            public void bindData(Account account, int position) {
+                accountImageTitle.setText(account.getAccountName().substring(0,1));
+                accountAmount.setText(account.getTotalAmount());
+                if(account.getAccountType() == 1) {
+                    accountName.setText(account.getAccountName() + "(储蓄)");
+                }
+                if(account.getAccountType() == 0){
+                    accountName.setText(account.getAccountName() + "(负债)");
+                }
+                accountDesc.setText(account.getAccountDesc());
+                int curPos = position % 6;
+                switch (curPos){
+                    case 0:
+                        accountItemLayout.setBackgroundResource(R.drawable.account_rect_border_one);
+                        break;
+                    case 1:
+                        accountItemLayout.setBackgroundResource(R.drawable.account_rect_border_two);
+                        break;
+                    case 2:
+                        accountItemLayout.setBackgroundResource(R.drawable.account_rect_border_three);
+                        break;
+                    case 3:
+                        accountItemLayout.setBackgroundResource(R.drawable.account_rect_border_four);
+                        break;
+                    case 4:
+                        accountItemLayout.setBackgroundResource(R.drawable.account_rect_border_five);
+                        break;
+                    case 5:
+                        accountItemLayout.setBackgroundResource(R.drawable.account_rect_border_six);
+                        break;
+
+                     default:
+                         break;
+                }
             }
         }
     }
-
 }

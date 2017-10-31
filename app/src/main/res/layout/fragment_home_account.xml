@@ -12,8 +12,6 @@
         android:text="@string/account"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"/>
-
-
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -29,6 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
+            android:id="@+id/account_total_amount"
             android:gravity="end"
             android:textSize="28sp"
             android:textColor="#1c865f"
@@ -39,20 +38,9 @@
     </LinearLayout>
 
 
-    <ListView
-        android:paddingLeft="@dimen/activity_margin"
-        android:paddingStart="@dimen/activity_margin"
-        android:paddingRight="@dimen/activity_margin"
-        android:paddingEnd="@dimen/activity_margin"
-        android:id="@+id/account_list_view"
-        android:scrollbars="none"
-        android:divider="@android:color/transparent"
-        android:dividerHeight="@dimen/activity_margin"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/account_recycler_view"
         android:layout_width="match_parent"
         android:layout_weight="1"
-        android:layout_height="0dp">
-
-    </ListView>
-
-
+        android:layout_height="0dp"/>
 </LinearLayout>
