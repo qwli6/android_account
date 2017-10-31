@@ -14,8 +14,6 @@ public abstract class AppBaseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initView();
-        initData();
-        initListener();
     }
 
     @Override
@@ -27,6 +25,9 @@ public abstract class AppBaseActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         this.mForegroundActivity = this;
+
+        initData();
+        initListener();
 
     }
 

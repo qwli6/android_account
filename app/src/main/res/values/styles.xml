@@ -41,7 +41,7 @@
         <item name="android:textSize">30sp</item>
         <item name="android:cursorVisible">false</item>
         <item name="android:maxLines">1</item>
-        <item name="android:maxLength">10</item>
+        <item name="android:maxLength">11</item>
         <item name="android:layout_marginLeft">@dimen/activity_margin</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:layout_marginRight">@dimen/activity_margin</item>

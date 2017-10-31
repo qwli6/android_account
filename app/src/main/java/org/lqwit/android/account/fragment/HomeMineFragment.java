@@ -29,8 +29,6 @@ public class HomeMineFragment extends Fragment {
 
     private static final String TAG = "HomeMineFragment";
 
-    public static final int TYPE_MANAGER_INCOME  = 0x1001;
-    public static final int TYPE_MANAGER_EXPEND  = 0x1002;
 
 
     @Nullable
@@ -57,12 +55,12 @@ public class HomeMineFragment extends Fragment {
 
             case R.id.relative_layout_income_type_manager:
                 Intent intent = new Intent(getActivity(), TypeManagerActivity.class);
-                intent.putExtra(TypeManagerActivity.TYPE_MANAGER, TYPE_MANAGER_INCOME);
+                intent.putExtra(TypeManagerActivity.TYPE_MANAGER, TypeManagerActivity.TYPE_MANAGER_INCOME);
                 startActivity(intent);
                 break;
             case R.id.relative_layout_expend_type_manager:
                 Intent expendIntent = new Intent(getActivity(), TypeManagerActivity.class);
-                expendIntent.putExtra(TypeManagerActivity.TYPE_MANAGER, TYPE_MANAGER_EXPEND);
+                expendIntent.putExtra(TypeManagerActivity.TYPE_MANAGER, TypeManagerActivity.TYPE_MANAGER_EXPEND);
                 startActivity(expendIntent);
                 break;
                 default:

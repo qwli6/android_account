@@ -13,17 +13,46 @@
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"/>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerview_account"
-        android:layout_marginStart="@dimen/activity_margin"
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
         android:layout_marginLeft="@dimen/activity_margin"
+        android:layout_marginStart="@dimen/activity_margin"
         android:layout_marginRight="@dimen/activity_margin"
         android:layout_marginEnd="@dimen/activity_margin"
+        android:gravity="center_vertical"
+        android:layout_height="72dp">
+        <TextView
+            android:text="总资产"
+            android:textSize="18sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:gravity="end"
+            android:textSize="28sp"
+            android:textColor="#1c865f"
+            android:text="65000"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+
+    <ListView
+        android:paddingLeft="@dimen/activity_margin"
+        android:paddingStart="@dimen/activity_margin"
+        android:paddingRight="@dimen/activity_margin"
+        android:paddingEnd="@dimen/activity_margin"
+        android:id="@+id/account_list_view"
+        android:scrollbars="none"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="@dimen/activity_margin"
         android:layout_width="match_parent"
         android:layout_weight="1"
         android:layout_height="0dp">
 
-    </android.support.v7.widget.RecyclerView>
+    </ListView>
 
 
 </LinearLayout>

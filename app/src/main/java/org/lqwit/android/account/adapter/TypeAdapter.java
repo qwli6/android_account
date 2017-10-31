@@ -10,6 +10,7 @@ import android.widget.TextView;
 import org.lqwit.android.account.R;
 import org.lqwit.android.account.entity.Type;
 import org.lqwit.android.account.listenter.OnTypeClickListener;
+import org.lqwit.android.account.utils.ViewUtils;
 
 import java.util.List;
 
@@ -43,8 +44,15 @@ public class TypeAdapter extends RecyclerView.Adapter<TypeAdapter.TypeViewHolder
 
     @Override
     public void onBindViewHolder(final TypeViewHolder holder, final int position) {
-        Type type = typeList.get(position);
-        holder.bindData(type);
+        Type type;
+        if(position == typeList.size() - 1){
+            type = new Type("icon_zhichu_shouru_type_add", "添加");
+            holder.typePic.setImageBitmap(ViewUtils.decodeBitmap(type.getPicName()));
+            holder.typeText.setText(type.getName());
+        }else {
+            type = typeList.get(position);
+            holder.bindData(type);
+        }
         if(onTypeClickListener != null){
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -71,7 +79,7 @@ public class TypeAdapter extends RecyclerView.Adapter<TypeAdapter.TypeViewHolder
 
 
         public void bindData(Type type) {
-//            typePic.setBackground(ViewUtils.getDrawable(type.getPicId()));
+            typePic.setImageBitmap(ViewUtils.decodeBitmap(type.getPicName()));
             typeText.setText(type.getName());
         }
     }

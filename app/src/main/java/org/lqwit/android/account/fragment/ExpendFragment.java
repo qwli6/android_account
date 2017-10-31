@@ -1,6 +1,7 @@
 package org.lqwit.android.account.fragment;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.lqwit.android.account.R;
+import org.lqwit.android.account.activity.TypeManagerActivity;
 import org.lqwit.android.account.adapter.TypeAdapter;
 import org.lqwit.android.account.db.DataBaseHelper;
 import org.lqwit.android.account.entity.Type;
@@ -116,10 +118,12 @@ public class ExpendFragment extends Fragment {
         Cursor cursor = sqLiteDatabase.rawQuery(sql, new String[]{String.valueOf(1)});
         while (cursor.moveToNext()){
             String name = cursor.getString(cursor.getColumnIndex("name"));
-            Integer picId = cursor.getInt(cursor.getColumnIndex("pic"));
-            Type type = new Type(picId, name);
+            String picName = cursor.getString(cursor.getColumnIndex("pic_name"));
+            Type type = new Type(picName, name);
             typeList.add(type);
         }
+
+        typeList.add(new Type("icon_zhichu_shouru_type_add", "添加"));
         cursor.close();
 
         GridLayoutManager manager = new GridLayoutManager(getActivity(),5);
@@ -128,8 +132,9 @@ public class ExpendFragment extends Fragment {
         expendTypeRecycleView.setAdapter(adapter);
 
         //set default selected account
-//        expendPic.setBackgroundResource(typeList.get(0).getPicId());
-        expendTitle.setText(typeList.get(0).getName());
+        Type type = typeList.get(0);
+        expendTitle.setText(type.getName());
+        expendPic.setImageBitmap(ViewUtils.decodeBitmap(type.getPicName()));
 
 
         adapter.setOnTypeClickListener(new OnTypeClickListener() {
@@ -137,11 +142,13 @@ public class ExpendFragment extends Fragment {
             public void onTypeClick(View view, int postion) {
                 if(postion != typeList.size() - 1) {
                     Type type = typeList.get(postion);
-//                    expendPic.setBackgroundResource(type.getPicId());
+                    expendPic.setImageBitmap(ViewUtils.decodeBitmap(type.getPicName()));
                     expendTitle.setText(type.getName());
                     curPosition = postion;
                 }else{
-                    Toast.makeText(getActivity(), "add", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getActivity(), TypeManagerActivity.class);
+                    intent.putExtra(TypeManagerActivity.TYPE_MANAGER, TypeManagerActivity.TYPE_MANAGER_EXPEND);
+                    startActivity(intent);
                 }
             }
         });
@@ -166,7 +173,6 @@ public class ExpendFragment extends Fragment {
                 break;
             case R.id.number_key_four:
                 CurrencyUtils.checkInputMoney(content, numberKeyFour.getText().toString(), showMoney);
-
                 break;
             case R.id.number_key_five:
                 CurrencyUtils.checkInputMoney(content, numberKeyFive.getText().toString(), showMoney);
@@ -234,7 +240,7 @@ public class ExpendFragment extends Fragment {
                     ContentValues contentValues = new ContentValues();
                     Type type = typeList.get(curPosition);
                     String sql = "insert into account_fund_flow(name,pic,pay_type,price,riqi,time,type) values(?,?,?,?,?,?,?)";
-                    sqLiteDatabase.execSQL(sql, new Object[]{type.getName(), type.getPicId(), expendType.getText().toString(), expendMoney, DateUtils.formatNoYear(new Date()),DateUtils.format(new Date()), consume_type});
+                    sqLiteDatabase.execSQL(sql, new Object[]{type.getName(), type.getPicName(), expendType.getText().toString(), expendMoney, DateUtils.formatNoYear(new Date()),DateUtils.format(new Date()), consume_type});
                     Toast.makeText(getActivity(), "保存成功", Toast.LENGTH_SHORT).show();
                     getActivity().finish();
 

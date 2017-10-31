@@ -25,11 +25,18 @@
             android:id="@+id/type_manager_title"
             android:textColor="@android:color/white"
             android:textSize="@dimen/xx_normal_size"
-            android:text="支出类别管理"
+            android:text=""
             android:layout_gravity="center_vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
     </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/type_manager_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
 
 </LinearLayout>

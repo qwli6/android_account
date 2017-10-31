@@ -19,6 +19,19 @@
     <color name="number_confirm_pressed_color">#ee484e</color>
     <color name="number_key_divider_color">#2d3444</color>
     <!--<color name="gray_color">#c4c4c4</color>-->
-    <color name="gray_color">#d4d4d4</color>
+    <color name="gray_color">#848484</color>
+
+
+
+    <color name="one">#57c03b</color>
+    <color name="two">#2fb2e8</color>
+    <color name="three">#519ddd</color>
+    <color name="four">#f3955d</color>
+    <color name="five">#45bc80</color>
+    <color name="six">#ea7067</color>
+
+
+
+
 
 </resources>

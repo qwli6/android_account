@@ -1,7 +1,11 @@
 package org.lqwit.android.account.utils;
 
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
 import android.content.res.ColorStateList;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Process;
@@ -135,5 +139,12 @@ public class ViewUtils {
         if (frontActivity != null) {
             Toast.makeText(frontActivity, str, Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public static Bitmap decodeBitmap(String picName){
+        Resources resources = getContext().getResources();
+        ApplicationInfo applicationInfo = getContext().getApplicationInfo();
+        int identifier = resources.getIdentifier(picName, "drawable", applicationInfo.packageName);
+        return BitmapFactory.decodeResource(getContext().getResources(), identifier);
     }
 }

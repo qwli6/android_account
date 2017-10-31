@@ -1,5 +1,6 @@
 package org.lqwit.android.account.fragment;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -14,9 +15,9 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.lqwit.android.account.R;
+import org.lqwit.android.account.activity.TypeManagerActivity;
 import org.lqwit.android.account.adapter.TypeAdapter;
 import org.lqwit.android.account.db.DataBaseHelper;
 import org.lqwit.android.account.entity.Type;
@@ -110,8 +111,8 @@ public class InComeFragment extends Fragment {
         Cursor cursor = sqLiteDatabase.rawQuery(sql, new String[]{String.valueOf(0)});
         while (cursor.moveToNext()){
             String name = cursor.getString(cursor.getColumnIndex("name"));
-            Integer pic = cursor.getInt(cursor.getColumnIndex("pic"));
-            typeList.add(new Type(pic, name));
+            String picName = cursor.getString(cursor.getColumnIndex("pic_name"));
+            typeList.add(new Type(picName, name));
         }
 
         GridLayoutManager manager = new GridLayoutManager(getActivity(),5);
@@ -119,8 +120,7 @@ public class InComeFragment extends Fragment {
         TypeAdapter adapter = new TypeAdapter(typeList);
         incomeTypeRecycleView.setAdapter(adapter);
 
-        //set default selected account
-//        incomePic.setBackgroundResource(typeList.get(0).getPicId());
+        incomePic.setImageBitmap(ViewUtils.decodeBitmap(typeList.get(0).getPicName()));
         incomeTitle.setText(typeList.get(0).getName());
 
 
@@ -128,15 +128,14 @@ public class InComeFragment extends Fragment {
             @Override
             public void onTypeClick(View view, int postion) {
                 if(postion != typeList.size() - 1) {
-                    Type account = typeList.get(postion);
-//                    Bitmap bitmap = BitmapFactory.decodeResource(getResources(), account.getPicId());
-//                    Palette palette = Palette.generate(bitmap);
-//                    layoutExpendSetPrice.setBackgroundColor(palette.getVibrantSwatch().getRgb());
-//                    incomePic.setBackgroundResource(account.getPicId());
-                    incomeTitle.setText(account.getName());
+                    Type type = typeList.get(postion);
+                    incomePic.setImageBitmap(ViewUtils.decodeBitmap(type.getPicName()));
+                    incomeTitle.setText(type.getName());
                     curPosition = postion;
                 }else{
-                    Toast.makeText(getActivity(), "add", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getActivity(), TypeManagerActivity.class);
+                    intent.putExtra(TypeManagerActivity.TYPE_MANAGER, TypeManagerActivity.TYPE_MANAGER_INCOME);
+                    startActivity(intent);
                 }
             }
         });

@@ -60,7 +60,7 @@ public class FundFlowFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_fund_flow, container, false);
         ButterKnife.bind(this, view);
 
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.splash_bg);
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.home_bg);
 //        Palette palette = Palette.generate(bitmap);
         Palette.Builder builder = new Palette.Builder(bitmap);
         Palette palette = builder.generate();
@@ -155,8 +155,4 @@ public class FundFlowFragment extends Fragment {
                     break;
         }
     }
-
-
-
-
 }

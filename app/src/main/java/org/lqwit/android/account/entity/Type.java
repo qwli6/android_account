@@ -9,20 +9,20 @@ package org.lqwit.android.account.entity;
  */
 
 public class Type {
-    private int picId;
+    private String picName;
     private String name;
 
-    public Type(int picId, String name) {
-        this.picId = picId;
+    public Type(String picName, String name) {
+        this.picName = picName;
         this.name = name;
     }
 
-    public int getPicId() {
-        return picId;
+    public String getPicName() {
+        return picName;
     }
 
-    public void setPicId(int picId) {
-        this.picId = picId;
+    public void setPicName(String picName) {
+        this.picName = picName;
     }
 
     public String getName() {

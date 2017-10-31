@@ -8,20 +8,24 @@
     <LinearLayout
         android:id="@+id/linear_layout_set_income_price"
         android:orientation="horizontal"
+        android:paddingLeft="@dimen/activity_margin"
+        android:paddingStart="@dimen/activity_margin"
+        android:paddingEnd="@dimen/activity_margin"
+        android:paddingRight="@dimen/activity_margin"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize">
         <ImageView
             android:id="@+id/income_pic"
-            android:layout_marginStart="@dimen/activity_margin"
-            android:layout_marginLeft="@dimen/activity_margin"
             android:layout_gravity="center_vertical"
             android:layout_width="@dimen/expend_income_type_pic_size"
             android:layout_height="@dimen/expend_income_type_pic_size"/>
         <TextView
             android:id="@+id/income_title"
             android:textSize="@dimen/x_normal_size"
-            android:layout_marginStart="@dimen/activity_margin"
-            android:layout_marginLeft="@dimen/activity_margin"
+            android:paddingLeft="@dimen/activity_margin"
+            android:paddingStart="@dimen/activity_margin"
+            android:paddingEnd="@dimen/activity_margin"
+            android:paddingRight="@dimen/activity_margin"
             android:textColor="#424242"
             android:layout_gravity="center_vertical"
             android:layout_width="wrap_content"

@@ -4,9 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
     <LinearLayout
-        android:background="@drawable/splash_bg"
+        android:background="@drawable/home_bg"
         android:layout_width="match_parent"
         android:layout_height="240dp"
         android:layerType="software"

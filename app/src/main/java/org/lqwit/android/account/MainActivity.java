@@ -20,9 +20,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppBaseActivity {
-    public static final int TYPE_MANAGER_INCOME  = 0x1001;
-    public static final int TYPE_MANAGER_EXPEND  = 0x1002;
-
 
     @BindView(R.id.home_bottom_menu)
     BottomNavigationView homeBottomMenu;
