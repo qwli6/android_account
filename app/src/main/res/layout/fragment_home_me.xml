@@ -1,28 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
-              android:background="#fafafa"
+              android:background="@color/toolbarColor"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
    <TextView
-       android:textColor="@android:color/white"
-       android:textSize="@dimen/xx_normal_size"
+       android:textColor="@color/toolbarTextColor"
+       android:textSize="20sp"
        android:gravity="center"
        android:text="@string/home_me"
-       android:background="@color/colorPrimary"
+       android:background="@color/toolbarColor"
        android:layout_width="match_parent"
        android:layout_height="?actionBarSize"/>
-
    <View
-       android:layout_marginTop="@dimen/activity_margin"
        android:layout_width="match_parent"
-       android:layout_marginLeft="@dimen/activity_margin"
-       android:layout_marginRight="@dimen/activity_margin"
        android:layout_height="@dimen/divider_line_height"
        android:background="@color/divider_line_color"/>
    <RelativeLayout
        android:id="@+id/relative_layout_login"
-       android:background="?selectableItemBackground"
+       android:background="@drawable/item_click_selector"
        android:padding="@dimen/activity_margin"
        android:layout_width="match_parent"
        android:layout_height="wrap_content">
@@ -42,77 +38,23 @@
           android:layout_height="wrap_content"/>
    </RelativeLayout>
 
+
+
    <View
        android:layout_width="match_parent"
-       android:layout_marginLeft="@dimen/activity_margin"
-       android:layout_marginRight="@dimen/activity_margin"
        android:layout_height="@dimen/divider_line_height"
        android:background="@color/divider_line_color"/>
    <RelativeLayout
-       android:background="?selectableItemBackground"
-       android:id="@+id/relative_layout_welfare"
-       android:paddingStart="@dimen/activity_margin"
-       android:paddingEnd="@dimen/activity_margin"
-       android:layout_width="match_parent"
-       android:layout_height="@dimen/relative_layout_item_height">
-      <TextView
-          android:layout_centerVertical="true"
-          android:text="@string/my_welfare"
-          android:textSize="@dimen/normal_size"
-          android:textColor="@android:color/black"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"/>
-      <ImageView
-          android:layout_centerVertical="true"
-          android:layout_alignParentEnd="true"
-          android:layout_alignParentRight="true"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"/>
-   </RelativeLayout>
-   <View
-       android:layout_width="match_parent"
-       android:layout_marginLeft="@dimen/activity_margin"
-       android:layout_marginRight="@dimen/activity_margin"
-       android:layout_height="@dimen/divider_line_height"
-       android:background="@color/divider_line_color"/>
-   <RelativeLayout
-       android:background="?selectableItemBackground"
-       android:id="@+id/relative_layout_help"
-       android:paddingStart="@dimen/activity_margin"
-       android:paddingEnd="@dimen/activity_margin"
-       android:layout_width="match_parent"
-       android:layout_height="@dimen/relative_layout_item_height">
-      <TextView
-          android:layout_centerVertical="true"
-          android:text="@string/notification_help"
-          android:textSize="@dimen/normal_size"
-          android:textColor="@android:color/black"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"/>
-      <ImageView
-          android:layout_centerVertical="true"
-          android:layout_alignParentEnd="true"
-          android:layout_alignParentRight="true"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"/>
-   </RelativeLayout>
-   <View
-       android:layout_width="match_parent"
-       android:layout_marginLeft="@dimen/activity_margin"
-       android:layout_marginRight="@dimen/activity_margin"
-       android:layout_height="@dimen/divider_line_height"
-       android:background="@color/divider_line_color"/>
-   <RelativeLayout
-       android:background="?selectableItemBackground"
        android:id="@+id/relative_layout_expend_type_manager"
+       android:background="@drawable/item_click_selector"
        android:paddingStart="@dimen/activity_margin"
        android:paddingEnd="@dimen/activity_margin"
        android:layout_width="match_parent"
-       android:layout_height="@dimen/relative_layout_item_height">
+       android:layout_height="?attr/actionBarSize">
       <TextView
           android:layout_centerVertical="true"
           android:text="@string/expend_type_manager"
-          android:textSize="@dimen/normal_size"
+          android:textSize="18sp"
           android:textColor="@android:color/black"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"/>
@@ -125,21 +67,20 @@
    </RelativeLayout>
    <View
        android:layout_width="match_parent"
-       android:layout_marginLeft="@dimen/activity_margin"
-       android:layout_marginRight="@dimen/activity_margin"
        android:layout_height="@dimen/divider_line_height"
        android:background="@color/divider_line_color"/>
+
    <RelativeLayout
-       android:background="?selectableItemBackground"
        android:id="@+id/relative_layout_income_type_manager"
+       android:background="@drawable/item_click_selector"
        android:paddingStart="@dimen/activity_margin"
        android:paddingEnd="@dimen/activity_margin"
        android:layout_width="match_parent"
-       android:layout_height="@dimen/relative_layout_item_height">
+       android:layout_height="?attr/actionBarSize">
       <TextView
           android:layout_centerVertical="true"
           android:text="@string/income_type_manager"
-          android:textSize="@dimen/normal_size"
+          android:textSize="18sp"
           android:textColor="@android:color/black"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"/>
@@ -152,21 +93,45 @@
    </RelativeLayout>
    <View
        android:layout_width="match_parent"
-       android:layout_marginLeft="@dimen/activity_margin"
-       android:layout_marginRight="@dimen/activity_margin"
+       android:layout_height="@dimen/divider_line_height"
+       android:background="@color/divider_line_color"/>
+
+   <RelativeLayout
+       android:id="@+id/question_feedback"
+       android:background="@drawable/item_click_selector"
+       android:paddingStart="@dimen/activity_margin"
+       android:paddingEnd="@dimen/activity_margin"
+       android:layout_width="match_parent"
+       android:layout_height="?attr/actionBarSize">
+      <TextView
+          android:layout_centerVertical="true"
+          android:text="@string/question_feed_back"
+          android:textSize="18sp"
+          android:textColor="@android:color/black"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"/>
+      <ImageView
+          android:layout_centerVertical="true"
+          android:layout_alignParentEnd="true"
+          android:layout_alignParentRight="true"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"/>
+   </RelativeLayout>
+   <View
+       android:layout_width="match_parent"
        android:layout_height="@dimen/divider_line_height"
        android:background="@color/divider_line_color"/>
    <RelativeLayout
        android:id="@+id/relative_layout_setting"
-       android:background="?selectableItemBackground"
+       android:background="@drawable/item_click_selector"
        android:paddingStart="@dimen/activity_margin"
        android:paddingEnd="@dimen/activity_margin"
        android:layout_width="match_parent"
-       android:layout_height="@dimen/relative_layout_item_height">
+       android:layout_height="?attr/actionBarSize">
       <TextView
           android:layout_centerVertical="true"
           android:text="@string/home_mine_settings"
-          android:textSize="@dimen/normal_size"
+          android:textSize="18sp"
           android:textColor="@android:color/black"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"/>
@@ -179,10 +144,6 @@
    </RelativeLayout>
    <View
        android:layout_width="match_parent"
-       android:layout_marginLeft="@dimen/activity_margin"
-       android:layout_marginRight="@dimen/activity_margin"
        android:layout_height="@dimen/divider_line_height"
        android:background="@color/divider_line_color"/>
-
-
 </LinearLayout>

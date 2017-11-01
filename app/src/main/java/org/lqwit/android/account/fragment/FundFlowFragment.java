@@ -5,18 +5,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.graphics.Palette;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.lqwit.android.account.R;
 import org.lqwit.android.account.activity.FundFlowDetailActivity;
@@ -59,14 +54,6 @@ public class FundFlowFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_fund_flow, container, false);
         ButterKnife.bind(this, view);
-
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.home_bg);
-//        Palette palette = Palette.generate(bitmap);
-        Palette.Builder builder = new Palette.Builder(bitmap);
-        Palette palette = builder.generate();
-        if(palette.getVibrantSwatch() != null) {
-            keepAnAccount.setBackgroundColor(palette.getVibrantSwatch().getRgb());
-        }
         return view;
     }
 
@@ -75,6 +62,7 @@ public class FundFlowFragment extends Fragment {
     public void onResume() {
         super.onResume();
        loadSplashData(getActivity(), DateUtils.formatNoYear(new Date()));
+
     }
 
     private void loadSplashData(final Context context, final String date){
@@ -96,7 +84,6 @@ public class FundFlowFragment extends Fragment {
                     Integer type = cursor.getInt(cursor.getColumnIndex("type"));
                     String price = cursor.getString(cursor.getColumnIndex("price"));
                     FundFlow fundFlow = new FundFlow();
-                    Log.d(TAG, "price:" + price);
                     fundFlow.setDate(date);
                     fundFlow.setName(name);
                     fundFlow.setPayType(payType);
@@ -116,7 +103,6 @@ public class FundFlowFragment extends Fragment {
                 .subscribe(new Consumer<List<FundFlow>>() {
                     @Override
                     public void accept(List<FundFlow> s) throws Exception {
-                        Toast.makeText(context, "查询出结果了", Toast.LENGTH_SHORT).show();
                         if(fundFlows.size() > 0){
                             FundFlow fundFlow = fundFlows.get(0);
                             todayRecentFundFlow.setText("最近一笔 " + fundFlow.getName() + " " + CurrencyUtils.formatAmount(fundFlow.getPrice()));

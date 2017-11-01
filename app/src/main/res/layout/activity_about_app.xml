@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/toolbarColor">
+
+    <TextView
+        android:id="@+id/about_toolbar_back"
+        android:drawableLeft="@drawable/title_back_selector"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:gravity="center_vertical"
+        android:drawablePadding="@dimen/activity_margin"
+        android:paddingLeft="@dimen/activity_margin"
+        android:paddingStart="@dimen/activity_margin"
+        android:text="关于"
+        android:textSize="20sp"
+        android:textColor="@color/toolbarTextColor"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.3dp"
+        android:background="@color/lineDividerColor"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_marginTop="60dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/splash_bg"
+        android:layout_width="90dp"
+        android:layout_height="90dp" />
+
+    <TextView
+        android:id="@+id/show_version_name"
+        android:layout_marginTop="60dp"
+        android:textSize="18sp"
+        android:textColor="@color/toolbarTextColor"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/check_version"
+        android:background="@drawable/setting_update_selector"
+        android:textSize="18sp"
+        android:layout_marginTop="@dimen/activity_margin"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/toolbarTextColor"
+        android:text="检测更新"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

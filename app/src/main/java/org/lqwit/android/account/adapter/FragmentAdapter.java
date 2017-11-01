@@ -12,7 +12,12 @@ public class FragmentAdapter extends FragmentStatePagerAdapter {
         private List<Fragment> fragmentList;
         private List<String>   titleList;
 
-        public FragmentAdapter(FragmentManager fm, List<Fragment> fragmentList, List<String> titleList) {
+    public FragmentAdapter(FragmentManager fm, List<Fragment> fragmentList) {
+        super(fm);
+        this.fragmentList = fragmentList;
+    }
+
+    public FragmentAdapter(FragmentManager fm, List<Fragment> fragmentList, List<String> titleList) {
             super(fm);
             this.fragmentList = fragmentList;
             this.titleList = titleList;

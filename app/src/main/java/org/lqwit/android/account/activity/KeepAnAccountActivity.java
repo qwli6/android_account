@@ -1,11 +1,10 @@
 package org.lqwit.android.account.activity;
 
 
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
-;
+import android.widget.RadioButton;
 
 import org.lqwit.android.account.R;
 import org.lqwit.android.account.adapter.FragmentAdapter;
@@ -20,6 +19,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+;
+
 /**
  * 记一笔账界面
  */
@@ -27,17 +28,17 @@ public class KeepAnAccountActivity extends AppBaseActivity {
     private FragmentAdapter adapter;
     private List<String> titleList = new ArrayList<>();
 
-
-    @BindView(R.id.type_tablayout)
-    TabLayout typeTabLayout;
     @BindView(R.id.viewpager_keep_an_accounts)
     ViewPager viewpagerKeepAccounts;
+    @BindView(R.id.radio_expend)
+    RadioButton radioExpend;
+    @BindView(R.id.radio_income)
+    RadioButton radioIncome;
 
     @Override
     public void initView() {
         setContentView(R.layout.activity_keep_an_account);
         ButterKnife.bind(this);
-
     }
 
 
@@ -46,20 +47,23 @@ public class KeepAnAccountActivity extends AppBaseActivity {
         List<Fragment> fragmentList = new ArrayList<>();
         fragmentList.add(new ExpendFragment());
         fragmentList.add(new InComeFragment());
-        titleList.add(getString(R.string.expend));
-        titleList.add(getString(R.string.income));
 
-        adapter = new FragmentAdapter(getSupportFragmentManager(), fragmentList, titleList);
+        adapter = new FragmentAdapter(getSupportFragmentManager(), fragmentList);
         viewpagerKeepAccounts.setAdapter(adapter);
-        typeTabLayout.setupWithViewPager(viewpagerKeepAccounts);
     }
 
 
-    @OnClick({R.id.expend_income_back})
+    @OnClick({R.id.expend_income_back, R.id.radio_expend, R.id.radio_income})
     public void onViewClick(View view){
         switch (view.getId()){
             case R.id.expend_income_back:
                 finish();
+                break;
+            case R.id.radio_expend:
+                viewpagerKeepAccounts.setCurrentItem(0, false);
+                break;
+            case R.id.radio_income:
+                viewpagerKeepAccounts.setCurrentItem(1, false);
                 break;
                 default:
                     break;
@@ -68,6 +72,26 @@ public class KeepAnAccountActivity extends AppBaseActivity {
 
     @Override
     public void initListener() {
+        viewpagerKeepAccounts.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if(position == 1){
+                    radioIncome.setChecked(true);
+                }
+                if(position == 0){
+                    radioExpend.setChecked(true);
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 }

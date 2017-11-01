@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
+              android:background="@color/toolbarColor"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
     <TextView
+        android:textColor="@color/toolbarTextColor"
+        android:textSize="20sp"
         android:gravity="center"
-        android:textColor="@android:color/white"
-        android:background="@color/colorPrimary"
-        android:textSize="@dimen/xx_normal_size"
         android:text="@string/account"
+        android:background="@color/toolbarColor"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_line_height"
+        android:background="@color/divider_line_color"/>
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"

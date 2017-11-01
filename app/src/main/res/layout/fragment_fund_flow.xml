@@ -1,6 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
+    android:background="@color/toolbarColor"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -82,7 +83,8 @@
         android:layout_margin="@dimen/activity_margin"
         android:text="记一笔"
         android:textSize="18sp"
-        android:textColor="@android:color/white"
+        android:background="@drawable/item_click_selector"
+        android:textColor="@color/toolbarTextColor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -92,7 +94,7 @@
         android:paddingEnd="@dimen/activity_margin"
         android:paddingStart="@dimen/activity_margin"
         android:paddingLeft="@dimen/activity_margin"
-        android:background="?attr/selectableItemBackground"
+        android:background="@drawable/item_click_selector"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize">
         <RelativeLayout
@@ -163,14 +165,13 @@
             android:layout_height="@dimen/divider_line_height"
             android:background="@color/divider_line_color"/>
     </RelativeLayout>
-
     <RelativeLayout
         android:id="@+id/week_fund_flow"
         android:paddingRight="@dimen/activity_margin"
         android:paddingEnd="@dimen/activity_margin"
         android:paddingStart="@dimen/activity_margin"
         android:paddingLeft="@dimen/activity_margin"
-        android:background="?attr/selectableItemBackground"
+        android:background="@drawable/item_click_selector"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize">
         <RelativeLayout
@@ -237,14 +238,13 @@
             android:layout_height="@dimen/divider_line_height"
             android:background="@color/divider_line_color"/>
     </RelativeLayout>
-
     <RelativeLayout
         android:id="@+id/month_fund_flow"
         android:paddingRight="@dimen/activity_margin"
         android:paddingEnd="@dimen/activity_margin"
         android:paddingStart="@dimen/activity_margin"
         android:paddingLeft="@dimen/activity_margin"
-        android:background="?attr/selectableItemBackground"
+        android:background="@drawable/item_click_selector"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize">
         <RelativeLayout

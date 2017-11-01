@@ -6,8 +6,10 @@
     <!--<color name="colorPrimary">#00aaec</color>-->
     <!--<color name="colorPrimaryDark">#00aaec</color>-->
 
-    <color name="colorPrimary">#343947</color>
-    <color name="colorPrimaryDark">#343947</color>
+    <!--<color name="colorPrimary">#343947</color>-->
+    <!--<color name="colorPrimaryDark">#343947</color>-->
+    <color name="colorPrimary">#FDFBF8</color>
+    <color name="colorPrimaryDark">#FDFBF8</color>
     <color name="colorAccent">#FF4081</color>
 
     <color name="activity_fragment_background">#eeeeee</color>
@@ -26,6 +28,8 @@
     <color name="lineDividerColor">#DFDBD5</color>
     <color name="itemPressedColor">#F8F3E5</color>
     <color name="customToast">#424242</color>
+    <color name="tabIndicatorLineColor">#CEAD53</color>
+
 
 
 

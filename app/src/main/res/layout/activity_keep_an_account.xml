@@ -18,19 +18,46 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
-        <android.support.design.widget.TabLayout
-            android:layout_alignParentEnd="true"
-            android:id="@+id/type_tablayout"
-            app:tabMode="fixed"
-            app:tabSelectedTextColor="@android:color/white"
-            app:tabPaddingStart="@dimen/activity_margin"
-            app:tabPaddingEnd="@dimen/activity_margin"
-            app:tabTextColor="@android:color/white"
-            android:layout_gravity="end"
-            app:tabIndicatorColor="@color/number_confirm_normal_color"
+        <RadioGroup
+            android:layout_centerInParent="true"
+            android:orientation="horizontal"
+            android:background="@drawable/rect_custom_toast_background"
             android:layout_width="wrap_content"
-            android:layout_height="?actionBarSize">
-        </android.support.design.widget.TabLayout>
+            android:layout_height="32dp">
+            <RadioButton
+                android:id="@+id/radio_expend"
+                android:text="支出"
+                android:checked="true"
+                android:textColor="@color/text_color_selector"
+                android:background="@drawable/left_radio_checked_selector"
+                android:paddingLeft="@dimen/activity_margin"
+                android:paddingStart="@dimen/activity_margin"
+                android:paddingRight="@dimen/activity_margin"
+                android:paddingEnd="@dimen/activity_margin"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:button="@null"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+            <View
+                android:layout_width="0.3dp"
+                android:layout_height="match_parent"
+                android:background="@color/lineDividerColor"/>
+            <RadioButton
+                android:id="@+id/radio_income"
+                android:text="收入"
+                android:background="@drawable/right_radio_checked_selector"
+                android:textColor="@color/text_color_selector"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:paddingLeft="@dimen/activity_margin"
+                android:paddingStart="@dimen/activity_margin"
+                android:paddingRight="@dimen/activity_margin"
+                android:paddingEnd="@dimen/activity_margin"
+                android:button="@null"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+        </RadioGroup>
     </RelativeLayout>
 
     <android.support.v4.view.ViewPager

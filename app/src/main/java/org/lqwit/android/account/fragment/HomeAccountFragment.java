@@ -110,6 +110,7 @@ public class HomeAccountFragment extends Fragment {
                     public void onTypeClick(View view, int postion) {
                         Intent intent = new Intent(getActivity(), AccountDetailActivity.class);
                         intent.putExtra(AccountDetailActivity.ACCOUNT_ID, accounts.get(postion).getAccountId());
+                        intent.putExtra(AccountDetailActivity.ACCOUNT_AMOUNT, accounts.get(postion).getTotalAmount());
                         startActivity(intent);
                     }
                 });

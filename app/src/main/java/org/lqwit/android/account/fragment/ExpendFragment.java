@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -315,6 +316,14 @@ public class ExpendFragment extends Fragment {
                 });
                 break;
             case R.id.expend_date:
+                BottomSheetDialog bottomDateDialog = new BottomSheetDialog(getActivity());
+                View dateView = View.inflate(getActivity(), R.layout.layout_choose_date, null);
+                bottomDateDialog.setContentView(dateView);
+                ViewPager viewPager = view.findViewById(R.id.date_choose_viewpager);
+
+
+                bottomDateDialog.show();
+
                 break;
             case R.id.expend_memo:
                 ViewUtils.showToastSafe(R.string.unsupport_memo);
@@ -323,6 +332,8 @@ public class ExpendFragment extends Fragment {
                     break;
         }
     }
+
+
 
     public class ChooseAccountAdapter extends RecyclerView.Adapter<ChooseAccountAdapter.ChooseAccountViewHolder>{
 

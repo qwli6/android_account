@@ -10,17 +10,19 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:gravity="bottom"
-        android:background="@drawable/splash_bg"
+        android:background="@color/one"
         android:padding="@dimen/activity_margin"
-        android:layout_height="240dp">
+        android:layout_height="200dp">
         <TextView
+            android:id="@+id/account_surplus"
             android:textSize="32sp"
             android:textColor="@android:color/white"
             android:text="7300.00"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
-            android:text="结余"
+            android:text="余额"
+            android:textSize="16sp"
             android:textColor="@android:color/white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -37,12 +39,14 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content">
                 <TextView
-                    android:text="7200"
+                    android:id="@+id/account_income"
+                    android:text="0.00"
                     android:textColor="@android:color/white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView
                     android:layout_marginTop="4dp"
+                    android:textSize="14sp"
                     android:text="收入"
                     android:textColor="@android:color/white"
                     android:layout_width="wrap_content"
@@ -55,12 +59,14 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content">
                 <TextView
-                    android:text="164.00"
+                    android:id="@+id/account_exptend"
+                    android:text="0.00"
                     android:textColor="@android:color/white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView
                     android:text="支出"
+                    android:textSize="14sp"
                     android:layout_marginTop="4dp"
                     android:textColor="@android:color/white"
                     android:layout_width="wrap_content"
@@ -68,5 +74,10 @@
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
+
+    <ExpandableListView
+        android:id="@+id/account_flow_expandable_listview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>

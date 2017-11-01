@@ -9,10 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import org.lqwit.android.account.R;
-import org.lqwit.android.account.activity.LoginActivity;
+import org.lqwit.android.account.activity.QuestionFeedBackActivity;
 import org.lqwit.android.account.activity.SettingActivity;
 import org.lqwit.android.account.activity.TypeManagerActivity;
-import org.lqwit.android.account.activity.UserProfileActivity;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -37,18 +36,16 @@ public class HomeMineFragment extends Fragment {
         return view;
     }
 
-    @OnClick({R.id.relative_layout_login, R.id.relative_layout_setting, R.id.relative_layout_help,
-            R.id.relative_layout_welfare, R.id.relative_layout_expend_type_manager, R.id.relative_layout_income_type_manager})
+    @OnClick({R.id.relative_layout_login, R.id.relative_layout_setting,
+            R.id.question_feedback, R.id.relative_layout_expend_type_manager,
+            R.id.relative_layout_income_type_manager})
     public void onViewClick(View view){
         switch (view.getId()){
-            case R.id.relative_layout_help:
-                startActivity(new Intent(getActivity(), UserProfileActivity.class));
-                break;
-            case R.id.relative_layout_login:
-                startActivity(new Intent(getActivity(), LoginActivity.class));
-                break;
             case R.id.relative_layout_setting:
                 startActivity(new Intent(getActivity(), SettingActivity.class));
+                break;
+            case R.id.question_feedback:
+                startActivity(new Intent(getActivity(), QuestionFeedBackActivity.class));
                 break;
 
             case R.id.relative_layout_income_type_manager:

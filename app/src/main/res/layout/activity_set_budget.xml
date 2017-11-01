@@ -3,31 +3,32 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/toolbarColor"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <RelativeLayout
-            android:background="@color/colorPrimary"
+        <TextView
+            android:id="@+id/set_budget_back"
+            android:drawableLeft="@drawable/title_back_selector"
+            android:drawableStart="@drawable/title_back_selector"
             android:layout_width="match_parent"
-            android:layout_height="?actionBarSize">
-            <ImageView
-                android:id="@+id/set_budget_back"
-                android:background="?selectableItemBackground"
-                android:layout_width="?actionBarSize"
-                android:layout_height="?actionBarSize"
-                android:paddingTop="@dimen/activity_margin"
-                android:paddingBottom="@dimen/activity_margin" />
-            <TextView
-                android:text="@string/set_budget"
-                android:textColor="@android:color/white"
-                android:layout_centerInParent="true"
-                android:textSize="@dimen/xx_normal_size"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-        </RelativeLayout>
+            android:layout_height="?attr/actionBarSize"
+            android:gravity="center_vertical"
+            android:drawablePadding="@dimen/activity_margin"
+            android:paddingLeft="@dimen/activity_margin"
+            android:paddingStart="@dimen/activity_margin"
+            android:paddingRight="@dimen/activity_margin"
+            android:paddingEnd="@dimen/activity_margin"
+            android:text="设置预算"
+            android:textSize="20sp"
+            android:textColor="@color/toolbarTextColor"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.3dp"
+            android:background="@color/lineDividerColor"/>
 
     <TextView
         android:textColor="@android:color/black"

@@ -107,10 +107,10 @@ public class TypeManagerActivity extends AppBaseActivity {
     }
 
 
-    @OnClick({R.id.type_manager_back})
+    @OnClick({R.id.type_manager_title})
     public void onViewClick(View view){
         switch (view.getId()){
-            case R.id.type_manager_back:
+            case R.id.type_manager_title:
                 finish();
                 break;
         }
