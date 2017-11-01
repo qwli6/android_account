@@ -1,11 +1,22 @@
 package org.lqwit.android.account.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseExpandableListAdapter;
+import android.widget.ExpandableListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.lqwit.android.account.R;
 import org.lqwit.android.account.base.AppBaseActivity;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,6 +33,16 @@ public class AccountDetailActivity extends AppBaseActivity {
     TextView accountExptend;
     @BindView(R.id.account_income)
     TextView accountIncome;
+    @BindView(R.id.account_flow_expandable_listview)
+    ExpandableListView accountFlowListView;
+
+    private int accountId;
+
+    private Map<String, List<String>> dataset = new HashMap<>();
+    private String[] parentList = new String[]{"first", "second", "third"};
+    private List<String> childrenList1 = new ArrayList<>();
+    private List<String> childrenList2 = new ArrayList<>();
+    private List<String> childrenList3 = new ArrayList<>();
 
     @Override
     public void initView() {
@@ -32,12 +53,195 @@ public class AccountDetailActivity extends AppBaseActivity {
         accountSurplus.setText(accountAmount);
     }
 
+    @Override
+    public void initData() {
+
+        childrenList1.add(parentList[0] + "-" + "first");
+        childrenList1.add(parentList[0] + "-" + "second");
+        childrenList1.add(parentList[0] + "-" + "third");
+        childrenList2.add(parentList[1] + "-" + "first");
+        childrenList2.add(parentList[1] + "-" + "second");
+        childrenList2.add(parentList[1] + "-" + "third");
+        childrenList3.add(parentList[2] + "-" + "first");
+        childrenList3.add(parentList[2] + "-" + "second");
+        childrenList3.add(parentList[2] + "-" + "third");
+        dataset.put(parentList[0], childrenList1);
+        dataset.put(parentList[1], childrenList2);
+        dataset.put(parentList[2], childrenList3);
+
+
+        accountFlowListView.setAdapter(new AccountFlowAdapter(dataset, parentList));
+
+        /**
+        accountId = getIntent().getIntExtra(ACCOUNT_ID, 0);
+        Observable.create(new ObservableOnSubscribe<List<String>>() {
+            @Override
+            public void subscribe(ObservableEmitter<List<String>> e) throws Exception {
+                DataBaseHelper dataBaseHelper = new DataBaseHelper(AccountDetailActivity.this);
+                SQLiteDatabase sqLiteDatabase = dataBaseHelper.openSqlDataBase();
+                String sql = "select * from account_fund_flow where pay_type = ? order by date desc";
+                Cursor cursor = sqLiteDatabase.rawQuery(sql, new String[]{String.valueOf(accountId)});
+                while (cursor.moveToNext()){
+
+                }
+
+                cursor.close();
+
+
+            }
+        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<List<String>>() {
+            @Override
+            public void accept(List<String> strings) throws Exception {
+
+            }
+        });
+
+         **/
+    }
 
     @OnClick(R.id.account_surplus)
     public void onViewClick(View view){
         switch (view.getId()){
             case R.id.account_surplus:
                 break;
+        }
+    }
+
+    class AccountFlowAdapter extends BaseExpandableListAdapter{
+        Map<String, List<String>> dataset;
+        String[] parentList;
+
+        public AccountFlowAdapter(Map<String, List<String>> dataset, String[] parentList) {
+            this.dataset = dataset;
+            this.parentList = parentList;
+        }
+
+        /**
+         * 总共有几组数据
+         * @return
+         */
+        @Override
+        public int getGroupCount() {
+            return dataset.size();
+        }
+
+        /**
+         * 获得每一个组的孩子的数量
+         * @param groupPosition
+         * @return
+         */
+        @Override
+        public int getChildrenCount(int groupPosition) {
+            return dataset.get(parentList[groupPosition]).size();
+        }
+
+        /**
+         * 获取每一个组的对象
+         * @param groupPosition
+         * @return
+         */
+        @Override
+        public Object getGroup(int groupPosition) {
+            return dataset.get(parentList[groupPosition]);
+        }
+
+        /**
+         * 获取每一个组的孩子对象
+         * @param groupPosition
+         * @param childPosition
+         * @return
+         */
+        @Override
+        public Object getChild(int groupPosition, int childPosition) {
+            return dataset.get(parentList[groupPosition]).get(childPosition);
+        }
+
+        /**
+         * 获取每一个组的id
+         * @param groupPosition
+         * @return
+         */
+        @Override
+        public long getGroupId(int groupPosition) {
+            return groupPosition;
+        }
+
+        /**
+         * 获取每一组的孩子的id
+         */
+        @Override
+        public long getChildId(int groupPosition, int childPosition) {
+            return childPosition;
+        }
+
+        /**
+         * 是否具有不变的id，无需改动，直接返回false即可
+         * @return
+         */
+        @Override
+        public boolean hasStableIds() {
+            return false;
+        }
+
+        /**
+         * 获取每一组的 view
+         * @param groupPosition
+         * @param isExpanded
+         * @param convertView
+         * @param parent
+         * @return
+         */
+        @Override
+        public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
+            if (convertView == null) {
+                LayoutInflater inflater = (LayoutInflater) AccountDetailActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                convertView = inflater.inflate(R.layout.parent_item, null);
+            }
+            convertView.setTag(R.layout.parent_item, groupPosition);
+            convertView.setTag(R.layout.child_item, -1);
+            TextView text = (TextView) convertView.findViewById(R.id.parent_title);
+            text.setText(parentList[groupPosition]);
+            return convertView;
+        }
+
+        /**
+         * 获取每一组的孩子View
+         * @param groupPosition
+         * @param childPosition
+         * @param isLastChild
+         * @param convertView
+         * @param parent
+         * @return
+         */
+        @Override
+        public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+            if (convertView == null) {
+                LayoutInflater inflater = (LayoutInflater)AccountDetailActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                convertView = inflater.inflate(R.layout.child_item, null);
+            }
+            convertView.setTag(R.layout.parent_item, groupPosition);
+            convertView.setTag(R.layout.child_item, groupPosition);
+            TextView text = (TextView) convertView.findViewById(R.id.child_title);
+            text.setText(dataset.get(parentList[groupPosition]).get(childPosition));
+            text.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(AccountDetailActivity.this, "点到了内置的textview", Toast.LENGTH_SHORT).show();
+                }
+            });
+            return convertView;
+        }
+
+        /**
+         * 子项是否可以选中
+         * 如果需要在子项中设置点击事件，需要返回true
+         * @param groupPosition
+         * @param childPosition
+         * @return
+         */
+        @Override
+        public boolean isChildSelectable(int groupPosition, int childPosition) {
+            return false;
         }
     }
 }
