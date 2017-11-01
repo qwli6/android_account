@@ -10,7 +10,7 @@ import android.view.View;
  * Desc:
  */
 
-public interface OnTypeClickListener {
+public interface OnItemClickListener {
 
     void onTypeClick(View view, int postion);
 }

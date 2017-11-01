@@ -16,6 +16,10 @@
         <attr name="isOpened" format="boolean"/>
     </declare-styleable>
 
+    <style name="bottom_sheet_style" parent="Theme.Design.BottomSheetDialog">
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
 
     <style name="NumKeyStyle">
         <item name="android:textSize">30sp</item>

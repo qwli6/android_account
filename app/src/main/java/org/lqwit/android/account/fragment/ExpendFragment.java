@@ -1,13 +1,15 @@
 package org.lqwit.android.account.fragment;
 
-import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomSheetDialog;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,8 +24,9 @@ import org.lqwit.android.account.R;
 import org.lqwit.android.account.activity.TypeManagerActivity;
 import org.lqwit.android.account.adapter.TypeAdapter;
 import org.lqwit.android.account.db.DataBaseHelper;
+import org.lqwit.android.account.entity.Account;
 import org.lqwit.android.account.entity.Type;
-import org.lqwit.android.account.listenter.OnTypeClickListener;
+import org.lqwit.android.account.listenter.OnItemClickListener;
 import org.lqwit.android.account.utils.CurrencyUtils;
 import org.lqwit.android.account.utils.DateUtils;
 import org.lqwit.android.account.utils.ViewUtils;
@@ -35,6 +38,12 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Author: liqiwen
@@ -93,6 +102,8 @@ public class ExpendFragment extends Fragment {
     TextView expendDate;
 
     private List<Type> typeList;
+    private RecyclerView chooseUserAccountRecycler;
+    private List<Account> accounts;
 
     @Nullable
     @Override
@@ -111,6 +122,40 @@ public class ExpendFragment extends Fragment {
      */
     public void initData(){
         typeList = new ArrayList<>();
+        Observable.create(new ObservableOnSubscribe<List<Account>>() {
+            @Override
+            public void subscribe(ObservableEmitter<List<Account>> e) throws Exception {
+                accounts = new ArrayList<>();
+                DataBaseHelper dataBaseHelper = new DataBaseHelper(getActivity());
+                SQLiteDatabase sqLiteDatabase = dataBaseHelper.openSqlDataBase();
+                String sql = "select * from user_account";
+                Cursor cursor = sqLiteDatabase.rawQuery(sql, null);
+                while (cursor.moveToNext()){
+                    Integer accountId = cursor.getInt(cursor.getColumnIndex("_id"));
+                    String accountName = cursor.getString(cursor.getColumnIndex("name"));
+                    String accountPrice = cursor.getString(cursor.getColumnIndex("amount"));
+                    String accountDesc = cursor.getString(cursor.getColumnIndex("desc"));
+                    Integer accountType = cursor.getInt(cursor.getColumnIndex("account_type"));
+                    Account account = new Account();
+                    account.setAccountId(accountId);
+                    account.setAccountName(accountName);
+                    account.setTotalAmount(accountPrice);
+                    account.setAccountType(accountType);
+                    account.setAccountDesc(accountDesc);
+                    accounts.add(account);
+                    e.onNext(accounts);
+                    e.onComplete();
+                }
+                cursor.close();
+            }
+        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<List<Account>>() {
+            @Override
+            public void accept(List<Account> accounts) throws Exception {
+                Account account = accounts.get(0);
+                expendType.setText(account.getAccountName());
+            }
+        });
+
 
         DataBaseHelper dataBaseHelper = new DataBaseHelper(getActivity());
         SQLiteDatabase sqLiteDatabase = dataBaseHelper.openSqlDataBase();
@@ -137,7 +182,7 @@ public class ExpendFragment extends Fragment {
         expendPic.setImageBitmap(ViewUtils.decodeBitmap(type.getPicName()));
 
 
-        adapter.setOnTypeClickListener(new OnTypeClickListener() {
+        adapter.setOnTypeClickListener(new OnItemClickListener() {
             @Override
             public void onTypeClick(View view, int postion) {
                 if(postion != typeList.size() - 1) {
@@ -237,7 +282,6 @@ public class ExpendFragment extends Fragment {
                 }else {
                     DataBaseHelper dataBaseHelper = new DataBaseHelper(getActivity());
                     SQLiteDatabase sqLiteDatabase = dataBaseHelper.openSqlDataBase();
-                    ContentValues contentValues = new ContentValues();
                     Type type = typeList.get(curPosition);
                     String sql = "insert into account_fund_flow(name,pic,pay_type,price,riqi,time,type) values(?,?,?,?,?,?,?)";
                     sqLiteDatabase.execSQL(sql, new Object[]{type.getName(), type.getPicName(), expendType.getText().toString(), expendMoney, DateUtils.formatNoYear(new Date()),DateUtils.format(new Date()), consume_type});
@@ -247,6 +291,28 @@ public class ExpendFragment extends Fragment {
                 }
                 break;
             case R.id.expend_type:
+                BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getActivity());
+                View bottomSheetView = View.inflate(getActivity(), R.layout.layout_choose_user_account, null);
+                TextView title = bottomSheetView.findViewById(R.id.choose_user_account_title);
+                title.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ViewUtils.showCenterToast("点击title..", Toast.LENGTH_SHORT);
+                    }
+                });
+                chooseUserAccountRecycler = bottomSheetView.findViewById(R.id.choose_user_account_recyclerview);
+                chooseUserAccountRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
+                if(accounts != null && accounts.size() > 0) {
+                    chooseUserAccountRecycler.setAdapter(new ChooseAccountAdapter(accounts));
+                }
+                bottomSheetDialog.setContentView(bottomSheetView);
+                bottomSheetDialog.show();
+                bottomSheetDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialog) {
+                        ViewUtils.showCenterToast("取消了..", Toast.LENGTH_SHORT);
+                    }
+                });
                 break;
             case R.id.expend_date:
                 break;
@@ -257,4 +323,37 @@ public class ExpendFragment extends Fragment {
                     break;
         }
     }
+
+    public class ChooseAccountAdapter extends RecyclerView.Adapter<ChooseAccountAdapter.ChooseAccountViewHolder>{
+
+        List<Account> accounts;
+
+        public ChooseAccountAdapter(List<Account> accounts) {
+            this.accounts = accounts;
+        }
+
+        @Override
+        public ChooseAccountViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            return new ChooseAccountViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_choose_user_account_item, null));
+        }
+
+        @Override
+        public void onBindViewHolder(ChooseAccountViewHolder holder, int position) {
+            holder.accountTitle.setText(accounts.get(position).getAccountName());
+        }
+
+        @Override
+        public int getItemCount() {
+            return accounts.size();
+        }
+
+        class ChooseAccountViewHolder extends RecyclerView.ViewHolder{
+            TextView accountTitle;
+            public ChooseAccountViewHolder(View itemView) {
+                super(itemView);
+                accountTitle = itemView.findViewById(R.id.account_title);
+            }
+        }
+    }
+
 }

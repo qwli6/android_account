@@ -5,13 +5,13 @@ package org.lqwit.android.account.entity;
  */
 
 public class Account {
-    private String accountId;
+    private Integer accountId;
     private String accountName;
     private String totalAmount;
     private String accountDesc;
     private Integer accountType;//资产还是负债
 
-    public Account(String accountId, String accountName, String totalAmount, Integer accountType) {
+    public Account(Integer accountId, String accountName, String totalAmount, Integer accountType) {
         this.accountId = accountId;
         this.accountName = accountName;
         this.totalAmount = totalAmount;
@@ -29,11 +29,11 @@ public class Account {
         return accountDesc;
     }
 
-    public String getAccountId() {
+    public Integer getAccountId() {
         return accountId;
     }
 
-    public void setAccountId(String accountId) {
+    public void setAccountId(Integer accountId) {
         this.accountId = accountId;
     }
 

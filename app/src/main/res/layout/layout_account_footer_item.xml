@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:paddingRight="@dimen/activity_margin"
+        android:paddingLeft="@dimen/activity_margin"
+        android:text="账户：收入存进的和支出使用的账户。"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:paddingRight="@dimen/activity_margin"
+        android:paddingLeft="@dimen/activity_margin"
+        android:layout_marginTop="@dimen/border_radius"
+        android:text="流水：钱流入和流出的记录。"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:paddingRight="@dimen/activity_margin"
+        android:paddingLeft="@dimen/activity_margin"
+        android:layout_marginTop="@dimen/border_radius"
+        android:text="流水结余：不等于余额，仅仅只是依据流入和流出计算出的金额。"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

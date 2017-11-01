@@ -21,6 +21,14 @@
     <!--<color name="gray_color">#c4c4c4</color>-->
     <color name="gray_color">#848484</color>
 
+    <color name="toolbarColor">#FDFBF8</color>
+    <color name="toolbarTextColor">#3D3D3D</color>
+    <color name="lineDividerColor">#DFDBD5</color>
+    <color name="itemPressedColor">#F8F3E5</color>
+    <color name="customToast">#424242</color>
+
+
+
 
 
     <color name="one">#57c03b</color>

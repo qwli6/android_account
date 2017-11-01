@@ -2,15 +2,16 @@ package org.lqwit.android.account.activity;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.lqwit.android.account.R;
 import org.lqwit.android.account.base.AppBaseActivity;
 import org.lqwit.android.account.config.Config;
 import org.lqwit.android.account.utils.PrefUtils;
 import org.lqwit.android.account.utils.VersionUtils;
+import org.lqwit.android.account.utils.ViewUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -48,7 +49,7 @@ public class SettingActivity extends AppBaseActivity {
                 startActivityForResult(intent, 0);
                 break;
             case R.id.relative_layout_check_update:
-                Log.d(TAG, "start request version info");
+                ViewUtils.showCenterToast("正在检查中...", Toast.LENGTH_LONG);
                 break;
             case R.id.setting_back:
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);

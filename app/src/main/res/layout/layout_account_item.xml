@@ -4,9 +4,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     app:cardElevation="@dimen/border_radius"
     app:cardCornerRadius="@dimen/border_radius"
-    app:cardMaxElevation="8dp"
+    app:cardMaxElevation="4dp"
     app:cardUseCompatPadding="true"
-    app:cardPreventCornerOverlap="true"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">

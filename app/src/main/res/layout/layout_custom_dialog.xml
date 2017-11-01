@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@color/toolbarColor"
+    android:layout_height="match_parent">
+    <TextView
+        android:gravity="center"
+        android:id="@+id/dialog_message"
+        android:textSize="18sp"
+        android:paddingLeft="@dimen/activity_margin"
+        android:paddingRight="@dimen/activity_margin"
+        android:paddingTop="32dp"
+        android:paddingBottom="32dp"
+        android:lineSpacingExtra="8dp"
+        android:textColor="@color/toolbarTextColor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.3dp"
+        android:background="@color/lineDividerColor"/>
+
+    <LinearLayout
+        android:id="@+id/dialog_confirm_cancel_layout"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <TextView
+            android:id="@+id/dialog_cancel"
+            android:background="@drawable/item_click_selector"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:textSize="18sp"
+            android:layout_height="match_parent"
+            android:textColor="@color/toolbarTextColor"/>
+        <View
+            android:layout_width="0.3dp"
+            android:layout_height="match_parent"
+            android:background="@color/lineDividerColor"/>
+        <TextView
+            android:id="@+id/dialog_confirm"
+            android:textSize="18sp"
+            android:background="@drawable/item_click_selector"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:textColor="@color/toolbarTextColor"/>
+    </LinearLayout>
+</LinearLayout>

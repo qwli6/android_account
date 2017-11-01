@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import org.lqwit.android.account.R;
 import org.lqwit.android.account.entity.Type;
-import org.lqwit.android.account.listenter.OnTypeClickListener;
+import org.lqwit.android.account.listenter.OnItemClickListener;
 import org.lqwit.android.account.utils.ViewUtils;
 
 import java.util.List;
@@ -26,9 +26,9 @@ import java.util.List;
 public class TypeAdapter extends RecyclerView.Adapter<TypeAdapter.TypeViewHolder> {
 
     private List<Type> typeList;
-    private OnTypeClickListener onTypeClickListener;
+    private OnItemClickListener onTypeClickListener;
 
-    public void setOnTypeClickListener(OnTypeClickListener onTypeClickListener) {
+    public void setOnTypeClickListener(OnItemClickListener onTypeClickListener) {
         this.onTypeClickListener = onTypeClickListener;
     }
 

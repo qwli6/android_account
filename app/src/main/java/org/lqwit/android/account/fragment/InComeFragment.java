@@ -21,7 +21,7 @@ import org.lqwit.android.account.activity.TypeManagerActivity;
 import org.lqwit.android.account.adapter.TypeAdapter;
 import org.lqwit.android.account.db.DataBaseHelper;
 import org.lqwit.android.account.entity.Type;
-import org.lqwit.android.account.listenter.OnTypeClickListener;
+import org.lqwit.android.account.listenter.OnItemClickListener;
 import org.lqwit.android.account.utils.CurrencyUtils;
 import org.lqwit.android.account.utils.DateUtils;
 import org.lqwit.android.account.utils.ViewUtils;
@@ -124,7 +124,7 @@ public class InComeFragment extends Fragment {
         incomeTitle.setText(typeList.get(0).getName());
 
 
-        adapter.setOnTypeClickListener(new OnTypeClickListener() {
+        adapter.setOnTypeClickListener(new OnItemClickListener() {
             @Override
             public void onTypeClick(View view, int postion) {
                 if(postion != typeList.size() - 1) {

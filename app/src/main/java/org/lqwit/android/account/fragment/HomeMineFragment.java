@@ -29,8 +29,6 @@ public class HomeMineFragment extends Fragment {
 
     private static final String TAG = "HomeMineFragment";
 
-
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

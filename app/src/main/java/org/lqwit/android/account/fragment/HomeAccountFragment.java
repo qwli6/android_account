@@ -1,5 +1,6 @@
 package org.lqwit.android.account.fragment;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -14,9 +15,14 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.lqwit.android.account.R;
+import org.lqwit.android.account.activity.AccountDetailActivity;
 import org.lqwit.android.account.db.DataBaseHelper;
 import org.lqwit.android.account.entity.Account;
+import org.lqwit.android.account.listenter.OnItemClickListener;
+import org.lqwit.android.account.listenter.OnItemLongClikcListener;
 import org.lqwit.android.account.utils.CurrencyUtils;
+import org.lqwit.android.account.utils.ViewUtils;
+import org.lqwit.android.account.view.CustomDialogBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,10 +46,12 @@ import io.reactivex.schedulers.Schedulers;
 
 public class HomeAccountFragment extends Fragment {
 
+
     @BindView(R.id.account_recycler_view)
     RecyclerView accountRecyclerView;
     @BindView(R.id.account_total_amount)
     TextView accountTotalAmount;
+
 
 
     @Nullable
@@ -71,11 +79,13 @@ public class HomeAccountFragment extends Fragment {
                            String desc = cursor.getString(cursor.getColumnIndex("desc"));
                            String amount = CurrencyUtils.formatAmount(cursor.getString(cursor.getColumnIndex("amount")));
                            Integer accountType = cursor.getInt(cursor.getColumnIndex("account_type"));
-                           Account account = new Account();
+                        Integer id = cursor.getInt(cursor.getColumnIndex("_id"));
+                        Account account = new Account();
                            account.setAccountType(accountType);
                            account.setAccountName(name);
                            account.setTotalAmount(amount);
                            account.setAccountDesc(desc);
+                           account.setAccountId(id);
                            accounts.add(account);
                     }
                     e.onNext(accounts);
@@ -85,43 +95,147 @@ public class HomeAccountFragment extends Fragment {
             }
         }).subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<List<Account>>() {
             @Override
-            public void accept(List<Account> accounts) throws Exception {
+            public void accept(final List<Account> accounts) throws Exception {
                 Double totalAmount = 0.00;
                 LinearLayoutManager manager = new LinearLayoutManager(getActivity());
                 accountRecyclerView.setLayoutManager(manager);
-                accountRecyclerView.setAdapter(new AccountAdapter(accounts));
+                final AccountAdapter adapter = new AccountAdapter(accounts);
+                accountRecyclerView.setAdapter(adapter);
                 for (int i = 0; i < accounts.size(); i++) {
                     totalAmount += Double.parseDouble(accounts.get(i).getTotalAmount());
                 }
                 accountTotalAmount.setText(CurrencyUtils.formatAmount(totalAmount.toString()));
+                adapter.setItemClickListener(new OnItemClickListener() {
+                    @Override
+                    public void onTypeClick(View view, int postion) {
+                        Intent intent = new Intent(getActivity(), AccountDetailActivity.class);
+                        intent.putExtra(AccountDetailActivity.ACCOUNT_ID, accounts.get(postion).getAccountId());
+                        startActivity(intent);
+                    }
+                });
+
+                adapter.setItemLongClikcListener(new OnItemLongClikcListener() {
+                    @Override
+                    public void itemLongClick(View view, final int position) {
+                        final CustomDialogBuilder customDialogBuilder = new CustomDialogBuilder(getActivity());
+                        customDialogBuilder.setView(R.layout.layout_custom_dialog).setText(R.id.dialog_message,
+                                "您确定要删除该账户吗？删除该账户后，该账户的数据将不会保存，请慎重执行该操作!")
+                                .setText(R.id.dialog_confirm, "确定", new CustomDialogBuilder.OnClickListener() {
+                            @Override
+                            public void onClick() {
+                                ViewUtils.showCustomToast("正在删除中，请稍后...");
+                                customDialogBuilder.dismiss();
+                                Account account = accounts.get(position);
+                                deleteAccount(account.getAccountId());
+                                accounts.remove(position);
+                                adapter.notifyItemRemoved(position);
+                            }
+                        }).setText(R.id.dialog_cancel, "取消", new CustomDialogBuilder.OnClickListener() {
+                            @Override
+                            public void onClick() {
+                                ViewUtils.showCustomToast("正在取消中，请稍后...");
+                                customDialogBuilder.dismiss();
+                            }
+                        }).show();
+                    }
+                });
             }
         });
     }
 
-    class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AccountViewHolder>{
+    private void deleteAccount(final Integer accountId) {
+        Observable.create(new ObservableOnSubscribe<String>() {
+            @Override
+            public void subscribe(ObservableEmitter<String> e) throws Exception {
+                DataBaseHelper dataBaseHelper = new DataBaseHelper(getActivity());
+                SQLiteDatabase sqLiteDatabase = dataBaseHelper.openSqlDataBase();
+                String sql = "delete from user_account where _id = ?";
+                sqLiteDatabase.execSQL(sql, new Integer[]{accountId});
+                e.onNext("success");
+                e.onComplete();
+            }
+        }).subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<String>() {
+            @Override
+            public void accept(String s) throws Exception {
+                ViewUtils.showCustomToast("删除成功");
+            }
+        });
+    }
 
+    class AccountAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
+        int TYPE_FOOTER = 0;
+        int TYPE_NORMAL = 1;
         List<Account> accounts;
+        private OnItemClickListener itemClickListener;
+        private OnItemLongClikcListener itemLongClikcListener;
+
+        public void setItemClickListener(OnItemClickListener itemClickListener) {
+            this.itemClickListener = itemClickListener;
+        }
+
+        public void setItemLongClikcListener(OnItemLongClikcListener itemLongClikcListener) {
+            this.itemLongClikcListener = itemLongClikcListener;
+        }
 
         public AccountAdapter(List<Account> accounts) {
             this.accounts = accounts;
         }
 
+
         @Override
-        public AccountViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_account_item, null);
-            return new AccountViewHolder(view);
+        public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            if(viewType == TYPE_NORMAL) {
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_account_item, null);
+                return new AccountViewHolder(view);
+            }
+            if(viewType == TYPE_FOOTER){
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_account_footer_item,null);
+                return new NormalViewHolder(view);
+            }
+            return null;
         }
 
         @Override
-        public void onBindViewHolder(AccountViewHolder holder, int position) {
-            Account account = accounts.get(position);
-            holder.bindData(account, position);
+        public int getItemViewType(int position) {
+            if(position == accounts.size()){
+                return TYPE_FOOTER;
+            } else {
+                return TYPE_NORMAL;
+            }
+        }
+
+        @Override
+        public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+            if(position < accounts.size()) {
+                Account account = accounts.get(position);
+                if (holder instanceof AccountViewHolder) {
+                    ((AccountViewHolder) holder).bindData(account, position);
+                    ((AccountViewHolder) holder).itemView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if(itemClickListener != null){
+                                itemClickListener.onTypeClick(v, position);
+                            }
+                        }
+                    });
+
+                    ((AccountViewHolder) holder).itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                        @Override
+                        public boolean onLongClick(View v) {
+                            if(itemLongClikcListener != null){
+                                itemLongClikcListener.itemLongClick(v, position);
+                            }
+                            return true;
+                        }
+                    });
+                }
+            }
         }
 
         @Override
         public int getItemCount() {
-            return accounts.size();
+            return accounts.size() + 1;
         }
 
         class AccountViewHolder extends RecyclerView.ViewHolder {
@@ -174,6 +288,13 @@ public class HomeAccountFragment extends Fragment {
                      default:
                          break;
                 }
+            }
+        }
+
+        class NormalViewHolder extends RecyclerView.ViewHolder{
+
+            public NormalViewHolder(View itemView) {
+                super(itemView);
             }
         }
     }

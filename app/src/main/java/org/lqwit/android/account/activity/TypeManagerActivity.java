@@ -15,7 +15,7 @@ import org.lqwit.android.account.adapter.TypeAdapter;
 import org.lqwit.android.account.base.AppBaseActivity;
 import org.lqwit.android.account.db.DataBaseHelper;
 import org.lqwit.android.account.entity.Type;
-import org.lqwit.android.account.listenter.OnTypeClickListener;
+import org.lqwit.android.account.listenter.OnItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,7 +91,7 @@ public class TypeManagerActivity extends AppBaseActivity {
                 typeAdapter = new TypeAdapter(types);
                 recyclerView.setAdapter(typeAdapter);
 
-                typeAdapter.setOnTypeClickListener(new OnTypeClickListener() {
+                typeAdapter.setOnTypeClickListener(new OnItemClickListener() {
                     @Override
                     public void onTypeClick(View view, int postion) {
                        if(postion == types.size() - 1){

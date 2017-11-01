@@ -6,12 +6,17 @@ import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Process;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import org.lqwit.android.account.R;
 import org.lqwit.android.account.base.AppBaseActivity;
 import org.lqwit.android.account.base.AppBaseApplication;
 
@@ -146,5 +151,29 @@ public class ViewUtils {
         ApplicationInfo applicationInfo = getContext().getApplicationInfo();
         int identifier = resources.getIdentifier(picName, "drawable", applicationInfo.packageName);
         return BitmapFactory.decodeResource(getContext().getResources(), identifier);
+    }
+
+    public static void showCustomToast(String str){
+        Toast toast = new Toast(getContext());
+        LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.layout_custom_toast, null);
+        TextView customToastMsg = view.findViewById(R.id.custom_toast_message);
+        customToastMsg.setText(str);
+        customToastMsg.setTypeface(Typeface.createFromAsset(getContext().getAssets(), "fonts/font_fzsongjianti.ttf"));
+        toast.setView(view);
+        toast.show();
+    }
+
+    public static void showCenterToast(String str, int duration){
+        Toast toast = new Toast(getContext());
+        LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.layout_custom_toast, null);
+        TextView customToastMsg = view.findViewById(R.id.custom_toast_message);
+        customToastMsg.setText(str);
+        customToastMsg.setTypeface(Typeface.createFromAsset(getContext().getAssets(), "fonts/font_fzsongjianti.ttf"));
+        toast.setView(view);
+        toast.setDuration(duration);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
     }
 }
