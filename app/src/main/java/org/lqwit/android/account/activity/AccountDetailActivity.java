@@ -7,11 +7,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import org.lqwit.android.account.R;
 import org.lqwit.android.account.base.AppBaseActivity;
+import org.lqwit.android.account.utils.ViewUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,7 +41,7 @@ public class AccountDetailActivity extends AppBaseActivity {
     private int accountId;
 
     private Map<String, List<String>> dataset = new HashMap<>();
-    private String[] parentList = new String[]{"first", "second", "third"};
+    private String[] parentList = new String[]{"十月", "九月", "八月"};
     private List<String> childrenList1 = new ArrayList<>();
     private List<String> childrenList2 = new ArrayList<>();
     private List<String> childrenList3 = new ArrayList<>();
@@ -56,21 +58,29 @@ public class AccountDetailActivity extends AppBaseActivity {
     @Override
     public void initData() {
 
-        childrenList1.add(parentList[0] + "-" + "first");
-        childrenList1.add(parentList[0] + "-" + "second");
-        childrenList1.add(parentList[0] + "-" + "third");
-        childrenList2.add(parentList[1] + "-" + "first");
-        childrenList2.add(parentList[1] + "-" + "second");
-        childrenList2.add(parentList[1] + "-" + "third");
-        childrenList3.add(parentList[2] + "-" + "first");
-        childrenList3.add(parentList[2] + "-" + "second");
-        childrenList3.add(parentList[2] + "-" + "third");
+        childrenList1.add(parentList[0] + "-");
+        childrenList1.add(parentList[0] + "-");
+        childrenList1.add(parentList[0] + "-");
+        childrenList2.add(parentList[1] + "-");
+        childrenList2.add(parentList[1] + "-");
+        childrenList2.add(parentList[1] + "-");
+        childrenList3.add(parentList[2] + "-");
+        childrenList3.add(parentList[2] + "-");
+        childrenList3.add(parentList[2] + "-");
         dataset.put(parentList[0], childrenList1);
         dataset.put(parentList[1], childrenList2);
         dataset.put(parentList[2], childrenList3);
 
-
+        accountFlowListView.setChildDivider(getResources().getDrawable(R.color.lineDividerColor));
         accountFlowListView.setAdapter(new AccountFlowAdapter(dataset, parentList));
+
+        accountFlowListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+                ViewUtils.showCenterToast("点击的位置：" + childPosition + "组位置：" + groupPosition, Toast.LENGTH_SHORT);
+                return true;
+            }
+        });
 
         /**
         accountId = getIntent().getIntExtra(ACCOUNT_ID, 0);
@@ -199,10 +209,18 @@ public class AccountDetailActivity extends AppBaseActivity {
             }
             convertView.setTag(R.layout.parent_item, groupPosition);
             convertView.setTag(R.layout.child_item, -1);
-            TextView text = (TextView) convertView.findViewById(R.id.parent_title);
+            TextView text = convertView.findViewById(R.id.parent_title);
+            ImageView indicator = convertView.findViewById(R.id.group_indicator);
             text.setText(parentList[groupPosition]);
+            if(isExpanded){
+                indicator.setBackgroundResource(R.drawable.ic_arrow_up);
+            }else{
+                indicator.setBackgroundResource(R.drawable.ic_arrow_down);
+            }
             return convertView;
         }
+
+
 
         /**
          * 获取每一组的孩子View
@@ -221,27 +239,22 @@ public class AccountDetailActivity extends AppBaseActivity {
             }
             convertView.setTag(R.layout.parent_item, groupPosition);
             convertView.setTag(R.layout.child_item, groupPosition);
-            TextView text = (TextView) convertView.findViewById(R.id.child_title);
+            TextView text = convertView.findViewById(R.id.child_title);
             text.setText(dataset.get(parentList[groupPosition]).get(childPosition));
-            text.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Toast.makeText(AccountDetailActivity.this, "点到了内置的textview", Toast.LENGTH_SHORT).show();
-                }
-            });
             return convertView;
         }
 
         /**
          * 子项是否可以选中
          * 如果需要在子项中设置点击事件，需要返回true
+         * 这个地方如果不返回为true的话，子类的分割线将设置无效
          * @param groupPosition
          * @param childPosition
          * @return
          */
         @Override
         public boolean isChildSelectable(int groupPosition, int childPosition) {
-            return false;
+            return true;
         }
     }
 }

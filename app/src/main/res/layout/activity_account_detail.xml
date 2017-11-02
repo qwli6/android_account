@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/toolbarColor"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -76,6 +77,10 @@
     </LinearLayout>
 
     <ExpandableListView
+        android:childDivider="@color/lineDividerColor"
+        android:groupIndicator="@null"
+        android:divider="@color/lineDividerColor"
+        android:dividerHeight="0.3dp"
         android:id="@+id/account_flow_expandable_listview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

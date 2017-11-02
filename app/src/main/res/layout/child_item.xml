@@ -1,13 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    android:background="@drawable/item_click_selector"
+    android:paddingLeft="@dimen/activity_margin"
+    android:paddingRight="@dimen/activity_margin"
+    android:paddingStart="@dimen/activity_margin"
+    android:paddingEnd="@dimen/activity_margin"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:paddingTop="@dimen/activity_margin"
+    android:paddingBottom="@dimen/activity_margin"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
     <TextView
+        android:paddingEnd="@dimen/activity_margin"
+        android:paddingRight="@dimen/activity_margin"
         android:id="@+id/child_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:textColor="@color/toolbarTextColor"
-        android:text="这是子item"
-        android:layout_margin="5dp"/>
+        android:textSize="14sp"
+        android:layout_gravity="center_vertical"
+        android:text="这是子item" />
+
+    <ImageView
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:background="@drawable/icon_zhichu_type_canyin"/>
+
+    <TextView
+        android:paddingEnd="@dimen/activity_margin"
+        android:paddingRight="@dimen/activity_margin"
+        android:paddingStart="@dimen/activity_margin"
+        android:paddingLeft="@dimen/activity_margin"
+        android:layout_gravity="center_vertical"
+        android:textSize="16sp"
+        android:text="早餐"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:textSize="24sp"
+        android:layout_gravity="center_vertical"
+        android:text="73.50"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 </LinearLayout>

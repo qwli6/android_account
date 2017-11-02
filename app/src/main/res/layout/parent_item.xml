@@ -1,14 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/item_click_selector"
+    android:paddingLeft="@dimen/activity_margin"
+    android:paddingRight="@dimen/activity_margin"
+    android:paddingStart="@dimen/activity_margin"
+    android:paddingEnd="@dimen/activity_margin"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <TextView
-        android:id="@+id/parent_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:textColor="@color/toolbarTextColor"
-        android:textStyle="bold"
-        android:text="这是父item"
-        android:layout_margin="5dp"/>
-</LinearLayout>
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/linear1"
+        android:paddingBottom="@dimen/activity_margin"
+        android:paddingTop="@dimen/activity_margin"
+        android:orientation="vertical"
+        android:layout_centerVertical="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/parent_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@color/toolbarTextColor"
+            android:textStyle="bold"
+            android:text="父item"
+            android:layout_margin="@dimen/border_radius"/>
+        <TextView
+            android:text="2017年"
+            android:padding="@dimen/border_radius"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_toEndOf="@id/linear1"
+        android:layout_toRightOf="@id/linear1"
+        android:paddingBottom="@dimen/activity_margin"
+        android:paddingTop="@dimen/activity_margin"
+        android:orientation="vertical"
+        android:layout_centerVertical="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:text="流入 7,200"
+            android:layout_margin="@dimen/border_radius"/>
+        <TextView
+            android:text="流出 233.00"
+            android:textSize="12sp"
+            android:padding="@dimen/border_radius"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+    <ImageView
+        android:id="@+id/group_indicator"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/ic_arrow_down"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+    <LinearLayout
+        android:layout_marginRight="32dp"
+        android:layout_marginEnd="32dp"
+        android:gravity="end"
+        android:layout_toStartOf="@id/group_indicator"
+        android:layout_toLeftOf="@id/group_indicator"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:paddingBottom="@dimen/activity_margin"
+        android:paddingTop="@dimen/activity_margin"
+        android:orientation="vertical"
+        android:layout_centerVertical="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:text="结余"
+            android:layout_margin="@dimen/border_radius"/>
+        <TextView
+            android:text="697323.00"
+            android:textSize="20sp"
+            android:padding="@dimen/border_radius"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</RelativeLayout>
