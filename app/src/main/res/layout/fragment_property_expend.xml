@@ -9,6 +9,7 @@
         android:id="@+id/linear_layout_set_price"
         android:orientation="horizontal"
         android:layout_width="match_parent"
+        android:background="@color/toolbarColor"
         android:paddingLeft="@dimen/activity_margin"
         android:paddingStart="@dimen/activity_margin"
         android:paddingEnd="@dimen/activity_margin"
@@ -33,31 +34,28 @@
 
         <EditText
             android:id="@+id/keep_an_account_show_money"
-            android:textColor="#424242"
+            android:textColor="@color/toolbarTextColor"
             style="@style/ExpendIncomeShowMoneyStyle"/>
     </LinearLayout>
     <View
-        android:layout_marginEnd="@dimen/activity_margin"
-        android:layout_marginStart="@dimen/activity_margin"
         android:layout_width="match_parent"
         android:layout_height="@dimen/divider_line_height"
-        android:background="@color/divider_line_color"/>
+        android:background="@color/lineDividerColor"/>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/keep_an_account_expend_type_recycleview"
+        android:background="#eeeeee"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"/>
 
-
     <View
-        android:layout_marginEnd="@dimen/activity_margin"
-        android:layout_marginStart="@dimen/activity_margin"
         android:layout_width="match_parent"
         android:layout_height="@dimen/divider_line_height"
         android:background="@color/divider_line_color"/>
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
+        android:background="@color/toolbarColor"
         android:paddingStart="@dimen/activity_margin"
         android:paddingEnd="@dimen/activity_margin"
         android:layout_height="40dp">

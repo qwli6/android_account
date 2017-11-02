@@ -15,6 +15,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -112,7 +113,7 @@ public class ExpendFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_property_expend, null);
         content  = new StringBuilder();
         ButterKnife.bind(this, view);
-        expendDate.setText(DateUtils.formatNoYear(new Date()));
+        expendDate.setText(DateUtils.format2(DateUtils.formatNoYear(new Date())));
         initData();
         return view;
     }
@@ -153,6 +154,7 @@ public class ExpendFragment extends Fragment {
             @Override
             public void accept(List<Account> accounts) throws Exception {
                 Account account = accounts.get(0);
+                account.setDefault(true); //设置第一个为默认支付账户
                 expendType.setText(account.getAccountName());
             }
         });
@@ -279,7 +281,7 @@ public class ExpendFragment extends Fragment {
                         || expendMoney.equals("0.")
                         || expendMoney.equals("0.0")
                         || expendMoney.equals("0.00")){
-                    ViewUtils.showToastSafe(R.string.money_not_blank);
+                    ViewUtils.showCustomToast(R.string.money_not_blank);
                 }else {
                     DataBaseHelper dataBaseHelper = new DataBaseHelper(getActivity());
                     SQLiteDatabase sqLiteDatabase = dataBaseHelper.openSqlDataBase();
@@ -294,13 +296,6 @@ public class ExpendFragment extends Fragment {
             case R.id.expend_type:
                 BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getActivity());
                 View bottomSheetView = View.inflate(getActivity(), R.layout.layout_choose_user_account, null);
-                TextView title = bottomSheetView.findViewById(R.id.choose_user_account_title);
-                title.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        ViewUtils.showCenterToast("点击title..", Toast.LENGTH_SHORT);
-                    }
-                });
                 chooseUserAccountRecycler = bottomSheetView.findViewById(R.id.choose_user_account_recyclerview);
                 chooseUserAccountRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
                 if(accounts != null && accounts.size() > 0) {
@@ -311,7 +306,16 @@ public class ExpendFragment extends Fragment {
                 bottomSheetDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
                     @Override
                     public void onDismiss(DialogInterface dialog) {
-                        ViewUtils.showCenterToast("取消了..", Toast.LENGTH_SHORT);
+                        if(accounts != null && accounts.size() > 0){
+                            for (int i = 0; i < accounts.size(); i++) {
+                                if(accounts.get(i).isDefault()){
+                                    expendType.setText(accounts.get(i).getAccountName());
+                                    return;
+                                }
+                            }
+                        }else{
+                            expendType.setText("未知");
+                        }
                     }
                 });
                 break;
@@ -326,7 +330,10 @@ public class ExpendFragment extends Fragment {
 
                 break;
             case R.id.expend_memo:
-                ViewUtils.showToastSafe(R.string.unsupport_memo);
+                BottomSheetDialog bottomMemoDialog = new BottomSheetDialog(getActivity());
+                View memoView = View.inflate(getActivity(), R.layout.layout_write_memo, null);
+                bottomMemoDialog.setContentView(memoView);
+                bottomMemoDialog.show();
                 break;
                 default:
                     break;
@@ -350,7 +357,31 @@ public class ExpendFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(ChooseAccountViewHolder holder, int position) {
-            holder.accountTitle.setText(accounts.get(position).getAccountName());
+            final Account account = accounts.get(position);
+            holder.accountTitle.setText(account.getAccountName());
+            holder.amount.setText(account.getTotalAmount());
+            if(account.isDefault()){
+                holder.defaultPayAccount.setChecked(true);
+            }else{
+                holder.defaultPayAccount.setChecked(false);
+            }
+
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(!account.isDefault()){
+                        /**
+                         * 1.遍历所有账户，将所有账户都设置成不勾选
+                         * 2.勾选所在位置的 checkbox
+                         */
+                        for (int i = 0; i < accounts.size(); i++) {
+                            accounts.get(i).setDefault(false);
+                        }
+                        account.setDefault(true);
+                        notifyDataSetChanged();
+                    }
+                }
+            });
         }
 
         @Override
@@ -360,9 +391,13 @@ public class ExpendFragment extends Fragment {
 
         class ChooseAccountViewHolder extends RecyclerView.ViewHolder{
             TextView accountTitle;
+            TextView amount;
+            CheckBox defaultPayAccount;
             public ChooseAccountViewHolder(View itemView) {
                 super(itemView);
                 accountTitle = itemView.findViewById(R.id.account_title);
+                amount = itemView.findViewById(R.id.amount);
+                defaultPayAccount = itemView.findViewById(R.id.checkbox_choose_account);
             }
         }
     }

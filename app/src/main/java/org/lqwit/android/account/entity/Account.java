@@ -11,6 +11,8 @@ public class Account {
     private String accountDesc;
     private Integer accountType;//资产还是负债
 
+    private boolean isDefault; //是否为默认支付账户
+
     public Account(Integer accountId, String accountName, String totalAmount, Integer accountType) {
         this.accountId = accountId;
         this.accountName = accountName;
@@ -19,6 +21,14 @@ public class Account {
     }
 
     public Account() {
+    }
+
+    public boolean isDefault() {
+        return isDefault;
+    }
+
+    public void setDefault(boolean aDefault) {
+        isDefault = aDefault;
     }
 
     public void setAccountDesc(String accountDesc) {

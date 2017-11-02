@@ -164,6 +164,17 @@ public class ViewUtils {
         toast.show();
     }
 
+    public static void showCustomToast(int strId){
+        Toast toast = new Toast(getContext());
+        LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.layout_custom_toast, null);
+        TextView customToastMsg = view.findViewById(R.id.custom_toast_message);
+        customToastMsg.setText(strId);
+        customToastMsg.setTypeface(Typeface.createFromAsset(getContext().getAssets(), "fonts/font_fzsongjianti.ttf"));
+        toast.setView(view);
+        toast.show();
+    }
+
     public static void showCenterToast(String str, int duration){
         Toast toast = new Toast(getContext());
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);

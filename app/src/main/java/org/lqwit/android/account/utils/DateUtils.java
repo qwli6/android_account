@@ -1,7 +1,5 @@
 package org.lqwit.android.account.utils;
 
-import android.support.annotation.NonNull;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -31,8 +29,7 @@ public class DateUtils {
         return format;
     }
 
-    @NonNull
-    private static String format2(String format) {
+    public static String format2(String format) {
         String time = format.split("-")[1] + "月" + format.split("-")[2] + "日";
         return time;
     }
