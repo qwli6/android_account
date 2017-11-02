@@ -16,6 +16,8 @@ public interface AccountDataSource {
 
     void getTypes(Integer mTypeFlag, GetTypesCallback callback);
 
+    void addNewType();
+
 
     interface LoadAccountsCallback{
 

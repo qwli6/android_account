@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--<color name="colorPrimary">#3F51B5</color>-->
+    <color name="colorPrimary">#3F51B5</color>
     <!--<color name="colorPrimary">#00E676</color>-->
     <!--<color name="colorPrimaryDark">#00E676</color>-->
     <!--<color name="colorPrimary">#00aaec</color>-->
-    <!--<color name="colorPrimaryDark">#00aaec</color>-->
+    <color name="colorPrimaryDark">#00aaec</color>
 
     <!--<color name="colorPrimary">#343947</color>-->
     <!--<color name="colorPrimaryDark">#343947</color>-->
-    <color name="colorPrimary">#FDFBF8</color>
-    <color name="colorPrimaryDark">#FDFBF8</color>
+    <!--<color name="colorPrimary">#FDFBF8</color>-->
+    <!--<color name="colorPrimaryDark">#FDFBF8</color>-->
     <color name="colorAccent">#FF4081</color>
 
     <color name="activity_fragment_background">#eeeeee</color>

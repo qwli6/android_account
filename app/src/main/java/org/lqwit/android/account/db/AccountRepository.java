@@ -33,6 +33,11 @@ public class AccountRepository implements AccountDataSource{
     }
 
     @Override
+    public void addNewType() {
+
+    }
+
+    @Override
     public void getFundFlows(@NonNull LoadAccountsCallback callback) {
 
     }

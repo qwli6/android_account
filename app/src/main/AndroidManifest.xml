@@ -30,8 +30,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.FundFlowDetailActivity" />
-        <activity android:name=".activity.AccountDetailActivity"/>
-        <activity android:name=".activity.AboutAppActivity"/>
+        <activity android:name=".activity.AccountDetailActivity" />
+        <activity android:name=".activity.AboutAppActivity" />
+        <activity android:name=".addtype.AddEditTypeActivity"></activity>
     </application>
 
 </manifest>

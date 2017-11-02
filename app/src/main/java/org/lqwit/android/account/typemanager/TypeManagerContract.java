@@ -16,13 +16,15 @@ public interface TypeManagerContract  {
 
         void showTypeList(List<Type> types);
 
+        void showAddType();
+
         boolean isActive();
     }
 
 
     interface Presenter extends BasePresenter{
 
-        void saveType(String name, String picName, Integer type);
+        void addNewType();
 
     }
 }

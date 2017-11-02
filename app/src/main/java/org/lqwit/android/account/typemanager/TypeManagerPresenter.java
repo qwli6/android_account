@@ -32,12 +32,6 @@ public class TypeManagerPresenter implements TypeManagerContract.Presenter, Acco
         mAccoutLocalDataSource.getTypes(mTypeFlag, this);
     }
 
-    @Override
-    public void saveType(@NonNull String name, @NonNull String picName, @NonNull Integer type) {
-        ActivityUtils.checkNotNull(name);
-        ActivityUtils.checkNotNull(picName);
-        ActivityUtils.checkNotNull(type);
-    }
 
 
     @Override
@@ -48,5 +42,10 @@ public class TypeManagerPresenter implements TypeManagerContract.Presenter, Acco
     @Override
     public void onDataNotAvailable() {
 
+    }
+
+    @Override
+    public void addNewType() {
+        mTypeManagerView.showAddType();
     }
 }
