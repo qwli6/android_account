@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import org.lqwit.android.account.R;
 import org.lqwit.android.account.activity.QuestionFeedBackActivity;
 import org.lqwit.android.account.activity.SettingActivity;
-import org.lqwit.android.account.activity.TypeManagerActivity;
+import org.lqwit.android.account.typemanager.TypeManagerActivity;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;

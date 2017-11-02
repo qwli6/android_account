@@ -1,4 +1,4 @@
-package org.lqwit.android.account.activity;
+package org.lqwit.android.account.addaccount;
 
 
 import android.support.v4.app.Fragment;

@@ -15,10 +15,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity" />
-        <activity android:name=".activity.KeepAnAccountActivity" />
+        <activity android:name=".addaccount.KeepAnAccountActivity" />
         <activity android:name=".activity.SetBudgetActivity" />
         <activity android:name=".activity.SettingActivity" />
-        <activity android:name=".activity.TypeManagerActivity" />
+        <activity android:name=".typemanager.TypeManagerActivity" />
         <activity android:name=".activity.QuestionFeedBackActivity" />
         <activity android:name=".activity.LoginActivity" />
         <activity android:name=".activity.UserProfileActivity" />

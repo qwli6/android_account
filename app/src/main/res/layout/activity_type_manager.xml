@@ -8,30 +8,39 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/type_manager_title"
-        android:drawableLeft="@drawable/title_back_selector"
-        android:drawableStart="@drawable/title_back_selector"
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:gravity="center_vertical"
-        android:drawablePadding="@dimen/activity_margin"
-        android:paddingLeft="@dimen/activity_margin"
-        android:paddingStart="@dimen/activity_margin"
-        android:paddingRight="@dimen/activity_margin"
-        android:paddingEnd="@dimen/activity_margin"
-        android:textSize="20sp"
-        android:textColor="@color/toolbarTextColor"/>
-    <View
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="@style/Toolbar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/coordinatorLayout"
         android:layout_width="match_parent"
-        android:layout_height="0.3dp"
-        android:background="@color/lineDividerColor"/>
+        android:layout_height="match_parent">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/type_manager_recycler"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        <FrameLayout
+            android:id="@+id/contentFrame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
-
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_edit_task_done"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/fab_margin"
+            android:src="@drawable/ic_add"
+            app:fabSize="normal"
+            app:layout_anchor="@id/contentFrame"
+            app:layout_anchorGravity="bottom|right|end" />
+    </android.support.design.widget.CoordinatorLayout>
 
 </LinearLayout>
