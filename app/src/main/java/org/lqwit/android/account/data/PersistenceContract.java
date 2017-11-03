@@ -1,4 +1,4 @@
-package org.lqwit.android.account.db;
+package org.lqwit.android.account.data;
 
 /**
  * Created by liqiwen on 2017/11/2.

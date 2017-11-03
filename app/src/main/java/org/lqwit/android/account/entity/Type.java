@@ -1,5 +1,7 @@
 package org.lqwit.android.account.entity;
 
+import android.text.TextUtils;
+
 /**
  * Author: liqiwen
  * Date: 2017/9/22
@@ -9,12 +11,24 @@ package org.lqwit.android.account.entity;
  */
 
 public class Type {
+    private String typeId;
     private String picName;
     private String name;
+    private Integer consumeType;
 
-    public Type(String picName, String name) {
+    public Type(String picName, String name, Integer consumeType) {
         this.picName = picName;
         this.name = name;
+        this.consumeType = consumeType;
+    }
+
+
+    public String getTypeId() {
+        return typeId;
+    }
+
+    public void setTypeId(String typeId) {
+        this.typeId = typeId;
     }
 
     public String getPicName() {
@@ -31,5 +45,18 @@ public class Type {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Integer getConsumeType() {
+        return consumeType;
+    }
+
+    public void setConsumeType(Integer consumeType) {
+        this.consumeType = consumeType;
+    }
+
+    public boolean isEmpty(){
+
+        return TextUtils.isEmpty(name) && TextUtils.isEmpty(picName);
     }
 }

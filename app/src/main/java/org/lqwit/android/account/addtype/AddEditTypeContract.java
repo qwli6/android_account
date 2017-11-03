@@ -9,11 +9,24 @@ import org.lqwit.android.account.BaseView;
 
 public interface AddEditTypeContract {
 
-    interface View extends BaseView<Persenter>{
+    interface View extends BaseView<Presenter>{
+
+        void showEmptyTypeError();
+
+        void setName(String name);
+
+        void setBgResource(String picName);
+
+        boolean isActive();
 
     }
 
-    interface Persenter extends BasePresenter{
+    interface Presenter extends BasePresenter{
 
+        void saveType();
+
+        void pupulateType();
+
+        boolean isDataMissing();
     }
 }

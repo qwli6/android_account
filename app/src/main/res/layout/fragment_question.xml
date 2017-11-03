@@ -1,0 +1,39 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="@color/toolbarColor"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <EditText
+        android:id="@+id/feedback_content"
+        android:background="@drawable/edittext_rect_border"
+        android:padding="@dimen/text_padding"
+        android:gravity="top"
+        android:textSize="16sp"
+        android:hint="@string/question_feed_back_hint"
+        android:layout_marginTop="@dimen/activity_margin"
+        android:layout_marginEnd="@dimen/activity_margin"
+        android:layout_marginStart="@dimen/activity_margin"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"/>
+
+    <TextView
+        android:id="@+id/commit_feedback"
+        android:layout_margin="@dimen/activity_margin"
+        android:background="@drawable/number_key_confirm_selector"
+        android:text="@string/commit_feedback"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"/>
+
+    <TextView
+        android:gravity="center"
+        android:text="还有更快速的联系方式"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

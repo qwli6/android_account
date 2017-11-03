@@ -6,14 +6,12 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import org.lqwit.android.account.R;
 import org.lqwit.android.account.adapter.TypeAdapter;
@@ -64,7 +62,8 @@ public class TypeManagerFragment extends Fragment implements TypeManagerContract
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mPresenter.addNewType();
+                mPresenter.addNewType(getActivity().getIntent()
+                        .getIntExtra(TypeManagerActivity.TYPE_MANAGER, 0), null);
             }
         });
         return root;
@@ -88,19 +87,18 @@ public class TypeManagerFragment extends Fragment implements TypeManagerContract
         mTypeAdapter.setOnTypeClickListener(new OnItemClickListener() {
             @Override
             public void onTypeClick(View view, int postion) {
-                if(postion == types.size() - 1){
-                    Toast.makeText(getActivity(), "添加", Toast.LENGTH_SHORT).show();
-                }else{
-                    Snackbar snackbar = Snackbar.make(view, "已存在的类型暂时不支持修改操作", Snackbar.LENGTH_LONG);
-                    snackbar.show();
-                }
+                Type type = types.get(postion);
+                mPresenter.addNewType(getActivity().getIntent().
+                        getIntExtra(TypeManagerActivity.TYPE_MANAGER, 0),
+                        type.getTypeId());
             }
         });
     }
 
     @Override
-    public void showAddType() {
+    public void showAddType(int typeFlag, String typeId) {
         Intent intent = new Intent(getActivity(), AddEditTypeActivity.class);
+        intent.putExtra(TypeManagerActivity.TYPE_MANAGER, typeFlag);
         startActivityForResult(intent, AddEditTypeActivity.REQUEST_ADD_TYPE);
     }
 

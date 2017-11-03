@@ -46,7 +46,7 @@ public class TypeAdapter extends RecyclerView.Adapter<TypeAdapter.TypeViewHolder
     public void onBindViewHolder(final TypeViewHolder holder, final int position) {
         Type type;
         if(position == typeList.size() - 1){
-            type = new Type("icon_zhichu_shouru_type_add", "添加");
+            type = new Type("icon_zhichu_shouru_type_add", "添加", 0);
             holder.typePic.setImageBitmap(ViewUtils.decodeBitmap(type.getPicName()));
             holder.typeText.setText(type.getName());
         }else {

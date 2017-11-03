@@ -18,7 +18,13 @@
     </declare-styleable>
 
 
-    <style name="Toolbar" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+
+
+    <style name="Toolbar" parent="Base.Widget.AppCompat.Toolbar" >
+        <item name="contentInsetStartWithNavigation">0dp</item>
+        <item name="contentInsetStart">0dp</item>
+    </style>
 
     <style name="NumKeyStyle">
         <item name="android:textSize">30sp</item>

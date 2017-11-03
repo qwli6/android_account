@@ -2,7 +2,7 @@ package org.lqwit.android.account.addaccount;
 
 import android.support.annotation.NonNull;
 
-import org.lqwit.android.account.db.AccountDataSource;
+import org.lqwit.android.account.data.source.AccountDataSource;
 import org.lqwit.android.account.entity.FundFlow;
 import org.lqwit.android.account.utils.ActivityUtils;
 

@@ -1,4 +1,4 @@
-package org.lqwit.android.account.db;
+package org.lqwit.android.account.data.source;
 
 import android.support.annotation.NonNull;
 

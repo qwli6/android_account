@@ -1,59 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+    android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:background="@color/toolbarColor"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <TextView
-        android:id="@+id/question_feedback_back"
-        android:drawableLeft="@drawable/title_back_selector"
-        android:drawableStart="@drawable/title_back_selector"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:gravity="center_vertical"
-        android:drawablePadding="@dimen/activity_margin"
-        android:paddingLeft="@dimen/activity_margin"
-        android:paddingStart="@dimen/activity_margin"
-        android:paddingRight="@dimen/activity_margin"
-        android:paddingEnd="@dimen/activity_margin"
-        android:text="问题反馈"
-        android:textSize="20sp"
-        android:textColor="@color/toolbarTextColor"/>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.3dp"
-        android:background="@color/lineDividerColor"/>
-    <EditText
-        android:id="@+id/feedback_content"
-        android:background="@drawable/edittext_rect_border"
-        android:padding="@dimen/text_padding"
-        android:gravity="top"
-        android:textSize="16sp"
-        android:hint="@string/question_feed_back_hint"
-        android:layout_marginTop="@dimen/activity_margin"
-        android:layout_marginEnd="@dimen/activity_margin"
-        android:layout_marginStart="@dimen/activity_margin"
-        android:layout_width="match_parent"
-        android:layout_height="180dp"/>
 
-    <TextView
-        android:id="@+id/commit_feedback"
-        android:layout_margin="@dimen/activity_margin"
-        android:background="@drawable/number_key_confirm_selector"
-        android:text="@string/commit_feedback"
-        android:textSize="18sp"
-        android:gravity="center"
-        android:textColor="@android:color/white"
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"/>
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:gravity="center"
-        android:text="还有更快速的联系方式"
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            style="@style/Toolbar"
+            app:navigationIcon="@drawable/ic_arrow_white_black_24dp"
+            app:titleTextColor="@android:color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+    </android.support.design.widget.AppBarLayout>
+
+    <FrameLayout
+        android:id="@+id/contentFrame"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent" />
+
+    <!--<android.support.design.widget.CoordinatorLayout-->
+        <!--android:id="@+id/coordinatorLayout"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent">-->
+
+
+
+        <!--<android.support.design.widget.FloatingActionButton-->
+            <!--android:id="@+id/fab_add_type"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="@dimen/fab_margin"-->
+            <!--android:src="@drawable/ic_add"-->
+            <!--app:fabSize="normal"-->
+            <!--app:layout_anchor="@id/contentFrame"-->
+            <!--app:layout_anchorGravity="bottom|right|end" />-->
+    <!--</android.support.design.widget.CoordinatorLayout>-->
 
 </LinearLayout>

@@ -19,7 +19,7 @@ import android.widget.TextView;
 import org.lqwit.android.account.R;
 import org.lqwit.android.account.typemanager.TypeManagerActivity;
 import org.lqwit.android.account.adapter.TypeAdapter;
-import org.lqwit.android.account.db.DataBaseHelper;
+import org.lqwit.android.account.data.source.local.DataBaseHelper;
 import org.lqwit.android.account.entity.Type;
 import org.lqwit.android.account.listenter.OnItemClickListener;
 import org.lqwit.android.account.utils.CurrencyUtils;
@@ -112,7 +112,7 @@ public class InComeFragment extends Fragment {
         while (cursor.moveToNext()){
             String name = cursor.getString(cursor.getColumnIndex("name"));
             String picName = cursor.getString(cursor.getColumnIndex("pic_name"));
-            typeList.add(new Type(picName, name));
+            typeList.add(new Type(picName, name, 0));
         }
 
         GridLayoutManager manager = new GridLayoutManager(getActivity(),5);

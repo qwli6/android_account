@@ -54,7 +54,7 @@
       <TextView
           android:layout_centerVertical="true"
           android:text="@string/expend_type_manager"
-          android:textSize="18sp"
+          android:textSize="16sp"
           android:textColor="@android:color/black"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"/>
@@ -80,7 +80,7 @@
       <TextView
           android:layout_centerVertical="true"
           android:text="@string/income_type_manager"
-          android:textSize="18sp"
+          android:textSize="16sp"
           android:textColor="@android:color/black"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"/>
@@ -106,7 +106,7 @@
       <TextView
           android:layout_centerVertical="true"
           android:text="@string/question_feed_back"
-          android:textSize="18sp"
+          android:textSize="16sp"
           android:textColor="@android:color/black"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"/>
@@ -131,7 +131,7 @@
       <TextView
           android:layout_centerVertical="true"
           android:text="@string/home_mine_settings"
-          android:textSize="18sp"
+          android:textSize="16sp"
           android:textColor="@android:color/black"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"/>

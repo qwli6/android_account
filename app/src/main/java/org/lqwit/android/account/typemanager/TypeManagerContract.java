@@ -16,7 +16,7 @@ public interface TypeManagerContract  {
 
         void showTypeList(List<Type> types);
 
-        void showAddType();
+        void showAddType(int typeFlag, String typeId);
 
         boolean isActive();
     }
@@ -24,7 +24,12 @@ public interface TypeManagerContract  {
 
     interface Presenter extends BasePresenter{
 
-        void addNewType();
+        /**
+         *
+         * @param typeFlag 0: income 1: expend
+         * @param typeId if typeId == null -> add  else -> update
+         */
+        void addNewType(int typeFlag, String typeId);
 
     }
 }

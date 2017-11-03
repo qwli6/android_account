@@ -25,7 +25,7 @@ import android.widget.Toast;
 import org.lqwit.android.account.R;
 import org.lqwit.android.account.typemanager.TypeManagerActivity;
 import org.lqwit.android.account.adapter.TypeAdapter;
-import org.lqwit.android.account.db.DataBaseHelper;
+import org.lqwit.android.account.data.source.local.DataBaseHelper;
 import org.lqwit.android.account.entity.Account;
 import org.lqwit.android.account.entity.Type;
 import org.lqwit.android.account.listenter.OnItemClickListener;
@@ -167,11 +167,11 @@ public class ExpendFragment extends Fragment {
         while (cursor.moveToNext()){
             String name = cursor.getString(cursor.getColumnIndex("name"));
             String picName = cursor.getString(cursor.getColumnIndex("pic_name"));
-            Type type = new Type(picName, name);
+            Type type = new Type(picName, name, 1);
             typeList.add(type);
         }
 
-        typeList.add(new Type("icon_zhichu_shouru_type_add", "添加"));
+        typeList.add(new Type("icon_zhichu_shouru_type_add", "添加", 1));
         cursor.close();
 
         GridLayoutManager manager = new GridLayoutManager(getActivity(),5);

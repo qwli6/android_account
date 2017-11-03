@@ -1,4 +1,4 @@
-package org.lqwit.android.account.db;
+package org.lqwit.android.account.data.source;
 
 import android.support.annotation.NonNull;
 
@@ -7,15 +7,15 @@ import org.lqwit.android.account.utils.ActivityUtils;
 
 /**
  * Created by liqiwen on 2017/11/2.
+ * called to AccountLocalDataSource # methods
  */
-
-public class AccountRepository implements AccountDataSource{
+public class AccountRepository implements AccountDataSource {
 
     private static AccountRepository INSTANCE = null;
-
     private final AccountDataSource mAccountLocalDataSource;
 
 
+    //Prevent direct instantitation
     private AccountRepository(@NonNull AccountDataSource accountLocalDataSource){
         mAccountLocalDataSource = ActivityUtils.checkNotNull(accountLocalDataSource);
     }
@@ -27,9 +27,23 @@ public class AccountRepository implements AccountDataSource{
         return INSTANCE;
     }
 
+
+    /**
+     * Used to force{@link #getInstance(AccountDataSource)} to create new instance
+     * next time it's called
+     */
+    public static void destroyInstance(){
+        INSTANCE = null;
+    }
+
+    /**
+     * called AccountLocalDataSource to saved!
+     * @param mTypeFlag
+     * @param callback
+     */
     @Override
     public void getTypes(Integer mTypeFlag, GetTypesCallback callback) {
-
+        mAccountLocalDataSource.getTypes(mTypeFlag, callback);
     }
 
     @Override

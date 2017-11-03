@@ -16,7 +16,7 @@ import android.widget.TextView;
 import org.lqwit.android.account.R;
 import org.lqwit.android.account.activity.FundFlowDetailActivity;
 import org.lqwit.android.account.addaccount.KeepAnAccountActivity;
-import org.lqwit.android.account.db.DataBaseHelper;
+import org.lqwit.android.account.data.source.local.DataBaseHelper;
 import org.lqwit.android.account.entity.FundFlow;
 import org.lqwit.android.account.utils.CurrencyUtils;
 import org.lqwit.android.account.utils.DateUtils;

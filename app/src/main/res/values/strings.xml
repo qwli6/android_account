@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">钱多多</string>
+    <string name="app_name">轻账</string>
     <string name="splash_count_time">3s跳过</string>
     <string name="home_me">我的</string>
     <string name="login_right_now">立即登录</string>
@@ -80,8 +80,11 @@
     <string name="user_gender">性别</string>
     <string name="account">账户</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="type_manager">类型管理</string>
+    <string name="add_type">添加类别</string>
+    <string name="add_expend_type">添加支出类别</string>
+    <string name="add_income_type">添加收支类别</string>
 
 
 </resources>

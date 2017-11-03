@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import org.lqwit.android.account.R;
 import org.lqwit.android.account.activity.AccountDetailActivity;
-import org.lqwit.android.account.db.DataBaseHelper;
+import org.lqwit.android.account.data.source.local.DataBaseHelper;
 import org.lqwit.android.account.entity.Account;
 import org.lqwit.android.account.listenter.OnItemClickListener;
 import org.lqwit.android.account.listenter.OnItemLongClikcListener;

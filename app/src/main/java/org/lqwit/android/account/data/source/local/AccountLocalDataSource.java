@@ -1,4 +1,4 @@
-package org.lqwit.android.account.db;
+package org.lqwit.android.account.data.source.local;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
 
+import org.lqwit.android.account.data.PersistenceContract;
+import org.lqwit.android.account.data.source.AccountDataSource;
 import org.lqwit.android.account.entity.FundFlow;
 import org.lqwit.android.account.entity.Type;
 import org.lqwit.android.account.utils.ActivityUtils;
@@ -22,8 +24,8 @@ import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by liqiwen on 2017/11/2.
+ * invoked sqlite database directy
  */
-
 public class AccountLocalDataSource implements AccountDataSource {
 
     private static AccountLocalDataSource INSTANCE;
@@ -62,7 +64,7 @@ public class AccountLocalDataSource implements AccountDataSource {
                                     PersistenceContract.TypeEntry.COLUMN_NAME_NAME));
                             String picName = c.getString(c.getColumnIndex(
                                     PersistenceContract.TypeEntry.COLUMN_NAME_PIC_NAME));
-                            Type type = new Type(picName, name);
+                            Type type = new Type(picName, name, mTypeFlag);
                             typeList.add(type);
                         }
                         e.onNext(typeList);

@@ -1,4 +1,4 @@
-package org.lqwit.android.account.db;
+package org.lqwit.android.account.data.source.local;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
