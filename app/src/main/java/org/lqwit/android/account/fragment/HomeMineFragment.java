@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import org.lqwit.android.account.R;
 import org.lqwit.android.account.question.QuestionFeedBackActivity;
-import org.lqwit.android.account.activity.SettingActivity;
+import org.lqwit.android.account.setting.SettingActivity;
 import org.lqwit.android.account.typemanager.TypeManagerActivity;
 
 import butterknife.ButterKnife;

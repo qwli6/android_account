@@ -1,33 +1,39 @@
-package org.lqwit.android.account.activity;
+package org.lqwit.android.account.setting;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.view.View;
-import android.widget.TextView;
+import android.support.v7.app.ActionBar;
+import android.support.v7.widget.Toolbar;
 
 import org.lqwit.android.account.R;
 import org.lqwit.android.account.base.AppBaseActivity;
-import org.lqwit.android.account.config.Config;
-import org.lqwit.android.account.utils.PrefUtils;
+import org.lqwit.android.account.utils.ActivityUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class SettingActivity extends AppBaseActivity {
-    @BindView(R.id.budget_money_textview)
-    TextView budgetMoney;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    private ActionBar mActionBar;
 
     @Override
     public void initView() {
         setContentView(R.layout.activity_setting);
         ButterKnife.bind(this);
-        if(null != PrefUtils.getString(Config.BUDGET, null, this)){
-            budgetMoney.setText(PrefUtils.getString(Config.BUDGET, null, this));
+        setSupportActionBar(toolbar);
+        mActionBar = getSupportActionBar();
+        mActionBar.setTitle(R.string.home_mine_settings);
+        mActionBar.setDisplayShowHomeEnabled(true);
+        mActionBar.setDisplayHomeAsUpEnabled(true);
+
+        SetFragment setFragment = (SetFragment) getSupportFragmentManager().findFragmentById(R.id.contentFrame);
+        if(setFragment == null){
+            setFragment = SetFragment.newInstance();
         }
+        ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), setFragment, R.id.contentFrame);
     }
     
-    
+
+    /**
     @OnClick({R.id.setting_toolbar_back, R.id.relative_layout_set_budget,
             R.id.relative_layout_about, R.id.relative_layout_keep_accounts_attention})
     public void onClickView(View view){
@@ -49,7 +55,9 @@ public class SettingActivity extends AppBaseActivity {
                     break;
         }
     }
+    **/
 
+    /**
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -66,5 +74,12 @@ public class SettingActivity extends AppBaseActivity {
                 default:
                     break;
         }
+    }
+
+     **/
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }

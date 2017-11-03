@@ -32,7 +32,6 @@ public class QuestionFeedBackActivity extends AppBaseActivity {
             questionFragment = QuestionFragment.newInstance();
             ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), questionFragment, R.id.contentFrame);
         }
-
     }
 
 

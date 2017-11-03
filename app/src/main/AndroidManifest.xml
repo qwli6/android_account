@@ -17,7 +17,7 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".addaccount.KeepAnAccountActivity" />
         <activity android:name=".activity.SetBudgetActivity" />
-        <activity android:name=".activity.SettingActivity" />
+        <activity android:name=".setting.SettingActivity" />
         <activity android:name=".typemanager.TypeManagerActivity" />
         <activity android:name=".question.QuestionFeedBackActivity" />
         <activity android:name=".activity.LoginActivity" />
