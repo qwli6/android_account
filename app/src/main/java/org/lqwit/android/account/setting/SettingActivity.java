@@ -11,6 +11,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class SettingActivity extends AppBaseActivity {
+
+    private SetPresenter mSetPresenter;
+
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     private ActionBar mActionBar;
@@ -30,32 +33,11 @@ public class SettingActivity extends AppBaseActivity {
             setFragment = SetFragment.newInstance();
         }
         ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), setFragment, R.id.contentFrame);
+
+        mSetPresenter = new SetPresenter(setFragment);
     }
     
 
-    /**
-    @OnClick({R.id.setting_toolbar_back, R.id.relative_layout_set_budget,
-            R.id.relative_layout_about, R.id.relative_layout_keep_accounts_attention})
-    public void onClickView(View view){
-        switch (view.getId()){
-            case R.id.relative_layout_set_budget:
-                Intent intent = new Intent(SettingActivity.this, SetBudgetActivity.class);
-                startActivityForResult(intent, 0);
-                break;
-            case R.id.setting_toolbar_back:
-                finish();
-                break;
-            case R.id.relative_layout_keep_accounts_attention:
-                break;
-
-            case R.id.relative_layout_about:
-                startActivity(new Intent(this, AboutAppActivity.class));
-                break;
-                default:
-                    break;
-        }
-    }
-    **/
 
     /**
     @Override

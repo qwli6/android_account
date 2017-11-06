@@ -19,16 +19,15 @@
         android:layout_width="match_parent"
         android:layout_height="180dp"/>
 
-    <TextView
+    <Button
         android:id="@+id/commit_feedback"
         android:layout_margin="@dimen/activity_margin"
-        android:background="@drawable/number_key_confirm_selector"
+        android:background="@drawable/button_selector"
         android:text="@string/commit_feedback"
         android:textSize="18sp"
-        android:gravity="center"
         android:textColor="@android:color/white"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"/>
+        android:layout_height="wrap_content"/>
 
     <TextView
         android:gravity="center"

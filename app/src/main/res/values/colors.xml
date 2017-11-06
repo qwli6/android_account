@@ -4,6 +4,7 @@
     <!--<color name="colorPrimary">#00E676</color>-->
     <!--<color name="colorPrimaryDark">#00E676</color>-->
     <color name="colorPrimary">#00aaec</color>
+    <color name="buttonPressed">#aa00aaec</color>
     <color name="colorPrimaryDark">#00aaec</color>
 
     <!--<color name="colorPrimary">#343947</color>-->
