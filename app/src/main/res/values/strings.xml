@@ -85,6 +85,13 @@
     <string name="add_type">添加类别</string>
     <string name="add_expend_type">添加支出类别</string>
     <string name="add_income_type">添加收支类别</string>
+    <string name="clear_data_cache_tips">是否要清除本地缓存数据？</string>
+    <string name="confirm_text">确定</string>
+    <string name="cancel_text">取消</string>
+    <string name="fund_flow">流水</string>
+    <string name="report_froms_textview">报表</string>
+    <string name="more">更多</string>
+    <string name="add_account">添加账户</string>
 
 
 </resources>

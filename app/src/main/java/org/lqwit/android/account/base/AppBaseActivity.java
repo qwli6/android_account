@@ -44,10 +44,9 @@ public abstract class AppBaseActivity extends AppCompatActivity {
 
     }
 
-
     @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-//        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }

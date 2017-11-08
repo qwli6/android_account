@@ -153,6 +153,7 @@
     </RelativeLayout>
     <RelativeLayout
         android:background="@drawable/item_click_selector"
+        android:id="@+id/clear_cache_layout"
         android:paddingStart="@dimen/activity_margin"
         android:paddingEnd="@dimen/activity_margin"
         android:layout_width="match_parent"

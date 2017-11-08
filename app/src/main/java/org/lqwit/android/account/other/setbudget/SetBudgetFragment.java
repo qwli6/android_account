@@ -1,12 +1,16 @@
-package org.lqwit.android.account.activity;
+package org.lqwit.android.account.other.setbudget;
+
 
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import org.lqwit.android.account.R;
-import org.lqwit.android.account.base.AppBaseActivity;
 import org.lqwit.android.account.config.Config;
 import org.lqwit.android.account.utils.CurrencyUtils;
 import org.lqwit.android.account.utils.ViewUtils;
@@ -15,7 +19,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class SetBudgetActivity extends AppBaseActivity {
+public class SetBudgetFragment extends Fragment {
+
     private StringBuilder content;
 
     @BindView(R.id.show_budget_money)
@@ -49,26 +54,29 @@ public class SetBudgetActivity extends AppBaseActivity {
     @BindView(R.id.number_key_budget_confirm)
     TextView numberKeyBudgetConfirm;
 
-    @Override
-    public void initView() {
-        setContentView(R.layout.activity_set_budget);
-        ButterKnife.bind(this);
-        content = new StringBuilder();
+
+    public static SetBudgetFragment newInstance() {
+        return new SetBudgetFragment();
     }
 
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View root = inflater.inflate(R.layout.fragment_set_budget, container, false);
+        ButterKnife.bind(this, root);
+        content = new StringBuilder();
+        return root;
+    }
 
 
-    @OnClick({R.id.set_budget_back, R.id.number_key_budget_one, R.id.number_key_budget_two,
+    @OnClick({R.id.number_key_budget_one, R.id.number_key_budget_two,
             R.id.number_key_budget_three, R.id.number_key_budget_four, R.id.number_key_budget_five,
             R.id.number_key_budget_six, R.id.number_key_budget_seven, R.id.number_key_budget_eight,
             R.id.number_key_budget_nine, R.id.number_key_budget_clear, R.id.number_key_budget_zero,
             R.id.number_key_budget_point, R.id.number_key_budget_delete, R.id.number_key_budget_confirm})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.set_budget_back:
-                finish();
-                break;
             case R.id.number_key_budget_one:
                 CurrencyUtils.checkInputMoney(content, numberKeyBudgetOne.getText().toString(), showBudgetMoney);
                 break;
@@ -142,12 +150,13 @@ public class SetBudgetActivity extends AppBaseActivity {
                 }
                 Intent intent = new Intent();
                 intent.putExtra(Config.BUDGET, budget);
-                setResult(RESULT_OK, intent);
-                finish();
-                Toast.makeText(this, "save to database", Toast.LENGTH_SHORT).show();
+//                setResult(RESULT_OK, intent);
+//                finish();
+//                Toast.makeText(this, "save to database", Toast.LENGTH_SHORT).show();
                 break;
             default:
                 break;
         }
     }
+
 }

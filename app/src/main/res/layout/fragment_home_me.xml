@@ -4,16 +4,10 @@
               android:background="@color/toolbarColor"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
-   <TextView
-       android:textColor="@color/toolbarTextColor"
-       android:textSize="20sp"
-       android:gravity="center"
-       android:text="@string/home_me"
-       android:background="@color/toolbarColor"
-       android:layout_width="match_parent"
-       android:layout_height="?actionBarSize"/>
+
    <View
        android:layout_width="match_parent"
+       android:layout_marginTop="32dp"
        android:layout_height="@dimen/divider_line_height"
        android:background="@color/divider_line_color"/>
    <RelativeLayout
@@ -38,12 +32,11 @@
           android:layout_height="wrap_content"/>
    </RelativeLayout>
 
-
-
    <View
        android:layout_width="match_parent"
        android:layout_height="@dimen/divider_line_height"
        android:background="@color/divider_line_color"/>
+
    <RelativeLayout
        android:id="@+id/relative_layout_expend_type_manager"
        android:background="@drawable/item_click_selector"

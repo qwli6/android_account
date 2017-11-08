@@ -62,4 +62,8 @@ public class HomeMineFragment extends Fragment {
                     break;
         }
     }
+
+    public static HomeMineFragment newInstance() {
+        return new HomeMineFragment();
+    }
 }

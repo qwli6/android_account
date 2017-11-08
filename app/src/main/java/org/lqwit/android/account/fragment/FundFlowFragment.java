@@ -62,7 +62,6 @@ public class FundFlowFragment extends Fragment {
     public void onResume() {
         super.onResume();
        loadSplashData(getActivity(), DateUtils.formatNoYear(new Date()));
-
     }
 
     private void loadSplashData(final Context context, final String date){
@@ -140,5 +139,9 @@ public class FundFlowFragment extends Fragment {
                 default:
                     break;
         }
+    }
+
+    public static FundFlowFragment newInstance() {
+        return new FundFlowFragment();
     }
 }

@@ -1,33 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
     android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/toolbarColor"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:layout_height="match_parent">
 
 
-   <android.support.v4.view.ViewPager
-       android:id="@+id/home_view_pager"
+
+   <FrameLayout
+       android:id="@+id/contentFrame"
        android:layout_width="match_parent"
        android:layout_height="0dp"
        android:layout_weight="1"/>
 
-   <android.support.design.widget.TabLayout
-       android:id="@+id/home_tabLayout"
-       app:tabIndicatorHeight="0dp"
-       android:background="#f00"
+   <LinearLayout
+       android:background="@color/gray_color"
+       android:orientation="horizontal"
        android:layout_width="match_parent"
-       android:layout_height="?attr/actionBarSize">
-      <android.support.design.widget.TabItem
-          android:layout_width="match_parent"
-          android:layout_height="match_parent" />
-      <android.support.design.widget.TabItem
-          android:layout_width="match_parent"
+       android:layout_height="wrap_content">
+      <ImageView
+          android:id="@+id/main_open_left_menu"
+          android:src="@drawable/ic_arrow_forward_white_24dp"
+          android:layout_gravity="center"
+          android:padding="@dimen/activity_margin"
+          android:layout_width="wrap_content"
           android:layout_height="wrap_content" />
-      <android.support.design.widget.TabItem
-          android:layout_width="match_parent"
+      <TextView
+          android:id="@+id/main_fund_flow"
+          android:text="@string/fund_flow"
+          android:paddingTop="@dimen/border_radius"
+          android:paddingBottom="@dimen/border_radius"
+          android:drawableTop="@drawable/ic_fund_flow_white_24dp"
+          android:textSize="12sp"
+          android:drawablePadding="@dimen/border_radius"
+          android:gravity="center_horizontal"
+          android:textColor="@android:color/white"
+          android:layout_weight="1"
+          android:layout_width="0dp"
           android:layout_height="wrap_content" />
-   </android.support.design.widget.TabLayout>
+      <TextView
+          android:id="@+id/main_account_textview"
+          android:text="@string/account"
+          android:paddingTop="@dimen/border_radius"
+          android:paddingBottom="@dimen/border_radius"
+          android:drawableTop="@drawable/ic_account_white_24dp"
+          android:textSize="12sp"
+          android:drawablePadding="@dimen/border_radius"
+          android:gravity="center_horizontal"
+          android:textColor="@android:color/white"
+          android:layout_weight="1"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content" />
+      <TextView
+          android:id="@+id/main_report_froms"
+          android:text="@string/report_froms_textview"
+          android:paddingTop="@dimen/border_radius"
+          android:paddingBottom="@dimen/border_radius"
+          android:drawableTop="@drawable/ic_chart_white_24dp"
+          android:textSize="12sp"
+          android:drawablePadding="@dimen/border_radius"
+          android:gravity="center_horizontal"
+          android:textColor="@android:color/white"
+          android:layout_weight="1"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content" />
+      <TextView
+          android:id="@+id/main_more"
+          android:text="@string/more"
+          android:paddingTop="@dimen/border_radius"
+          android:paddingBottom="@dimen/border_radius"
+          android:drawableTop="@drawable/ic_more_horiz_white_24dp"
+          android:textSize="12sp"
+          android:drawablePadding="@dimen/border_radius"
+          android:gravity="center_horizontal"
+          android:textColor="@android:color/white"
+          android:layout_weight="1"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content" />
+   </LinearLayout>
 </LinearLayout>
+

@@ -49,8 +49,6 @@ public class HomeAccountFragment extends Fragment {
 
     @BindView(R.id.account_recycler_view)
     RecyclerView accountRecyclerView;
-    @BindView(R.id.account_total_amount)
-    TextView accountTotalAmount;
 
 
 
@@ -96,15 +94,11 @@ public class HomeAccountFragment extends Fragment {
         }).subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<List<Account>>() {
             @Override
             public void accept(final List<Account> accounts) throws Exception {
-                Double totalAmount = 0.00;
                 LinearLayoutManager manager = new LinearLayoutManager(getActivity());
                 accountRecyclerView.setLayoutManager(manager);
                 final AccountAdapter adapter = new AccountAdapter(accounts);
                 accountRecyclerView.setAdapter(adapter);
-                for (int i = 0; i < accounts.size(); i++) {
-                    totalAmount += Double.parseDouble(accounts.get(i).getTotalAmount());
-                }
-                accountTotalAmount.setText(CurrencyUtils.formatAmount(totalAmount.toString()));
+
                 adapter.setItemClickListener(new OnItemClickListener() {
                     @Override
                     public void onTypeClick(View view, int postion) {
@@ -163,10 +157,12 @@ public class HomeAccountFragment extends Fragment {
         });
     }
 
+    public static HomeAccountFragment newInstance() {
+        return new HomeAccountFragment();
+    }
+
     class AccountAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
-        int TYPE_FOOTER = 0;
-        int TYPE_NORMAL = 1;
         List<Account> accounts;
         private OnItemClickListener itemClickListener;
         private OnItemLongClikcListener itemLongClikcListener;
@@ -186,57 +182,40 @@ public class HomeAccountFragment extends Fragment {
 
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            if(viewType == TYPE_NORMAL) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_account_item, null);
-                return new AccountViewHolder(view);
-            }
-            if(viewType == TYPE_FOOTER){
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_account_footer_item,null);
-                return new NormalViewHolder(view);
-            }
-            return null;
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_account_item, null);
+            return new AccountViewHolder(view);
         }
 
-        @Override
-        public int getItemViewType(int position) {
-            if(position == accounts.size()){
-                return TYPE_FOOTER;
-            } else {
-                return TYPE_NORMAL;
-            }
-        }
 
         @Override
         public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
-            if(position < accounts.size()) {
-                Account account = accounts.get(position);
-                if (holder instanceof AccountViewHolder) {
-                    ((AccountViewHolder) holder).bindData(account, position);
-                    ((AccountViewHolder) holder).itemView.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            if(itemClickListener != null){
-                                itemClickListener.onTypeClick(v, position);
-                            }
+            Account account = accounts.get(position);
+            if (holder instanceof AccountViewHolder) {
+                ((AccountViewHolder) holder).bindData(account, position);
+                ((AccountViewHolder) holder).itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(itemClickListener != null){
+                            itemClickListener.onTypeClick(v, position);
                         }
-                    });
+                    }
+                });
 
-                    ((AccountViewHolder) holder).itemView.setOnLongClickListener(new View.OnLongClickListener() {
-                        @Override
-                        public boolean onLongClick(View v) {
-                            if(itemLongClikcListener != null){
-                                itemLongClikcListener.itemLongClick(v, position);
-                            }
-                            return true;
+                ((AccountViewHolder) holder).itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {
+                        if(itemLongClikcListener != null){
+                            itemLongClikcListener.itemLongClick(v, position);
                         }
-                    });
-                }
+                        return true;
+                    }
+                });
             }
         }
 
         @Override
         public int getItemCount() {
-            return accounts.size() + 1;
+            return accounts.size();
         }
 
         class AccountViewHolder extends RecyclerView.ViewHolder {

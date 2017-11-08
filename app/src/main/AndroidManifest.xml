@@ -16,7 +16,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity" />
         <activity android:name=".addaccount.KeepAnAccountActivity" />
-        <activity android:name=".activity.SetBudgetActivity" />
+        <activity android:name=".other.setbudget.SetBudgetActivity" />
         <activity android:name=".setting.SettingActivity" />
         <activity android:name=".typemanager.TypeManagerActivity" />
         <activity android:name=".question.QuestionFeedBackActivity" />
@@ -32,7 +32,10 @@
         <activity android:name=".activity.FundFlowDetailActivity" />
         <activity android:name=".activity.AccountDetailActivity" />
         <activity android:name=".other.about.AboutAppActivity" />
-        <activity android:name=".addtype.AddEditTypeActivity"></activity>
+        <activity android:name=".addtype.AddEditTypeActivity" />
+        <activity android:name=".MoreActivity" />
+        <activity android:name=".AccountActivity" />
+        <activity android:name=".AddAccountActivity"></activity>
     </application>
 
 </manifest>
