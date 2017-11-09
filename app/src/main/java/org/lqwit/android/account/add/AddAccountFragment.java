@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import org.lqwit.android.R;
 import org.lqwit.android.account.add.icon.ChooseAccountIconActivity;
@@ -81,5 +82,11 @@ public class AddAccountFragment extends AppBaseFragment implements AddAccountCon
     @Override
     public void setPresenter(@NonNull AddAccountContract.Presenter presenter) {
         mPresenter = ActivityUtils.checkNotNull(presenter);
+    }
+
+    @Override
+    public void showErrorView(String msg) {
+        ViewUtils.showCenterToast(msg, Toast.LENGTH_SHORT);
+        return;
     }
 }

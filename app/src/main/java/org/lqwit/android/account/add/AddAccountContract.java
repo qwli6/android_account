@@ -9,6 +9,7 @@ import org.lqwit.android.global.base.BaseView;
 
 public interface AddAccountContract {
     interface View extends BaseView<Presenter>{
+        void showErrorView(String msg);
 
 //        void setTitle();
 

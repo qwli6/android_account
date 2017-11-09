@@ -56,10 +56,10 @@ public class AccountRepository implements AccountDataSource {
 
     }
 
-    @Override
-    public void getFundFlow(@NonNull Integer fundFlowId, @NonNull GetFundFlowCallback callback) {
-
-    }
+//    @Override
+//    public void getFundFlow(@NonNull Integer fundFlowId, @NonNull GetFundFlowCallback callback) {
+//
+//    }
 
     @Override
     public void saveFundFlow(@NonNull FundFlow fundFlow) {

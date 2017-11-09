@@ -96,44 +96,45 @@ public class AccountLocalDataSource implements AccountDataSource {
 
     }
 
+    /**
     @Override
     public void getFundFlow(@NonNull Integer fundFlowId, @NonNull GetFundFlowCallback callback) {
         SQLiteDatabase db = mDbHelper.openSqlDataBase();
         /**
          * query columns
          */
-        String[] projection = {
-                PersistenceContract.FundFlowEntry.COLUMN_NAME_ENTRY_ID,
-                PersistenceContract.FundFlowEntry.COLUMN_NAME_TITLE
-        };
-        String selection = PersistenceContract.FundFlowEntry.COLUMN_NAME_ENTRY_ID + "LIKE ?";
-        String[] selectionArgs = { String.valueOf(fundFlowId) };
-
-        Cursor c = db.query(PersistenceContract.FundFlowEntry.TABLE_NAME, projection,
-                selection, selectionArgs, null, null, null);
-
-        FundFlow fundFlow = null;
-
-        if(c != null && c.getCount() > 0){
-            c.moveToFirst();
-            Integer itemId = c.getInt(c.getColumnIndexOrThrow(PersistenceContract
-                    .FundFlowEntry.COLUMN_NAME_ENTRY_ID));
-
-            fundFlow = new FundFlow();
-            fundFlow.setId(itemId);
-        }
-        if(c != null){
-            c.close();
-        }
-        db.close();
-
-        if(fundFlow != null){
-            callback.onTaskLoaded(fundFlow);
-        }else{
-            callback.onDataNotAvailable();
-        }
-    }
-
+//        String[] projection = {
+//                PersistenceContract.FundFlowEntry.COLUMN_NAME_ENTRY_ID,
+//                PersistenceContract.FundFlowEntry.COLUMN_NAME_TITLE
+//        };
+//        String selection = PersistenceContract.FundFlowEntry.COLUMN_NAME_ENTRY_ID + "LIKE ?";
+//        String[] selectionArgs = { String.valueOf(fundFlowId) };
+//
+//        Cursor c = db.query(PersistenceContract.FundFlowEntry.TABLE_NAME, projection,
+//                selection, selectionArgs, null, null, null);
+//
+//        FundFlow fundFlow = null;
+//
+//        if(c != null && c.getCount() > 0){
+//            c.moveToFirst();
+//            Integer itemId = c.getInt(c.getColumnIndexOrThrow(PersistenceContract
+//                    .FundFlowEntry.COLUMN_NAME_ENTRY_ID));
+//
+//            fundFlow = new FundFlow();
+//            fundFlow.setId(itemId);
+//        }
+//        if(c != null){
+//            c.close();
+//        }
+//        db.close();
+//
+//        if(fundFlow != null){
+//            callback.onTaskLoaded(fundFlow);
+//        }else{
+//            callback.onDataNotAvailable();
+//        }
+//    }
+//
     @Override
     public void saveFundFlow(@NonNull FundFlow fundFlow) {
         ActivityUtils.checkNotNull(fundFlow);

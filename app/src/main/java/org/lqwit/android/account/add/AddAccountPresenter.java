@@ -1,6 +1,7 @@
 package org.lqwit.android.account.add;
 
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 
 import org.lqwit.android.data.source.AccountDataSource;
 import org.lqwit.android.data.entity.FundFlow;
@@ -79,6 +80,9 @@ public class AddAccountPresenter implements AddAccountContract.Presenter{
 
     @Override
     public void validateInfo(String name) {
-
+        if(TextUtils.isEmpty(name)){
+            String msg = "账户名称不能为空！";
+            mAddAcountView.showErrorView(msg);
+        }
     }
 }
