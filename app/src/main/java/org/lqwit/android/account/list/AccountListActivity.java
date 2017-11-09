@@ -6,7 +6,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import org.lqwit.android.account.R;
+import org.lqwit.android.R;
 import org.lqwit.android.account.add.AddAccountActivity;
 import org.lqwit.android.global.base.AppBaseActivity;
 import org.lqwit.android.global.utils.ActivityUtils;

@@ -5,7 +5,7 @@ import android.content.Context;
 import android.os.Handler;
 import android.util.Log;
 
-import org.lqwit.android.account.R;
+import org.lqwit.android.R;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 

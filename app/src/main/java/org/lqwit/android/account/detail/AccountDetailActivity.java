@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.lqwit.android.account.R;
+import org.lqwit.android.R;
 import org.lqwit.android.global.base.AppBaseActivity;
 import org.lqwit.android.global.utils.ViewUtils;
 

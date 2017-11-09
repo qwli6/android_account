@@ -2,7 +2,7 @@ package org.lqwit.android.other.info;
 
 import android.view.View;
 
-import org.lqwit.android.account.R;
+import org.lqwit.android.R;
 import org.lqwit.android.global.base.AppBaseActivity;
 
 import butterknife.ButterKnife;

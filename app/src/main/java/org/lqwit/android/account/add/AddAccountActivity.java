@@ -3,7 +3,8 @@ package org.lqwit.android.account.add;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 
-import org.lqwit.android.account.R;
+import org.lqwit.android.R;
+import org.lqwit.android.global.Injection;
 import org.lqwit.android.global.base.AppBaseActivity;
 import org.lqwit.android.global.utils.ActivityUtils;
 
@@ -11,6 +12,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class AddAccountActivity extends AppBaseActivity {
+
+    private AddAccountPresenter addAccountPresenter;
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -32,6 +35,9 @@ public class AddAccountActivity extends AppBaseActivity {
         }
         ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
                 fragment, R.id.contentFrame);
+
+        addAccountPresenter = new AddAccountPresenter
+                (Injection.provideAccountRepository(this), fragment);
 
     }
 }

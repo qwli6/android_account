@@ -7,7 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 
-import org.lqwit.android.account.R;
+import org.lqwit.android.R;
 
 public class DeleteDialog extends DialogFragment {
 

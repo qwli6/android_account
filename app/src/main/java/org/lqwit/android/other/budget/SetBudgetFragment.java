@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import org.lqwit.android.account.R;
+import org.lqwit.android.R;
 import org.lqwit.android.global.config.Config;
 import org.lqwit.android.global.utils.CurrencyUtils;
 import org.lqwit.android.global.utils.ViewUtils;

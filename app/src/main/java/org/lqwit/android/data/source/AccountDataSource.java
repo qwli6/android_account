@@ -26,12 +26,6 @@ public interface AccountDataSource {
         void onDataNotAvailable();
     }
 
-    interface GetFundFlowCallback{
-
-        void onTaskLoaded(FundFlow fundFlow);
-
-        void onDataNotAvailable();
-    }
 
     interface GetTypesCallback{
         void onTypesLoaded(List<Type> types);
@@ -41,7 +35,6 @@ public interface AccountDataSource {
 
     void getFundFlows(@NonNull LoadAccountsCallback callback);
 
-    void getFundFlow(@NonNull Integer fundFlowId, @NonNull GetFundFlowCallback callback);
 
     void saveFundFlow(@NonNull FundFlow fundFlow);
 

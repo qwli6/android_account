@@ -16,7 +16,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import org.lqwit.android.account.R;
+import org.lqwit.android.R;
 import org.lqwit.android.global.utils.ActivityUtils;
 import org.lqwit.android.global.utils.ViewUtils;
 

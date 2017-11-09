@@ -1,41 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="org.lqwit.android.account">
+    package="org.lqwit.android">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name="org.lqwit.android.global.base.AppBaseApplication"
+        android:name=".global.base.AppBaseApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity" />
-        <activity android:name="org.lqwit.android.fundflow.KeepAnAccountActivity" />
-        <activity android:name="org.lqwit.android.other.budget.SetBudgetActivity" />
-        <activity android:name="org.lqwit.android.other.setting.SettingActivity" />
-        <activity android:name="org.lqwit.android.type.manager.TypeManagerActivity" />
-        <activity android:name="org.lqwit.android.other.feedback.QuestionFeedBackActivity" />
-        <activity android:name="org.lqwit.android.other.login.LoginActivity" />
-        <activity android:name="org.lqwit.android.other.info.UserProfileActivity" />
-        <activity android:name="org.lqwit.android.other.SplashActivity">
+        <activity android:name=".account.MainActivity" />
+        <activity android:name=".fundflow.KeepAnAccountActivity" />
+        <activity android:name=".other.budget.SetBudgetActivity" />
+        <activity android:name=".other.setting.SettingActivity" />
+        <activity android:name=".type.manager.TypeManagerActivity" />
+        <activity android:name=".other.feedback.QuestionFeedBackActivity" />
+        <activity android:name=".other.login.LoginActivity" />
+        <activity android:name=".other.info.UserProfileActivity" />
+        <activity android:name=".other.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".fundflowdetail.FundFlowDetailActivity" />
-        <activity android:name=".detail.AccountDetailActivity" />
-        <activity android:name="org.lqwit.android.other.about.AboutAppActivity" />
-        <activity android:name="org.lqwit.android.type.add.AddEditTypeActivity" />
-        <activity android:name="org.lqwit.android.other.mine.MineActivity" />
-        <activity android:name=".list.AccountListActivity" />
-        <activity android:name=".add.AddAccountActivity"></activity>
+        <activity android:name=".account.fundflowdetail.FundFlowDetailActivity" />
+        <activity android:name=".account.detail.AccountDetailActivity" />
+        <activity android:name=".other.about.AboutAppActivity" />
+        <activity android:name=".type.add.AddEditTypeActivity" />
+        <activity android:name=".other.mine.MineActivity" />
+        <activity android:name=".account.list.AccountListActivity" />
+        <activity android:name=".account.add.AddAccountActivity" />
+        <activity android:name=".account.add.icon.ChooseAccountIconActivity"/>
     </application>
 
 </manifest>

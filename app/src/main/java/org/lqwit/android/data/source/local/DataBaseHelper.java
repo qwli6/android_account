@@ -5,7 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Environment;
 import android.util.Log;
 
-import org.lqwit.android.account.R;
+import org.lqwit.android.R;
 
 import java.io.File;
 import java.io.FileOutputStream;

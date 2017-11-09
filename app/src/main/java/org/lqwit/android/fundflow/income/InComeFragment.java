@@ -16,7 +16,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.lqwit.android.account.R;
+import org.lqwit.android.R;
 import org.lqwit.android.type.manager.TypeManagerActivity;
 import org.lqwit.android.type.adapter.TypeAdapter;
 import org.lqwit.android.data.source.local.DataBaseHelper;

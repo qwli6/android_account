@@ -11,7 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import org.lqwit.android.account.R;
+import org.lqwit.android.R;
 import org.lqwit.android.other.about.AboutAppActivity;
 import org.lqwit.android.other.budget.SetBudgetActivity;
 import org.lqwit.android.global.utils.ActivityUtils;

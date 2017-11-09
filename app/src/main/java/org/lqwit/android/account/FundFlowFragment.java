@@ -8,11 +8,12 @@ import android.database.sqlite.SQLiteDatabase;
 import android.view.View;
 import android.widget.TextView;
 
+import org.lqwit.android.R;
 import org.lqwit.android.account.fundflowdetail.FundFlowDetailActivity;
+import org.lqwit.android.data.entity.FundFlow;
+import org.lqwit.android.data.source.local.DataBaseHelper;
 import org.lqwit.android.fundflow.KeepAnAccountActivity;
 import org.lqwit.android.global.base.AppBaseFragment;
-import org.lqwit.android.data.source.local.DataBaseHelper;
-import org.lqwit.android.data.entity.FundFlow;
 import org.lqwit.android.global.utils.CurrencyUtils;
 import org.lqwit.android.global.utils.DateUtils;
 

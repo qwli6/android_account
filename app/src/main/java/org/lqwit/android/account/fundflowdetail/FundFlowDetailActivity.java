@@ -1,6 +1,6 @@
 package org.lqwit.android.account.fundflowdetail;
 
-import org.lqwit.android.account.R;
+import org.lqwit.android.R;
 import org.lqwit.android.global.base.AppBaseActivity;
 
 public class FundFlowDetailActivity extends AppBaseActivity {

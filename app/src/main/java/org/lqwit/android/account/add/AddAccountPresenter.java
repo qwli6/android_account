@@ -15,7 +15,7 @@ import org.lqwit.android.global.utils.ActivityUtils;
  * Listens to user actions from the UI ({@link ExpendFragment}),
  * retrieves the data and updates the UI as required.
  */
-public class AddAccountPresenter implements AddAccountContract.Presenter, AccountDataSource.GetFundFlowCallback{
+public class AddAccountPresenter implements AddAccountContract.Presenter{
 
     @NonNull
     private final AddAccountContract.View mAddAcountView;
@@ -43,22 +43,22 @@ public class AddAccountPresenter implements AddAccountContract.Presenter, Accoun
     }
 
 
-    @Override
-    public void saveAccount(String title, String price, String picName, Integer payType, Integer type) {
-        createAccount(title, price, picName, payType, type);
-    }
-
-
-
-    @Override
-    public void populateTask() {
-
-    }
-
-    @Override
-    public boolean isDataMissing() {
-        return false;
-    }
+//    @Override
+//    public void saveAccount(String title, String price, String picName, Integer payType, Integer type) {
+//        createAccount(title, price, picName, payType, type);
+//    }
+//
+//
+//
+//    @Override
+//    public void populateTask() {
+//
+//    }
+//
+//    @Override
+//    public boolean isDataMissing() {
+//        return false;
+//    }
 
 
     private void createAccount(String title, String price, String picName, Integer payType, Integer type) {
@@ -76,13 +76,9 @@ public class AddAccountPresenter implements AddAccountContract.Presenter, Accoun
         mAccountRepository.saveFundFlow(fundFlow);
     }
 
-    @Override
-    public void onTaskLoaded(FundFlow fundFlow) {
-
-    }
 
     @Override
-    public void onDataNotAvailable() {
+    public void validateInfo(String name) {
 
     }
 }

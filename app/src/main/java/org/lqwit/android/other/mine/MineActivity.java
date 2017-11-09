@@ -3,7 +3,7 @@ package org.lqwit.android.other.mine;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 
-import org.lqwit.android.account.R;
+import org.lqwit.android.R;
 import org.lqwit.android.global.base.AppBaseActivity;
 import org.lqwit.android.global.utils.ActivityUtils;
 

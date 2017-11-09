@@ -15,13 +15,14 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize">
         <TextView
-            android:text="账户金额"
+            android:text="@string/account_amount"
             android:textSize="16sp"
             android:layout_gravity="center_vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <EditText
+            android:id="@+id/et_add_account_amount"
             android:layout_weight="1"
             android:paddingLeft="@dimen/activity_margin"
             android:paddingStart="@dimen/activity_margin"
@@ -29,9 +30,9 @@
             android:paddingEnd="@dimen/activity_margin"
             android:textSize="16sp"
             android:inputType="number"
-            android:hint="账户金额"
+            android:hint="@string/account_amount"
             android:background="@android:color/transparent"
-            android:gravity="center_vertical"
+            android:gravity="center_vertical|end"
             android:layout_width="0dp"
             android:layout_height="match_parent" />
     </LinearLayout>
@@ -51,13 +52,14 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize">
         <TextView
-            android:text="账户名称"
+            android:text="@string/account_name"
             android:textSize="16sp"
             android:layout_gravity="center_vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <EditText
+            android:id="@+id/et_add_account_name"
             android:layout_weight="1"
             android:paddingLeft="@dimen/activity_margin"
             android:paddingStart="@dimen/activity_margin"
@@ -65,9 +67,9 @@
             android:paddingEnd="@dimen/activity_margin"
             android:maxLength="8"
             android:textSize="16sp"
-            android:hint="账户名称（不超过8个汉字）"
+            android:hint="@string/account_name"
             android:background="@android:color/transparent"
-            android:gravity="center_vertical"
+            android:gravity="center_vertical|end"
             android:layout_width="0dp"
             android:layout_height="match_parent" />
     </LinearLayout>
@@ -77,6 +79,44 @@
         android:layout_height="0.3dp"
         android:background="@color/lineDividerColor"/>
     <LinearLayout
+        android:layout_gravity="center_vertical"
+        android:paddingStart="@dimen/activity_margin"
+        android:paddingLeft="@dimen/activity_margin"
+        android:paddingRight="@dimen/activity_margin"
+        android:paddingEnd="@dimen/activity_margin"
+        android:orientation="horizontal"
+        android:background="@drawable/item_click_selector"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize">
+        <TextView
+            android:text="@string/account_desc"
+            android:textSize="16sp"
+            android:layout_gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/et_add_account_desc"
+            android:layout_weight="1"
+            android:paddingLeft="@dimen/activity_margin"
+            android:paddingStart="@dimen/activity_margin"
+            android:paddingRight="@dimen/activity_margin"
+            android:paddingEnd="@dimen/activity_margin"
+            android:maxLength="10"
+            android:maxLines="1"
+            android:textSize="16sp"
+            android:hint="@string/account_desc"
+            android:background="@android:color/transparent"
+            android:gravity="center_vertical|end"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.3dp"
+        android:background="@color/lineDividerColor"/>
+    <RelativeLayout
         android:id="@+id/add_account_icon"
         android:layout_gravity="center_vertical"
         android:paddingStart="@dimen/activity_margin"
@@ -88,58 +128,61 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize">
         <TextView
-            android:text="账户图标"
+            android:text="@string/account_icon"
+            android:layout_centerVertical="true"
             android:textSize="16sp"
             android:layout_gravity="center_vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <ImageView
-            android:layout_marginStart="@dimen/activity_margin"
-            android:layout_marginLeft="@dimen/activity_margin"
+            android:id="@+id/choosed_account_icon"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
             android:layout_gravity="center_vertical"
-            android:background="@drawable/icon_zhichu_type_canyin"
-            android:layout_width="36dp"
-            android:layout_height="36dp" />
-    </LinearLayout>
+            android:background="@drawable/zhang_hu_xianjin_2"
+            android:layout_width="40dp"
+            android:layout_height="40dp" />
+    </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="0.3dp"
         android:background="@color/lineDividerColor"/>
-    <LinearLayout
-        android:id="@+id/add_account_color"
-        android:background="@drawable/item_click_selector"
-        android:layout_gravity="center_vertical"
-        android:paddingStart="@dimen/activity_margin"
-        android:paddingLeft="@dimen/activity_margin"
-        android:paddingRight="@dimen/activity_margin"
-        android:paddingEnd="@dimen/activity_margin"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize">
-        <TextView
-            android:text="账户颜色"
-            android:textSize="16sp"
-            android:layout_gravity="center_vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+    <!--<LinearLayout-->
+        <!--android:id="@+id/add_account_color"-->
+        <!--android:background="@drawable/item_click_selector"-->
+        <!--android:layout_gravity="center_vertical"-->
+        <!--android:paddingStart="@dimen/activity_margin"-->
+        <!--android:paddingLeft="@dimen/activity_margin"-->
+        <!--android:paddingRight="@dimen/activity_margin"-->
+        <!--android:paddingEnd="@dimen/activity_margin"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="?attr/actionBarSize">-->
+        <!--<TextView-->
+            <!--android:text="账户颜色"-->
+            <!--android:textSize="16sp"-->
+            <!--android:layout_gravity="center_vertical"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content" />-->
 
-        <ImageView
-            android:layout_marginStart="@dimen/activity_margin"
-            android:layout_marginLeft="@dimen/activity_margin"
-            android:layout_gravity="center_vertical"
-            android:background="@drawable/icon_zhichu_type_canyin"
-            android:layout_width="36dp"
-            android:layout_height="36dp" />
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.3dp"
-        android:background="@color/lineDividerColor"/>
+        <!--<ImageView-->
+            <!--android:layout_marginStart="@dimen/activity_margin"-->
+            <!--android:layout_marginLeft="@dimen/activity_margin"-->
+            <!--android:layout_gravity="center_vertical"-->
+            <!--android:background="@drawable/icon_zhichu_type_canyin"-->
+            <!--android:layout_width="36dp"-->
+            <!--android:layout_height="36dp" />-->
+    <!--</LinearLayout>-->
+    <!--<View-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0.3dp"-->
+        <!--android:background="@color/lineDividerColor"/>-->
 
 
     <Button
-        android:id="@+id/save_type"
+        android:id="@+id/save_account"
         android:layout_marginTop="@dimen/activity_margin"
         android:textSize="16sp"
         android:textColor="@android:color/white"

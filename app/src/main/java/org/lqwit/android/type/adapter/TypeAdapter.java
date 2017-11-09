@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.lqwit.android.account.R;
+import org.lqwit.android.R;
 import org.lqwit.android.data.entity.Type;
 import org.lqwit.android.type.listenter.OnItemClickListener;
 import org.lqwit.android.global.utils.ViewUtils;

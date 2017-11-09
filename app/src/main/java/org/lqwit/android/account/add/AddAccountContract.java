@@ -10,33 +10,20 @@ import org.lqwit.android.global.base.BaseView;
 public interface AddAccountContract {
     interface View extends BaseView<Presenter>{
 
-        void showEmptyTaskError();
+//        void setTitle();
 
-        void showTasksList();
+//        void setDescription(String description);
 
-        void setTitle();
-
-        void setDescription(String description);
-
-        boolean isActive();
+//        boolean isActive();
     }
 
 
 
     interface Presenter extends BasePresenter{
+        void validateInfo(String name);
 
-        /**
-         * add an account
-         * @param title
-         * @param price
-         * @param picName
-         * @param payType
-         * @param type
-         */
-        void saveAccount(String title, String price, String picName, Integer payType, Integer type);
-
-        void populateTask();
-
-        boolean isDataMissing();
+//        void populateTask();
+//
+//        boolean isDataMissing();
     }
 }

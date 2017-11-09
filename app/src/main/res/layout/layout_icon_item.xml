@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:background="@drawable/item_click_selector"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+        <ImageView
+            android:layout_margin="@dimen/activity_margin"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/zhang_hu_fanka"
+            android:id="@+id/account_icon_img"
+            android:layout_width="40dp"
+            android:layout_height="40dp"/>
+</LinearLayout>

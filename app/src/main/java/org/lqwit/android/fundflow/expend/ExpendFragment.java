@@ -22,16 +22,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.lqwit.android.account.R;
-import org.lqwit.android.type.manager.TypeManagerActivity;
-import org.lqwit.android.type.adapter.TypeAdapter;
-import org.lqwit.android.data.source.local.DataBaseHelper;
+import org.lqwit.android.R;
 import org.lqwit.android.data.entity.Account;
 import org.lqwit.android.data.entity.Type;
-import org.lqwit.android.type.listenter.OnItemClickListener;
+import org.lqwit.android.data.source.local.DataBaseHelper;
 import org.lqwit.android.global.utils.CurrencyUtils;
 import org.lqwit.android.global.utils.DateUtils;
 import org.lqwit.android.global.utils.ViewUtils;
+import org.lqwit.android.type.adapter.TypeAdapter;
+import org.lqwit.android.type.listenter.OnItemClickListener;
+import org.lqwit.android.type.manager.TypeManagerActivity;
 
 import java.util.ArrayList;
 import java.util.Date;

@@ -6,7 +6,7 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.RadioButton;
 
-import org.lqwit.android.account.R;
+import org.lqwit.android.R;
 import org.lqwit.android.type.adapter.FragmentAdapter;
 import org.lqwit.android.global.base.AppBaseActivity;
 import org.lqwit.android.fundflow.expend.ExpendFragment;

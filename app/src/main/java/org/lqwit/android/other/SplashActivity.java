@@ -12,7 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import org.lqwit.android.account.MainActivity;
-import org.lqwit.android.account.R;
+import org.lqwit.android.R;
 
 
 public class SplashActivity extends AppCompatActivity {

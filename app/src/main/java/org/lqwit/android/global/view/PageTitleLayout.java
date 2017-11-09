@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import org.lqwit.android.account.R;
+import org.lqwit.android.R;
 
 /**
  * Created by liqiwen on 2017/10/16.

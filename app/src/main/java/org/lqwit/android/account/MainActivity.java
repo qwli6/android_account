@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 
+import org.lqwit.android.R;
 import org.lqwit.android.account.list.AccountListActivity;
 import org.lqwit.android.global.base.AppBaseActivity;
 import org.lqwit.android.global.utils.ActivityUtils;
