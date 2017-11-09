@@ -78,15 +78,45 @@
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/home_button_keep_an_account"
-        android:layout_margin="@dimen/activity_margin"
-        android:text="记一笔"
-        android:textSize="18sp"
-        android:background="@drawable/item_click_selector"
-        android:textColor="@color/toolbarTextColor"
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_marginBottom="@dimen/activity_margin"
+            android:layout_marginTop="@dimen/activity_margin"
+            android:id="@+id/home_button_keep_an_account"
+            android:text="记一笔"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/activity_margin"
+            android:layout_marginLeft="@dimen/activity_margin"
+            android:gravity="center"
+            android:paddingTop="@dimen/text_padding"
+            android:paddingBottom="@dimen/text_padding"
+            android:textSize="16sp"
+            android:textColor="@android:color/white"
+            android:background="@drawable/keep_account_left_selector"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="?attr/actionBarSize" />
+        <ImageButton
+            android:background="@drawable/keep_account_right_selector"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:src="@drawable/ic_add_white_24dp"
+            android:paddingLeft="@dimen/activity_margin"
+            android:paddingRight="@dimen/activity_margin"
+            android:layout_marginRight="@dimen/activity_margin"
+            android:layout_marginEnd="@dimen/activity_margin"
+            android:paddingTop="@dimen/text_padding"
+            android:paddingBottom="@dimen/text_padding"
+            android:textSize="16sp"
+            android:textColor="@android:color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="?attr/actionBarSize" />
+    </LinearLayout>
 
     <RelativeLayout
         android:id="@+id/today_fund_flow"

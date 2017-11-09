@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/toolbarColor"
-    tools:context="org.lqwit.android.account.addtype.AddEditTypeFragment">
+    tools:context="org.lqwit.android.account.org.lqwit.android.type.add.AddEditTypeFragment">
     <LinearLayout
         android:layout_gravity="center_vertical"
         android:paddingStart="@dimen/activity_margin"

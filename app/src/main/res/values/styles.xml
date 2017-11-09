@@ -7,6 +7,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:typeface">monospace</item>
+        <item name="android:windowTranslucentStatus">true</item>
         <!--<item name="android:windowFullscreen">true</item>-->
     </style>
 
@@ -24,6 +25,7 @@
     <style name="Toolbar" parent="Base.Widget.AppCompat.Toolbar" >
         <item name="contentInsetStartWithNavigation">0dp</item>
         <item name="contentInsetStart">0dp</item>
+        <item name="android:paddingTop">@dimen/toolbar_padding_top</item>
     </style>
 
     <style name="NumKeyStyle">
@@ -65,4 +67,5 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
+    <dimen name="toolbar_padding_top">25dp</dimen>
 </resources>

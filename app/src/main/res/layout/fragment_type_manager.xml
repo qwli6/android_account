@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/toolbarColor"
-    tools:context="org.lqwit.android.account.typemanager.TypeManagerFragment">
+    tools:context="org.lqwit.android.account.org.lqwit.android.type.manager.TypeManagerFragment">
 
 
     <android.support.v7.widget.RecyclerView

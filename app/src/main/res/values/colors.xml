@@ -47,4 +47,44 @@
 
 
 
+
+
+    <color name="a">#ff5252</color>
+    <color name="b">#ef5350</color>
+    <color name="c">#ffebee</color>
+    <color name="d">#f48fb1</color>
+    <color name="e">#f50057</color>
+    <color name="f">#9c27b0</color>
+    <color name="g">#4a148c</color>
+    <color name="h">#aa00ff</color>
+    <color name="i">#d1c4e9</color>
+    <color name="j">#673ab7</color>
+    <color name="k">#311b92</color>
+    <color name="l">#651fff</color>
+    <color name="m">#304ffe</color>
+    <color name="n">#2962ff</color>
+    <color name="o">#2e7d32</color>
+    <color name="p">#00c853</color>
+    <color name="q">#fdd835</color>
+    <color name="r">#f9a825</color>
+    <color name="s">#fb8c00</color>
+    <color name="t">#ff6d00</color>
+    <color name="u">#ff5722</color>
+    <color name="v">#e64a19</color>
+    <color name="w">#424242</color>
+    <color name="x">#546e7a</color>
+    <color name="y">#689f38</color>
+    <color name="z">#43a047</color>
+
+
+
+
+
+
+
+
+
+
+
+
 </resources>

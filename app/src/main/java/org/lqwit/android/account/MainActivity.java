@@ -4,9 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 
-import org.lqwit.android.account.base.AppBaseActivity;
-import org.lqwit.android.account.fragment.FundFlowFragment;
-import org.lqwit.android.account.utils.ActivityUtils;
+import org.lqwit.android.account.list.AccountListActivity;
+import org.lqwit.android.global.base.AppBaseActivity;
+import org.lqwit.android.global.utils.ActivityUtils;
+import org.lqwit.android.other.mine.MineActivity;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -24,6 +25,8 @@ public class MainActivity extends AppBaseActivity {
     @Override
     public void initView() {
         setContentView(R.layout.activity_main);
+
+
         ButterKnife.bind(this);
 
 
@@ -46,11 +49,11 @@ public class MainActivity extends AppBaseActivity {
             case R.id.main_fund_flow:
                 break;
             case R.id.main_account_textview:
-                intent = new Intent(MainActivity.this, AccountActivity.class);
+                intent = new Intent(MainActivity.this, AccountListActivity.class);
                 startActivity(intent);
                 break;
             case R.id.main_more:
-                intent = new Intent(MainActivity.this, MoreActivity.class);
+                intent = new Intent(MainActivity.this, MineActivity.class);
                 startActivity(intent);
                 break;
             case R.id.main_report_froms:
