@@ -23,7 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.lqwit.android.R;
-import org.lqwit.android.data.entity.Account;
+import org.lqwit.android.data.entity.AccountEntry;
 import org.lqwit.android.data.entity.Type;
 import org.lqwit.android.data.source.local.DataBaseHelper;
 import org.lqwit.android.global.utils.CurrencyUtils;
@@ -105,7 +105,7 @@ public class ExpendFragment extends Fragment {
 
     private List<Type> typeList;
     private RecyclerView chooseUserAccountRecycler;
-    private List<Account> accounts;
+    private List<AccountEntry> accounts;
 
     @Nullable
     @Override
@@ -124,9 +124,9 @@ public class ExpendFragment extends Fragment {
      */
     public void initData(){
         typeList = new ArrayList<>();
-        Observable.create(new ObservableOnSubscribe<List<Account>>() {
+        Observable.create(new ObservableOnSubscribe<List<AccountEntry>>() {
             @Override
-            public void subscribe(ObservableEmitter<List<Account>> e) throws Exception {
+            public void subscribe(ObservableEmitter<List<AccountEntry>> e) throws Exception {
                 accounts = new ArrayList<>();
                 DataBaseHelper dataBaseHelper = new DataBaseHelper(getActivity());
                 SQLiteDatabase sqLiteDatabase = dataBaseHelper.openSqlDataBase();
@@ -137,25 +137,25 @@ public class ExpendFragment extends Fragment {
                     String accountName = cursor.getString(cursor.getColumnIndex("name"));
                     String accountPrice = cursor.getString(cursor.getColumnIndex("amount"));
                     String accountDesc = cursor.getString(cursor.getColumnIndex("desc"));
-                    Integer accountType = cursor.getInt(cursor.getColumnIndex("account_type"));
-                    Account account = new Account();
-                    account.setAccountId(accountId);
-                    account.setAccountName(accountName);
-                    account.setTotalAmount(accountPrice);
-                    account.setAccountType(accountType);
-                    account.setAccountDesc(accountDesc);
+                    String picName = cursor.getString(cursor.getColumnIndex("pic_name"));
+                    AccountEntry account = new AccountEntry();
+                    account.setId(accountId);
+                    account.setName(accountName);
+                    account.setAmount(accountPrice);
+                    account.setPicName(picName);
+                    account.setDesc(accountDesc);
                     accounts.add(account);
                     e.onNext(accounts);
                     e.onComplete();
                 }
                 cursor.close();
             }
-        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<List<Account>>() {
+        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<List<AccountEntry>>() {
             @Override
-            public void accept(List<Account> accounts) throws Exception {
-                Account account = accounts.get(0);
-                account.setDefault(true); //设置第一个为默认支付账户
-                expendType.setText(account.getAccountName());
+            public void accept(List<AccountEntry> accounts) throws Exception {
+                AccountEntry account = accounts.get(0);
+//                account.setDefault(true); //设置第一个为默认支付账户
+                expendType.setText(account.getAmount());
             }
         });
 
@@ -308,10 +308,10 @@ public class ExpendFragment extends Fragment {
                     public void onDismiss(DialogInterface dialog) {
                         if(accounts != null && accounts.size() > 0){
                             for (int i = 0; i < accounts.size(); i++) {
-                                if(accounts.get(i).isDefault()){
-                                    expendType.setText(accounts.get(i).getAccountName());
-                                    return;
-                                }
+//                                if(accounts.get(i).isDefault()){
+//                                    expendType.setText(accounts.get(i).getAccountName());
+//                                    return;
+//                                }
                             }
                         }else{
                             expendType.setText("未知");
@@ -344,9 +344,9 @@ public class ExpendFragment extends Fragment {
 
     public class ChooseAccountAdapter extends RecyclerView.Adapter<ChooseAccountAdapter.ChooseAccountViewHolder>{
 
-        List<Account> accounts;
+        List<AccountEntry> accounts;
 
-        public ChooseAccountAdapter(List<Account> accounts) {
+        public ChooseAccountAdapter(List<AccountEntry> accounts) {
             this.accounts = accounts;
         }
 
@@ -357,29 +357,29 @@ public class ExpendFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(ChooseAccountViewHolder holder, int position) {
-            final Account account = accounts.get(position);
-            holder.accountTitle.setText(account.getAccountName());
-            holder.amount.setText(account.getTotalAmount());
-            if(account.isDefault()){
-                holder.defaultPayAccount.setChecked(true);
-            }else{
-                holder.defaultPayAccount.setChecked(false);
-            }
+            final AccountEntry account = accounts.get(position);
+            holder.accountTitle.setText(account.getName());
+            holder.amount.setText(account.getAmount());
+//            if(account.isDefault()){
+//                holder.defaultPayAccount.setChecked(true);
+//            }else{
+//                holder.defaultPayAccount.setChecked(false);
+//            }
 
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(!account.isDefault()){
-                        /**
-                         * 1.遍历所有账户，将所有账户都设置成不勾选
-                         * 2.勾选所在位置的 checkbox
-                         */
-                        for (int i = 0; i < accounts.size(); i++) {
-                            accounts.get(i).setDefault(false);
-                        }
-                        account.setDefault(true);
-                        notifyDataSetChanged();
-                    }
+//                    if(!account.isDefault()){
+//                        /**
+//                         * 1.遍历所有账户，将所有账户都设置成不勾选
+//                         * 2.勾选所在位置的 checkbox
+//                         */
+//                        for (int i = 0; i < accounts.size(); i++) {
+//                            accounts.get(i).setDefault(false);
+//                        }
+//                        account.setDefault(true);
+//                        notifyDataSetChanged();
+//                    }
                 }
             });
         }

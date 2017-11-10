@@ -30,4 +30,16 @@ public final class PersistenceContract {
         public static final String COLUMN_NAME_PIC_NAME = "pic_name";
         public static final String COLUMN_NAME_TYPE = "type";
     }
+
+    /**
+     * account schema structure
+     */
+    public static abstract class AccountEntry implements BaseColumns{
+        public static final String TABLE_NAME = "user_account";
+        public static final String COLUMN_NAME_ID = "_id";
+        public static final String COLUMN_NAME_NAME = "name";
+        public static final String COLUMN_NAME_DESC = "desc";
+        public static final String COLUMN_NAME_AMOUNT = "amount";
+        public static final String COLUMN_NAME_PIC_NAME = "pic_name";
+    }
 }

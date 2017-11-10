@@ -159,7 +159,7 @@ public class ViewUtils {
         View view = inflater.inflate(R.layout.layout_custom_toast, null);
         TextView customToastMsg = view.findViewById(R.id.custom_toast_message);
         customToastMsg.setText(str);
-        customToastMsg.setTypeface(Typeface.createFromAsset(getContext().getAssets(), "fonts/font_fzsongjianti.ttf"));
+        customToastMsg.setTypeface(Typeface.createFromAsset(getContext().getAssets(), "fonts/font_hwzs.ttf"));
         toast.setView(view);
         toast.show();
     }
@@ -170,7 +170,7 @@ public class ViewUtils {
         View view = inflater.inflate(R.layout.layout_custom_toast, null);
         TextView customToastMsg = view.findViewById(R.id.custom_toast_message);
         customToastMsg.setText(strId);
-        customToastMsg.setTypeface(Typeface.createFromAsset(getContext().getAssets(), "fonts/font_fzsongjianti.ttf"));
+        customToastMsg.setTypeface(Typeface.createFromAsset(getContext().getAssets(), "fonts/font_hwzs.ttf"));
         toast.setView(view);
         toast.show();
     }
@@ -181,7 +181,7 @@ public class ViewUtils {
         View view = inflater.inflate(R.layout.layout_custom_toast, null);
         TextView customToastMsg = view.findViewById(R.id.custom_toast_message);
         customToastMsg.setText(str);
-        customToastMsg.setTypeface(Typeface.createFromAsset(getContext().getAssets(), "fonts/font_fzsongjianti.ttf"));
+        customToastMsg.setTypeface(Typeface.createFromAsset(getContext().getAssets(), "fonts/font_hwzs.ttf"));
         toast.setView(view);
         toast.setDuration(duration);
         toast.setGravity(Gravity.CENTER, 0, 0);

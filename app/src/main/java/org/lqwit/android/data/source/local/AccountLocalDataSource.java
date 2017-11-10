@@ -6,10 +6,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
 
-import org.lqwit.android.data.schema.PersistenceContract;
-import org.lqwit.android.data.source.AccountDataSource;
 import org.lqwit.android.data.entity.FundFlow;
 import org.lqwit.android.data.entity.Type;
+import org.lqwit.android.data.schema.PersistenceContract;
+import org.lqwit.android.data.source.AccountDataSource;
 import org.lqwit.android.global.utils.ActivityUtils;
 
 import java.util.ArrayList;
@@ -89,6 +89,20 @@ public class AccountLocalDataSource implements AccountDataSource {
     @Override
     public void addNewType() {
 
+    }
+
+    @Override
+    public void saveAccount(AccountCallback callback, String name,
+                            String amount, String desc, String iconName) {
+        SQLiteDatabase db = mDbHelper.openSqlDataBase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(PersistenceContract.AccountEntry.COLUMN_NAME_NAME, name);
+        contentValues.put(PersistenceContract.AccountEntry.COLUMN_NAME_DESC, desc);
+        contentValues.put(PersistenceContract.AccountEntry.COLUMN_NAME_AMOUNT, amount);
+        contentValues.put(PersistenceContract.AccountEntry.COLUMN_NAME_PIC_NAME, iconName);
+        db.insert(PersistenceContract.AccountEntry.TABLE_NAME, null, contentValues);
+
+        callback.saveSuccess();
     }
 
     @Override

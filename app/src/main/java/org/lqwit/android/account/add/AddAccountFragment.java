@@ -4,7 +4,6 @@ package org.lqwit.android.account.add;
 import android.app.Activity;
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -21,14 +20,10 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
-public class AddAccountFragment extends AppBaseFragment implements AddAccountContract.View {
+public class AddAccountFragment extends AppBaseFragment implements AccountContract.View {
 
     private static final String TAG = "AddAccountFragment";
-    private AddAccountContract.Presenter mPresenter;
-
-    private String name;
-    private String desc;
-    private String amount;
+    private AccountContract.Presenter mPresenter;
 
 
     @BindView(R.id.choosed_account_icon)
@@ -39,6 +34,8 @@ public class AddAccountFragment extends AppBaseFragment implements AddAccountCon
     EditText accountName;
     @BindView(R.id.et_add_account_desc)
     EditText accountDesc;
+    private String iconName;
+
     @Override
     public View createView() {
         View root = View.inflate(mActivity, R.layout.fragment_add_account, null);
@@ -59,7 +56,10 @@ public class AddAccountFragment extends AppBaseFragment implements AddAccountCon
                 startActivityForResult(intent, 1);
                 break;
             case R.id.save_account:
-                mPresenter.validateInfo(name);
+                String name = accountName.getText().toString();
+                String amount = accountAmount.getText().toString();
+                String desc = accountDesc.getText().toString();
+                mPresenter.saveAccount(name, amount, desc, iconName);
                 break;
             default:
                 break;
@@ -71,16 +71,18 @@ public class AddAccountFragment extends AppBaseFragment implements AddAccountCon
         switch (requestCode){
             case 1:
                 if(resultCode == Activity.RESULT_OK){
-                    String name = data.getStringExtra("icon_name");
-                    Log.d(TAG, "name:" + name);
-                    choosedAccountIcon.setImageBitmap(ViewUtils.decodeBitmap(name));
+                    iconName = data.getStringExtra("icon_name");
+                    choosedAccountIcon.setImageBitmap(ViewUtils.decodeBitmap(iconName));
                 }
+                break;
+            default:
+                break;
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
-    public void setPresenter(@NonNull AddAccountContract.Presenter presenter) {
+    public void setPresenter(@NonNull AccountContract.Presenter presenter) {
         mPresenter = ActivityUtils.checkNotNull(presenter);
     }
 
@@ -88,5 +90,10 @@ public class AddAccountFragment extends AppBaseFragment implements AddAccountCon
     public void showErrorView(String msg) {
         ViewUtils.showCenterToast(msg, Toast.LENGTH_SHORT);
         return;
+    }
+
+    @Override
+    public void saveSuccess() {
+        mActivity.finish();
     }
 }

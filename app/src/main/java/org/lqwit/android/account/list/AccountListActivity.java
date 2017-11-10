@@ -16,6 +16,7 @@ import butterknife.ButterKnife;
 
 public class AccountListActivity extends AppBaseActivity {
 
+
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
@@ -39,6 +40,7 @@ public class AccountListActivity extends AppBaseActivity {
                 fragment, R.id.contentFrame);
 
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

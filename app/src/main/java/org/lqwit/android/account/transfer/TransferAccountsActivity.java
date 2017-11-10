@@ -1,4 +1,4 @@
-package org.lqwit.android.account.add;
+package org.lqwit.android.account.transfer;
 
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
@@ -11,33 +11,32 @@ import org.lqwit.android.global.utils.ActivityUtils;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class AddAccountActivity extends AppBaseActivity {
+public class TransferAccountsActivity extends AppBaseActivity {
 
-    private AccountPresenter addAccountPresenter;
+    private TransferPresenter transferPresenter;
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
     @Override
     public void initView() {
-        setContentView(R.layout.activity_add_account);
+        setContentView(R.layout.activity_transfer_accounts);
         ButterKnife.bind(this);
 
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle(R.string.add_account);
-        actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
-        AddAccountFragment fragment = (AddAccountFragment)
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setTitle("转账");
+
+        TransferFragment fragment = (TransferFragment)
                 getSupportFragmentManager().findFragmentById(R.id.contentFrame);
         if(fragment == null){
-            fragment = AddAccountFragment.newInstance();
+            fragment = TransferFragment.newInstance();
         }
         ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
                 fragment, R.id.contentFrame);
 
-        addAccountPresenter = new AccountPresenter
-                (Injection.provideAccountRepository(this), fragment);
-
+        transferPresenter = new TransferPresenter(Injection.provideAccountRepository(this), fragment);
     }
 }

@@ -18,6 +18,14 @@ public interface AccountDataSource {
 
     void addNewType();
 
+    void saveAccount(AccountCallback callback, String name,
+                     String amount, String desc, String iconName);
+
+    interface AccountCallback{
+        void saveSuccess();
+        void failed(String msg);
+    }
+
 
     interface LoadAccountsCallback{
 

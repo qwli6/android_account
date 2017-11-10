@@ -12,12 +12,12 @@ import org.lqwit.android.global.utils.ActivityUtils;
 public class AccountRepository implements AccountDataSource {
 
     private static AccountRepository INSTANCE = null;
-    private final AccountDataSource mAccountLocalDataSource;
+    private final AccountDataSource localDataSource;
 
 
     //Prevent direct instantitation
     private AccountRepository(@NonNull AccountDataSource accountLocalDataSource){
-        mAccountLocalDataSource = ActivityUtils.checkNotNull(accountLocalDataSource);
+        localDataSource = ActivityUtils.checkNotNull(accountLocalDataSource);
     }
 
     public static AccountRepository getInstance(AccountDataSource accountLocalDataSource){
@@ -43,11 +43,18 @@ public class AccountRepository implements AccountDataSource {
      */
     @Override
     public void getTypes(Integer mTypeFlag, GetTypesCallback callback) {
-        mAccountLocalDataSource.getTypes(mTypeFlag, callback);
+        localDataSource.getTypes(mTypeFlag, callback);
     }
 
     @Override
     public void addNewType() {
+
+    }
+
+    @Override
+    public void saveAccount(AccountCallback callback,
+                            String name, String amount, String desc, String iconName) {
+        localDataSource.saveAccount(callback, name, amount, desc, iconName);
 
     }
 

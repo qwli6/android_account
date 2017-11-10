@@ -7,9 +7,12 @@ import org.lqwit.android.global.base.BaseView;
  * Created by liqiwen on 2017/11/2.
  */
 
-public interface AddAccountContract {
+public interface AccountContract {
     interface View extends BaseView<Presenter>{
         void showErrorView(String msg);
+
+        void saveSuccess();
+
 
 //        void setTitle();
 
@@ -21,7 +24,8 @@ public interface AddAccountContract {
 
 
     interface Presenter extends BasePresenter{
-        void validateInfo(String name);
+
+        void saveAccount(String name, String amount, String desc, String iconName);
 
 //        void populateTask();
 //
