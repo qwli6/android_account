@@ -3,9 +3,6 @@ package org.lqwit.android.account.list;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +16,7 @@ import org.lqwit.android.R;
 import org.lqwit.android.account.detail.AccountDetailActivity;
 import org.lqwit.android.data.entity.AccountEntry;
 import org.lqwit.android.data.source.local.DataBaseHelper;
+import org.lqwit.android.global.base.AppBaseFragment;
 import org.lqwit.android.global.utils.CurrencyUtils;
 import org.lqwit.android.global.utils.ViewUtils;
 import org.lqwit.android.global.view.DeleteDialog;
@@ -43,19 +41,18 @@ import io.reactivex.schedulers.Schedulers;
  * Desc:
  */
 
-public class AccountListFragment extends Fragment implements DeleteDialog.DeleteListener{
+public class AccountListFragment extends AppBaseFragment implements DeleteDialog.DeleteListener{
 
     @BindView(R.id.account_list_view)
     ListView accountListView;
 
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home_account, null);
-        ButterKnife.bind(this, view);
+    public View createView() {
+        View root = View.inflate(mActivity, R.layout.fragment_home_account, null);
+        ButterKnife.bind(this, root);
         initData();
-        return view;
+        return root;
     }
 
 
@@ -88,7 +85,9 @@ public class AccountListFragment extends Fragment implements DeleteDialog.Delete
                     cursor.close();
                 }
             }
-        }).subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<List<AccountEntry>>() {
+        }).subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<List<AccountEntry>>() {
             @Override
             public void accept(final List<AccountEntry> accounts) throws Exception {
                 accountListView.setAdapter(new AccountListAdapter(accounts));
@@ -96,8 +95,13 @@ public class AccountListFragment extends Fragment implements DeleteDialog.Delete
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         Intent intent = new Intent(getActivity(), AccountDetailActivity.class);
-                        intent.putExtra(AccountDetailActivity.ACCOUNT_ID, accounts.get(position).getId());
-                        intent.putExtra(AccountDetailActivity.ACCOUNT_AMOUNT, accounts.get(position).getAmount());
+                        AccountEntry accountEntry = accounts.get(position);
+                        intent.putExtra(AccountDetailActivity.ACCOUNT_ID,
+                                accountEntry.getId());
+                        intent.putExtra(AccountDetailActivity.ACCOUNT_AMOUNT,
+                                accountEntry.getAmount());
+                        intent.putExtra(AccountDetailActivity.ACCOUNT_NAME,
+                                accountEntry.getName());
                         startActivity(intent);
                     }
                 });
@@ -105,13 +109,10 @@ public class AccountListFragment extends Fragment implements DeleteDialog.Delete
                 accountListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
                     @Override
                     public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                        if(position > 0) {
-                            AccountEntry account = accounts.get(position);
-                            DeleteDialog deleteDialog = new DeleteDialog();
-                            deleteDialog.show(getChildFragmentManager(), "account_fragment_delete");
-                            return true;
-                        }
-                        return false;
+                        AccountEntry account = accounts.get(position);
+                        DeleteDialog deleteDialog = new DeleteDialog();
+                        deleteDialog.show(getChildFragmentManager(), "account_fragment_delete");
+                        return true;
                     }
                 });
             }

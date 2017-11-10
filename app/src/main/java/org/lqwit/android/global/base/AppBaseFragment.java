@@ -36,7 +36,8 @@ public abstract class AppBaseFragment extends Fragment{
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
+        initData();
+        initListener();
     }
 
     public void initData(){

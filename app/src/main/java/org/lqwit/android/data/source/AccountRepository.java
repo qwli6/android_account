@@ -59,6 +59,11 @@ public class AccountRepository implements AccountDataSource {
     }
 
     @Override
+    public void loadAccountList(LoadAccountListCallback callback) {
+        localDataSource.loadAccountList(callback);
+    }
+
+    @Override
     public void getFundFlows(@NonNull LoadAccountsCallback callback) {
 
     }

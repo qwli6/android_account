@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
 
+import org.lqwit.android.data.entity.AccountEntry;
 import org.lqwit.android.data.entity.FundFlow;
 import org.lqwit.android.data.entity.Type;
 import org.lqwit.android.data.schema.PersistenceContract;
@@ -30,6 +31,8 @@ public class AccountLocalDataSource implements AccountDataSource {
 
     private static AccountLocalDataSource INSTANCE;
     private DataBaseHelper mDbHelper;
+    private SQLiteDatabase db;
+
 
     /**
      * Prevent direct instantiation.
@@ -101,8 +104,49 @@ public class AccountLocalDataSource implements AccountDataSource {
         contentValues.put(PersistenceContract.AccountEntry.COLUMN_NAME_AMOUNT, amount);
         contentValues.put(PersistenceContract.AccountEntry.COLUMN_NAME_PIC_NAME, iconName);
         db.insert(PersistenceContract.AccountEntry.TABLE_NAME, null, contentValues);
-
+        db.close();
         callback.saveSuccess();
+    }
+
+    @Override
+    public void loadAccountList(final LoadAccountListCallback callback) {
+        String tableName = PersistenceContract.AccountEntry.TABLE_NAME;
+        final String sql = "select * from " + tableName;
+        Observable.create(new ObservableOnSubscribe<List<AccountEntry>>() {
+            @Override
+            public void subscribe(ObservableEmitter<List<AccountEntry>> e) throws Exception {
+                db = mDbHelper.openSqlDataBase();
+                Cursor cursor = db.rawQuery(sql, null);
+                if(cursor != null && cursor.getCount() > 0){
+                    List<AccountEntry> accountEntries =new ArrayList<>();
+                    while (cursor.moveToNext()){
+                        AccountEntry accountEntry = new AccountEntry();
+                        accountEntry.setId(cursor.getInt(cursor.getColumnIndex(
+                                PersistenceContract.AccountEntry.COLUMN_NAME_ID)));
+                        accountEntry.setName(cursor.getString(cursor.getColumnIndex(
+                                PersistenceContract.AccountEntry.COLUMN_NAME_NAME)));
+                        accountEntry.setAmount(cursor.getString(cursor.getColumnIndex(
+                                PersistenceContract.AccountEntry.COLUMN_NAME_AMOUNT)));
+                        accountEntry.setDesc(cursor.getString(cursor.getColumnIndexOrThrow(
+                                PersistenceContract.AccountEntry.COLUMN_NAME_DESC)));
+                        accountEntry.setPicName(cursor.getString(cursor.getColumnIndex(
+                                PersistenceContract.AccountEntry.COLUMN_NAME_PIC_NAME)));
+                        accountEntries.add(accountEntry);
+                    }
+                    cursor.close();
+                    db.close();
+                    e.onNext(accountEntries);
+                    e.onComplete();
+                }
+            }
+        }).subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<List<AccountEntry>>() {
+            @Override
+            public void accept(List<AccountEntry> accountEntries) throws Exception {
+                callback.loadSuccess(accountEntries);
+            }
+        });
     }
 
     @Override

@@ -2,6 +2,7 @@ package org.lqwit.android.account.transfer;
 
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import org.lqwit.android.R;
 import org.lqwit.android.global.Injection;
@@ -10,6 +11,7 @@ import org.lqwit.android.global.utils.ActivityUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class TransferAccountsActivity extends AppBaseActivity {
 
@@ -37,6 +39,26 @@ public class TransferAccountsActivity extends AppBaseActivity {
         ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
                 fragment, R.id.contentFrame);
 
-        transferPresenter = new TransferPresenter(Injection.provideAccountRepository(this), fragment);
+        transferPresenter = new TransferPresenter(
+                Injection.provideAccountRepository(this), fragment);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        transferPresenter.start();
+    }
+
+    @OnClick(R.id.transfer_save)
+    public void onViewClick(View view){
+        switch (view.getId()){
+            case R.id.transfer_save:
+                TransferFragment fragment = (TransferFragment)
+                        getSupportFragmentManager().findFragmentById(R.id.contentFrame);
+                if(fragment != null){
+                    fragment.startTransfer();
+                }
+                break;
+        }
     }
 }

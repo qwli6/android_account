@@ -23,6 +23,6 @@ public class AccountDetailPresenter implements AccountDetailContract.Presenter {
 
     @Override
     public void start() {
-
+//        accountRepository.get
     }
 }

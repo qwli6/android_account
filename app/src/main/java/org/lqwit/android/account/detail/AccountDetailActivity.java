@@ -19,26 +19,12 @@ import butterknife.ButterKnife;
 public class AccountDetailActivity extends AppBaseActivity {
     public static final String ACCOUNT_ID = "account_id";
     public static final String ACCOUNT_AMOUNT = "account_amount";
+    public static final String ACCOUNT_NAME = "account_name";
 
     private AccountDetailPresenter accountDetailPresenter;
 
-//    @BindView(R.id.account_surplus)
-//    TextView accountSurplus;
-//    @BindView(R.id.account_exptend)
-//    TextView accountExptend;
-//    @BindView(R.id.account_income)
-//    TextView accountIncome;
-//    @BindView(R.id.account_flow_expandable_listview)
-//    ExpandableListView accountFlowListView;
-
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-
-//    private Map<String, List<String>> dataset = new HashMap<>();
-//    private String[] parentList = new String[]{"十月", "九月", "八月"};
-//    private List<String> childrenList1 = new ArrayList<>();
-//    private List<String> childrenList2 = new ArrayList<>();
-//    private List<String> childrenList3 = new ArrayList<>();
 
     @Override
     public void initView() {
@@ -46,7 +32,7 @@ public class AccountDetailActivity extends AppBaseActivity {
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("账户名称");
+        actionBar.setTitle(getIntent().getStringExtra(ACCOUNT_NAME));
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
 
@@ -64,6 +50,12 @@ public class AccountDetailActivity extends AppBaseActivity {
 
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        accountDetailPresenter.start();
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.account_detail_menu, menu);
         return super.onCreateOptionsMenu(menu);
@@ -76,6 +68,8 @@ public class AccountDetailActivity extends AppBaseActivity {
             case R.id.transfer_accounts:
                 intent = new Intent(AccountDetailActivity.this,
                         TransferAccountsActivity.class);
+                intent.putExtra(ACCOUNT_NAME, getIntent().getStringExtra(ACCOUNT_NAME));
+                intent.putExtra(ACCOUNT_AMOUNT, getIntent().getStringExtra(ACCOUNT_AMOUNT));
                 startActivity(intent);
                 return true;
 

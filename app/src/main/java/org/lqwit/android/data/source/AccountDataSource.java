@@ -2,6 +2,7 @@ package org.lqwit.android.data.source;
 
 import android.support.annotation.NonNull;
 
+import org.lqwit.android.data.entity.AccountEntry;
 import org.lqwit.android.data.entity.FundFlow;
 import org.lqwit.android.data.entity.Type;
 
@@ -21,6 +22,8 @@ public interface AccountDataSource {
     void saveAccount(AccountCallback callback, String name,
                      String amount, String desc, String iconName);
 
+
+
     interface AccountCallback{
         void saveSuccess();
         void failed(String msg);
@@ -32,6 +35,13 @@ public interface AccountDataSource {
         void onAccountLoaded(List<FundFlow> fundFlows);
 
         void onDataNotAvailable();
+    }
+
+
+    void loadAccountList(LoadAccountListCallback callback);
+    interface LoadAccountListCallback{
+        void loadSuccess(List<AccountEntry> accountEntries);
+        void onDataNotAvaiable();
     }
 
 
