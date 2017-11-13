@@ -1,347 +1,140 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:background="@color/toolbarColor"
+    android:background="@drawable/menu_bg8"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:background="@drawable/home_bg"
-        android:layout_width="match_parent"
-        android:layout_height="240dp"
-        android:layerType="software"
-        android:gravity="bottom"
-        android:orientation="vertical">
+        <RelativeLayout
+            android:id="@+id/home_title"
+            android:layout_marginTop="25dp"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize">
+                <TextView
+                    android:layout_centerInParent="true"
+                    android:textSize="18sp"
+                    android:text="日常账本"
+                    android:textColor="@android:color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <ImageButton
+                    android:layout_alignParentRight="true"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/ic_statictis_white_24dp"
+                    android:layout_width="?attr/actionBarSize"
+                    android:layout_height="?attr/actionBarSize" />
+        </RelativeLayout>
 
         <LinearLayout
-            android:padding="@dimen/activity_margin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <TextView
-                android:text="本月支出"
-                android:textColor="@android:color/white"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <LinearLayout
-                android:paddingTop="8dp"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+            android:id="@+id/home_layout"
+            android:paddingTop="@dimen/activity_margin"
+            android:layout_below="@id/home_title"
+            android:layout_centerHorizontal="true"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
                 <TextView
-                    android:text="0.00"
+                    android:text="流水结余"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_marginTop="@dimen/text_padding"
+                    android:textStyle="bold"
+                    android:text="￥23034034"
                     android:textColor="@android:color/white"
                     android:textSize="32sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
-                <TextView
-                    android:text="0.00"
-                    android:textColor="@android:color/white"
-                    android:textSize="32sp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-            <LinearLayout
-                android:orientation="horizontal"
-                android:paddingTop="8dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:text="本月可用"
-                    android:textColor="@android:color/white"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:text="5800.00"
-                    android:textColor="@android:color/white"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:text="本月收入"
-                    android:textColor="@android:color/white"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:layout_gravity="right"
-                    android:text="17000.00"
-                    android:textColor="@android:color/white"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
         </LinearLayout>
 
 
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:gravity="center_horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:layout_marginBottom="@dimen/activity_margin"
-            android:layout_marginTop="@dimen/activity_margin"
-            android:id="@+id/home_button_keep_an_account"
-            android:text="记一笔"
-            android:layout_gravity="center"
-            android:layout_marginStart="@dimen/activity_margin"
-            android:layout_marginLeft="@dimen/activity_margin"
-            android:gravity="center"
-            android:paddingTop="@dimen/text_padding"
-            android:paddingBottom="@dimen/text_padding"
-            android:textSize="16sp"
-            android:textColor="@android:color/white"
-            android:background="@drawable/keep_account_left_selector"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="?attr/actionBarSize" />
-        <ImageButton
-            android:background="@drawable/keep_account_right_selector"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:src="@drawable/ic_add_white_24dp"
+        <LinearLayout
+            android:layout_centerInParent="true"
+            android:orientation="vertical"
             android:paddingLeft="@dimen/activity_margin"
             android:paddingRight="@dimen/activity_margin"
-            android:layout_marginRight="@dimen/activity_margin"
-            android:layout_marginEnd="@dimen/activity_margin"
-            android:paddingTop="@dimen/text_padding"
-            android:paddingBottom="@dimen/text_padding"
-            android:textSize="16sp"
-            android:textColor="@android:color/white"
-            android:layout_width="wrap_content"
-            android:layout_height="?attr/actionBarSize" />
-    </LinearLayout>
-
-    <RelativeLayout
-        android:id="@+id/today_fund_flow"
-        android:paddingRight="@dimen/activity_margin"
-        android:paddingEnd="@dimen/activity_margin"
-        android:paddingStart="@dimen/activity_margin"
-        android:paddingLeft="@dimen/activity_margin"
-        android:background="@drawable/item_click_selector"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize">
-        <RelativeLayout
-            android:id="@+id/relative_layout_today"
-            android:layout_width="?attr/actionBarSize"
-            android:layout_height="?attr/actionBarSize">
-            <TextView
-                android:background="@drawable/date_flag_circle"
-                android:text="今"
-                android:textStyle="bold"
-                android:textSize="20sp"
-                android:textColor="@android:color/white"
-                android:layout_centerVertical="true"
-                android:gravity="center"
-                android:layout_width="48dp"
-                android:layout_height="48dp" />
-        </RelativeLayout>
-        <LinearLayout
-            android:layout_toRightOf="@id/relative_layout_today"
-            android:layout_toEndOf="@id/relative_layout_today"
-            android:layout_centerVertical="true"
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <TextView
-                android:text="今天"
-                android:textStyle="bold"
-                android:textColor="@android:color/black"
-                android:textSize="16sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:id="@+id/today_recent_fund_flow"
-                android:paddingTop="4dp"
-                android:textSize="12sp"
-                android:textColor="@color/gray_color"
-                android:text="还没有记过账"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:orientation="vertical"
-            android:gravity="end"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/today_total_expend"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0.00"
-                android:textColor="#b9574a" />
-            <TextView
-                android:id="@+id/today_total_income"
-                android:textColor="#1c865f"
-                android:paddingTop="4dp"
-                android:text="0.00"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-        <View
-            android:layout_alignParentBottom="true"
+            android:paddingStart="@dimen/activity_margin"
+            android:paddingEnd="@dimen/activity_margin"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/divider_line_height"
-            android:background="@color/divider_line_color"/>
-    </RelativeLayout>
-    <RelativeLayout
-        android:id="@+id/week_fund_flow"
-        android:paddingRight="@dimen/activity_margin"
-        android:paddingEnd="@dimen/activity_margin"
-        android:paddingStart="@dimen/activity_margin"
-        android:paddingLeft="@dimen/activity_margin"
-        android:background="@drawable/item_click_selector"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize">
-        <RelativeLayout
-            android:id="@+id/relative_layout_week"
-            android:layout_width="?attr/actionBarSize"
-            android:layout_height="?attr/actionBarSize">
-            <TextView
-                android:background="@drawable/date_flag_circle"
-                android:text="周"
-                android:textStyle="bold"
-                android:textSize="20sp"
-                android:textColor="@android:color/white"
-                android:layout_centerVertical="true"
-                android:gravity="center"
-                android:layout_width="48dp"
-                android:layout_height="48dp" />
-        </RelativeLayout>
-        <LinearLayout
-            android:layout_toRightOf="@id/relative_layout_week"
-            android:layout_toEndOf="@id/relative_layout_week"
-            android:layout_centerVertical="true"
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <TextView
-                android:textStyle="bold"
-                android:textColor="@android:color/black"
-                android:textSize="16sp"
-                android:text="本周"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:paddingTop="4dp"
-                android:textSize="12sp"
-                android:textColor="@color/gray_color"
-                android:text="10月30日-11月05日"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:id="@+id/linearLayout">
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                        <TextView
+                            android:text="今日"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <ProgressBar
+                            android:layout_weight="1"
+                            android:layout_marginLeft="@dimen/activity_margin"
+                            android:layout_marginRight="@dimen/activity_margin"
+                            android:layout_marginStart="@dimen/activity_margin"
+                            android:layout_marginEnd="@dimen/activity_margin"
+                            style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+                            android:secondaryProgress="66"
+                            android:scrollbars="horizontal"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:text="66"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                </LinearLayout>
+                <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:text="今日已花费12元"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <LinearLayout
+                    android:layout_marginTop="@dimen/activity_margin"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                        <TextView
+                            android:text="本月"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <ProgressBar
+                            android:layout_marginLeft="@dimen/activity_margin"
+                            android:layout_marginRight="@dimen/activity_margin"
+                            android:layout_marginStart="@dimen/activity_margin"
+                            android:layout_marginEnd="@dimen/activity_margin"
+                            style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+                            android:layout_weight="1"
+                            android:secondaryProgress="66"
+                            android:scrollbars="horizontal"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:text="2000"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                </LinearLayout>
+                <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:text="本月已花费1238.64元"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:orientation="vertical"
-            android:gravity="end"
+        <ImageButton
+            android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <TextView
-                android:text="0.00"
-                android:textColor="#b9574a"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:textColor="#1c865f"
-                android:paddingTop="4dp"
-                android:text="0.00"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-        <View
             android:layout_alignParentBottom="true"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/divider_line_height"
-            android:background="@color/divider_line_color"/>
-    </RelativeLayout>
-    <RelativeLayout
-        android:id="@+id/month_fund_flow"
-        android:paddingRight="@dimen/activity_margin"
-        android:paddingEnd="@dimen/activity_margin"
-        android:paddingStart="@dimen/activity_margin"
-        android:paddingLeft="@dimen/activity_margin"
-        android:background="@drawable/item_click_selector"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize">
-        <RelativeLayout
-            android:id="@+id/relative_layout_month"
-            android:layout_width="?attr/actionBarSize"
-            android:layout_height="?attr/actionBarSize">
-            <TextView
-                android:background="@drawable/date_flag_circle"
-                android:text="月"
-                android:textStyle="bold"
-                android:textSize="20sp"
-                android:textColor="@android:color/white"
-                android:layout_centerVertical="true"
-                android:gravity="center"
-                android:layout_width="48dp"
-                android:layout_height="48dp" />
-        </RelativeLayout>
-        <LinearLayout
-            android:layout_toRightOf="@id/relative_layout_month"
-            android:layout_toEndOf="@id/relative_layout_month"
-            android:layout_centerVertical="true"
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <TextView
-                android:textStyle="bold"
-                android:textColor="@android:color/black"
-                android:textSize="16sp"
-                android:text="本月"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:paddingTop="4dp"
-                android:textSize="12sp"
-                android:textColor="@color/gray_color"
-                android:text="10月01日-10月31日"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="?attr/actionBarSize"
+            android:id="@+id/home_button_keep_an_account"
+            android:gravity="center"
+            android:src="@drawable/ic_create_white_48dp"
+            android:background="@drawable/keep_account_left_selector" />
 
-        <LinearLayout
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:orientation="vertical"
-            android:gravity="end"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <TextView
-                android:text="0.00"
-                android:textColor="#b9574a"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:paddingTop="4dp"
-                android:text="0.00"
-                android:textColor="#1c865f"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-        <View
-            android:layout_alignParentBottom="true"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/divider_line_height"
-            android:background="@color/divider_line_color"/>
-    </RelativeLayout>
-
-
-
-</LinearLayout>
+</RelativeLayout>
