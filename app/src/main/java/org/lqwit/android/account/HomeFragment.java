@@ -4,7 +4,6 @@ package org.lqwit.android.account;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,9 +16,7 @@ import org.lqwit.android.global.base.AppBaseFragment;
 import org.lqwit.android.global.utils.DateUtils;
 import org.lqwit.android.other.budget.SetBudgetActivity;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,9 +24,7 @@ import butterknife.OnClick;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
@@ -42,6 +37,12 @@ public class HomeFragment extends AppBaseFragment{
     TextView monthBudget;
     @BindView(R.id.tv_home_day_budget)
     TextView dayBudget;
+    @BindView(R.id.account_total_amount)
+    TextView accountTotalAmount;
+    @BindView(R.id.today_expend)
+    TextView todayExpend;
+    @BindView(R.id.month_expend)
+    TextView monthExpend;
     private SQLiteDatabase dbHelper;
 
 
@@ -49,6 +50,7 @@ public class HomeFragment extends AppBaseFragment{
     public View createView() {
         View root = View.inflate(mActivity, R.layout.fragment_home, null);
         ButterKnife.bind(this, root);
+        dbHelper = new DataBaseHelper(mActivity).openSqlDataBase();
         return root;
     }
 
@@ -57,8 +59,73 @@ public class HomeFragment extends AppBaseFragment{
     public void onResume() {
         super.onResume();
         findMonthBudget(DateUtils.formatNoDay(new Date()));
+        findTodayExpend(DateUtils.formatNoYear(new Date()));
+        findTotalAmount();
+        findMonthExpend(DateUtils.formatNoYear(new Date()));
+    }
 
-        findTodayExpend(DateUtils.formatNoDay(new Date()));
+    /**
+     * 查询本月消费
+     * @param yearMonth 年月
+     */
+    private void findMonthExpend(final String yearMonth) {
+        Observable.create(new ObservableOnSubscribe<String>() {
+            @Override
+            public void subscribe(ObservableEmitter<String> e) throws Exception {
+                String sql = "select income_expend_amount from income_expend_record where " +
+                        "income_expend_type = ? and income_expend_date like ?";
+                Cursor cursor = dbHelper.rawQuery(sql, new String[]{ExpendFragment.CONSUME_TYPE.toString(),
+                        yearMonth +"%"});
+                if(cursor != null && cursor.getCount()> 0){
+                    Double todayExpendAmount = 0.00;
+                    while (cursor.moveToNext()) {
+                        String amount = cursor.getString(
+                                cursor.getColumnIndex("income_expend_amount"));
+                        todayExpendAmount += Double.parseDouble(amount);
+                    }
+                    e.onNext(String.valueOf(todayExpendAmount));
+                    cursor.close();
+                }else{
+                    e.onNext("0");
+                }
+                e.onComplete();
+            }
+        }).subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(String s) throws Exception {
+                        monthExpend.setText("本月已消费 " + s + " 元");
+                    }
+                });
+    }
+
+    private void findTotalAmount() {
+        Observable.create(new ObservableOnSubscribe<String>() {
+            @Override
+            public void subscribe(ObservableEmitter<String> e) throws Exception {
+                String sql = "select amount from user_account";
+                Cursor cursor = dbHelper.rawQuery(sql, null);
+                Double totalAmount = 0.00;
+                if(cursor != null && cursor.getCount() > 0){
+                    while (cursor.moveToNext()) {
+                        String amount = cursor.getString(cursor.getColumnIndex("amount"));
+                        totalAmount = totalAmount + Double.parseDouble(amount);
+                    }
+                    e.onNext(String.valueOf(totalAmount));
+                    e.onComplete();
+                    cursor.close();
+                }
+            }
+        })
+        .subscribeOn(Schedulers.newThread())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new Consumer<String>() {
+            @Override
+            public void accept(String s) throws Exception {
+                accountTotalAmount.setText("￥ " + s);
+            }
+        });
     }
 
 
@@ -85,49 +152,33 @@ public class HomeFragment extends AppBaseFragment{
      * @param noDay
      */
     private void findTodayExpend(final String noDay){
-        Observable.create(new ObservableOnSubscribe<List<String>>() {
+        Observable.create(new ObservableOnSubscribe<String>() {
             @Override
-            public void subscribe(ObservableEmitter<List<String>> e) throws Exception {
-                List<String> amounts = new ArrayList<>();
-                String sql = "select * from income_expend_record where " +
+            public void subscribe(ObservableEmitter<String> e) throws Exception {
+                String sql = "select income_expend_amount from income_expend_record where " +
                         "income_expend_type = ? and income_expend_date = ?";
                 Cursor cursor = dbHelper.rawQuery(sql, new String[]{ExpendFragment.CONSUME_TYPE.toString(),
                         noDay});
                 if(cursor != null && cursor.getCount()> 0){
-                    String amount = cursor.getString(
-                            cursor.getColumnIndex("income_expend_amount"));
-                    amounts.add(amount);
-                    e.onNext(amounts);
-                    e.onComplete();
+                    Double todayExpendAmount = 0.00;
+                    while (cursor.moveToNext()) {
+                        String amount = cursor.getString(
+                                cursor.getColumnIndex("income_expend_amount"));
+                        todayExpendAmount += Double.parseDouble(amount);
+                    }
+                    e.onNext(String.valueOf(todayExpendAmount));
                     cursor.close();
                 }else{
-                    e.onError(new Throwable());
+                    e.onNext("0");
                 }
+                e.onComplete();
             }
         }).subscribeOn(Schedulers.newThread())
         .observeOn(AndroidSchedulers.mainThread())
-        .subscribe(new Observer<List<String>>() {
+        .subscribe(new Consumer<String>() {
             @Override
-            public void onSubscribe(Disposable d) {
-
-            }
-
-            @Override
-            public void onNext(List<String> strings) {
-                for (String string :
-                        strings) {
-                    Log.d(TAG, string);
-                }
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                Log.d(TAG, "今日无交易");
-            }
-
-            @Override
-            public void onComplete() {
-
+            public void accept(String s) throws Exception {
+                todayExpend.setText("今日已消费 " + s + " 元");
             }
         });
     }
@@ -144,13 +195,12 @@ public class HomeFragment extends AppBaseFragment{
                         String budget = cursor.getString(
                                 cursor.getColumnIndex("budget_amount"));
                         e.onNext(budget);
-                        e.onComplete();
                     }
                     cursor.close();
                 }else{
                     e.onNext("0");
-                    e.onComplete();
                 }
+                e.onComplete();
             }
         }).subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
