@@ -1,77 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:orientation="vertical"
+<LinearLayout android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/toolbarColor"
+    android:background="@color/colorPrimary"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <RelativeLayout
-        android:background="@color/colorPrimary"
+    <android.support.design.widget.AppBarLayout
+        app:elevation="0dp"
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize">
-        <ImageView
-            android:id="@+id/expend_income_back"
-            android:padding="@dimen/activity_margin"
-            android:src="@drawable/ic_arrow_white_black_24dp"
-            android:layout_centerVertical="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content">
 
-        <RadioGroup
-            android:layout_centerInParent="true"
-            android:orientation="horizontal"
-            android:background="@drawable/edittext_rect_border"
-            android:layout_width="wrap_content"
-            android:layout_height="32dp">
-            <RadioButton
-                android:id="@+id/radio_expend"
-                android:text="支出"
-                android:checked="true"
-                android:textColor="@color/text_color_selector"
-                android:background="@drawable/left_radio_checked_selector"
-                android:paddingLeft="@dimen/activity_margin"
-                android:paddingStart="@dimen/activity_margin"
-                android:paddingRight="@dimen/activity_margin"
-                android:paddingEnd="@dimen/activity_margin"
-                android:paddingTop="4dp"
-                android:paddingBottom="4dp"
-                android:button="@null"
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            style="@style/Toolbar"
+            app:navigationIcon="@drawable/ic_arrow_white_black_24dp"
+            app:titleTextColor="@android:color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" >
+
+            <TextView
+                android:id="@+id/change_income_expend"
+                android:layout_gravity="end"
+                android:gravity="center"
+                android:padding="@dimen/activity_margin"
+                android:drawablePadding="@dimen/text_padding"
+                android:drawableLeft="@drawable/ic_change_white_24dp"
+                android:drawableStart="@drawable/ic_change_white_24dp"
+                android:textColor="@android:color/white"
+                android:text="@string/change_income_expend"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
-            <View
-                android:layout_width="0.3dp"
-                android:layout_height="match_parent"
-                android:background="@color/lineDividerColor"/>
-            <RadioButton
-                android:id="@+id/radio_income"
-                android:text="收入"
-                android:background="@drawable/right_radio_checked_selector"
-                android:textColor="@color/text_color_selector"
-                android:paddingTop="4dp"
-                android:paddingBottom="4dp"
-                android:paddingLeft="@dimen/activity_margin"
-                android:paddingStart="@dimen/activity_margin"
-                android:paddingRight="@dimen/activity_margin"
-                android:paddingEnd="@dimen/activity_margin"
-                android:button="@null"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
-        </RadioGroup>
-    </RelativeLayout>
+                android:layout_height="wrap_content" />
+        </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="0.3dp"
         android:background="@color/lineDividerColor"/>
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewpager_keep_an_accounts"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+   <FrameLayout
+       android:background="@android:color/white"
+       android:id="@+id/keep_an_account_container"
+       android:layout_width="match_parent"
+       android:layout_height="0dp"
+       android:layout_weight="1">
 
-    </android.support.v4.view.ViewPager>
+   </FrameLayout>
 
 </LinearLayout>

@@ -9,11 +9,16 @@ import org.lqwit.android.global.base.BaseView;
 
 public interface SetBudgetContract {
 
+    String UPDATE = "budget_update";
+    String QUERY = "budget_query";
+
     interface View extends BaseView<Presenter>{
 
+        void showSuccessView(String budget, String flag);
     }
 
     interface Presenter extends BasePresenter{
 
+        void saveMonthBudget(String amount);
     }
 }

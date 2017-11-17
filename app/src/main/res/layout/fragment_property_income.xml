@@ -38,8 +38,6 @@
     </LinearLayout>
 
     <View
-        android:layout_marginEnd="@dimen/activity_margin"
-        android:layout_marginStart="@dimen/activity_margin"
         android:layout_width="match_parent"
         android:layout_height="@dimen/divider_line_height"
         android:background="@color/divider_line_color"/>
@@ -50,8 +48,6 @@
         android:layout_weight="1"/>
 
     <View
-        android:layout_marginEnd="@dimen/activity_margin"
-        android:layout_marginStart="@dimen/activity_margin"
         android:layout_width="match_parent"
         android:layout_height="@dimen/divider_line_height"
         android:background="@color/divider_line_color"/>
@@ -212,6 +208,7 @@
                 <TextView
                     android:id="@+id/number_key_income_clear"
                     android:text="@string/num_clear"
+                    android:textSize="@dimen/xx_normal_size"
                     style="@style/NumKeyStyle"/>
                 <View
                     android:layout_width="@dimen/divider_line_height"
@@ -241,6 +238,7 @@
             <TextView
                 android:id="@+id/number_key_income_delete"
                 android:text="@string/num_delete"
+                android:textSize="@dimen/xx_normal_size"
                 style="@style/NumDeleteConfirmStyle"
                 tools:ignore="NestedWeights"/>
             <TextView

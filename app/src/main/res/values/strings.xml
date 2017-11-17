@@ -44,9 +44,9 @@
     <string name="num_nine">9</string>
     <string name="num_zero">0</string>
     <string name="num_point">.</string>
-    <string name="num_delete">del</string>
+    <string name="num_delete">删除</string>
     <string name="num_confirm">确定</string>
-    <string name="num_clear">C</string>
+    <string name="num_clear">清零</string>
     <string name="home_mine_bottom_button">我的</string>
     <string name="home_account_bottom_button">账户</string>
     <string name="home_report_forms_bottom_button">报表</string>
@@ -96,6 +96,17 @@
     <string name="account_name">账户名称</string>
     <string name="account_desc">账户描述</string>
     <string name="account_icon">账户图标</string>
+    <string name="change_income_expend">切换</string>
+    <string name="add">添加</string>
+    <string name="default_account_book">默认账簿</string>
+    <string name="account_total_balance">账户结余</string>
+    <string name="today">今天</string>
+    <string name="month">本月</string>
+    <string name="input_comments_hint">请输入备注</string>
+    <string name="choose_time">选择时间</string>
+    <string name="comment">填写备注</string>
+    <string name="unsupport_comment">暂不支持备注</string>
+    <string name="choose_account">选择账户</string>
 
 
 </resources>

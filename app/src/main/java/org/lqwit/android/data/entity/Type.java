@@ -16,12 +16,21 @@ public class Type {
     private String name;
     private Integer consumeType;
 
+    public Type() {
+    }
+
     public Type(String picName, String name, Integer consumeType) {
         this.picName = picName;
         this.name = name;
         this.consumeType = consumeType;
     }
 
+    public Type(String typeId, String picName, String name, Integer consumeType) {
+        this.typeId = typeId;
+        this.picName = picName;
+        this.name = name;
+        this.consumeType = consumeType;
+    }
 
     public String getTypeId() {
         return typeId;

@@ -4,6 +4,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 
 import org.lqwit.android.R;
+import org.lqwit.android.global.Injection;
 import org.lqwit.android.global.base.AppBaseActivity;
 import org.lqwit.android.global.utils.ActivityUtils;
 
@@ -11,6 +12,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class SetBudgetActivity extends AppBaseActivity {
+
+    private SetBudgetContract.Presenter setBudgetPresenter;
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -32,6 +35,14 @@ public class SetBudgetActivity extends AppBaseActivity {
         }
         ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
                 fragment, R.id.contentFrame);
+
+        setBudgetPresenter = new SetBudgetPresenter(fragment,
+                Injection.provideAccountRepository(this));
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setBudgetPresenter.start();
+    }
 }

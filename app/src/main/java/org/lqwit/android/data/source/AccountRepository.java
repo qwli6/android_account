@@ -59,6 +59,16 @@ public class AccountRepository implements AccountDataSource {
     }
 
     @Override
+    public void findMonthBudget(String noDay, BudgetCallback callback) {
+        localDataSource.findMonthBudget(noDay, callback);
+    }
+
+    @Override
+    public void saveMonthBudget(String amount, BudgetCallback callback) {
+        localDataSource.saveMonthBudget(amount, callback);
+    }
+
+    @Override
     public void loadAccountList(LoadAccountListCallback callback) {
         localDataSource.loadAccountList(callback);
     }

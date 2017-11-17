@@ -1,19 +1,14 @@
 package org.lqwit.android.account.list;
 
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.view.LayoutInflater;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import org.lqwit.android.R;
-import org.lqwit.android.account.detail.AccountDetailActivity;
 import org.lqwit.android.data.entity.AccountEntry;
 import org.lqwit.android.data.source.local.DataBaseHelper;
 import org.lqwit.android.global.base.AppBaseFragment;
@@ -43,8 +38,8 @@ import io.reactivex.schedulers.Schedulers;
 
 public class AccountListFragment extends AppBaseFragment implements DeleteDialog.DeleteListener{
 
-    @BindView(R.id.account_list_view)
-    ListView accountListView;
+    @BindView(R.id.account_list)
+    RecyclerView accountList;
 
 
     @Override
@@ -68,15 +63,11 @@ public class AccountListFragment extends AppBaseFragment implements DeleteDialog
                     List<AccountEntry> accounts = new ArrayList<>();
                     while (cursor.moveToNext()){
                            String name = cursor.getString(cursor.getColumnIndex("name"));
-                           String desc = cursor.getString(cursor.getColumnIndex("desc"));
                            String amount = CurrencyUtils.formatAmount(cursor.getString(cursor.getColumnIndex("amount")));
-                           String picName = cursor.getString(cursor.getColumnIndex("pic_name"));
-                        Integer id = cursor.getInt(cursor.getColumnIndex("_id"));
-                        AccountEntry account = new AccountEntry();
-                           account.setPicName(picName);
+                            Integer id = cursor.getInt(cursor.getColumnIndex("_id"));
+                            AccountEntry account = new AccountEntry();
                            account.setName(name);
                            account.setAmount(amount);
-                           account.setDesc(desc);
                            account.setId(id);
                            accounts.add(account);
                     }
@@ -90,33 +81,15 @@ public class AccountListFragment extends AppBaseFragment implements DeleteDialog
                 .subscribe(new Consumer<List<AccountEntry>>() {
             @Override
             public void accept(final List<AccountEntry> accounts) throws Exception {
-                accountListView.setAdapter(new AccountListAdapter(accounts));
-                accountListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Intent intent = new Intent(getActivity(), AccountDetailActivity.class);
-                        AccountEntry accountEntry = accounts.get(position);
-                        intent.putExtra(AccountDetailActivity.ACCOUNT_ID,
-                                accountEntry.getId());
-                        intent.putExtra(AccountDetailActivity.ACCOUNT_AMOUNT,
-                                accountEntry.getAmount());
-                        intent.putExtra(AccountDetailActivity.ACCOUNT_NAME,
-                                accountEntry.getName());
-                        startActivity(intent);
-                    }
-                });
-
-                accountListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-                    @Override
-                    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                        AccountEntry account = accounts.get(position);
-                        DeleteDialog deleteDialog = new DeleteDialog();
-                        deleteDialog.show(getChildFragmentManager(), "account_fragment_delete");
-                        return true;
-                    }
-                });
+                for (int i = 0; i < accounts.size(); i++) {
+                    System.out.println(accounts.get(i).getName());
+                }
+                LinearLayoutManager layoutManager = new LinearLayoutManager(mActivity);
+                accountList.setLayoutManager(layoutManager);
+                accountList.setAdapter(new AccountListAdapter(accounts));
             }
         });
+
     }
 
 
@@ -130,7 +103,7 @@ public class AccountListFragment extends AppBaseFragment implements DeleteDialog
     }
 
 
-   class AccountListAdapter extends BaseAdapter{
+   class AccountListAdapter extends RecyclerView.Adapter<AccountListAdapter.AccountViewHolder>{
 
        List<AccountEntry> accounts;
 
@@ -139,35 +112,34 @@ public class AccountListFragment extends AppBaseFragment implements DeleteDialog
        }
 
        @Override
-       public int getCount() {
+       public AccountViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+           View item = ViewUtils.inflate(R.layout.layout_account_item);
+           return new AccountViewHolder(item);
+       }
+
+       @Override
+       public void onBindViewHolder(AccountViewHolder holder, int position) {
+            holder.bindData(accounts.get(position));
+       }
+
+       @Override
+       public int getItemCount() {
            return accounts.size();
        }
 
-       @Override
-       public Object getItem(int position) {
-           return accounts.get(position);
-       }
+       class AccountViewHolder extends RecyclerView.ViewHolder{
+           TextView accountName;
+           TextView accountAmount;
+           public AccountViewHolder(View itemView) {
+               super(itemView);
+               accountName = itemView.findViewById(R.id.account_name);
+               accountAmount = itemView.findViewById(R.id.account_amount);
+           }
 
-       @Override
-       public long getItemId(int position) {
-           return position;
-       }
-
-       @Override
-       public View getView(int position, View convertView, ViewGroup parent) {
-
-           AccountEntry account = accounts.get(position);
-           View view = LayoutInflater.from(parent.getContext()).
-                   inflate(R.layout.layout_account_item, null);
-           TextView accountName = view.findViewById(R.id.account_name);
-           TextView accountDesc = view.findViewById(R.id.account_desc);
-           TextView accountAmount = view.findViewById(R.id.account_amount);
-           ImageView accountImg = view.findViewById(R.id.account_image_title);
-           accountName.setText(account.getName());
-           accountDesc.setText(account.getDesc());
-           accountAmount.setText(account.getAmount());
-           accountImg.setImageBitmap(ViewUtils.decodeBitmap(account.getPicName()));
-           return view;
+           public void bindData(AccountEntry accountEntry){
+               accountName.setText(accountEntry.getName());
+               accountAmount.setText(accountEntry.getAmount());
+           }
        }
    }
 }

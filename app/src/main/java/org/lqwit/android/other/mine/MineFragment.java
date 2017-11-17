@@ -1,14 +1,10 @@
 package org.lqwit.android.other.mine;
 
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import org.lqwit.android.R;
+import org.lqwit.android.global.base.AppBaseFragment;
 import org.lqwit.android.other.feedback.QuestionFeedBackActivity;
 import org.lqwit.android.other.setting.SettingActivity;
 import org.lqwit.android.type.manager.TypeManagerActivity;
@@ -24,14 +20,13 @@ import butterknife.OnClick;
  * Desc:
  */
 
-public class MineFragment extends Fragment {
+public class MineFragment extends AppBaseFragment {
 
     private static final String TAG = "MineFragment";
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home_me, null);
+    public View createView() {
+        View view = View.inflate(getActivity(), R.layout.fragment_home_me, null);
         ButterKnife.bind(this, view);
         return view;
     }

@@ -37,7 +37,7 @@
         <activity android:name=".account.list.AccountListActivity" />
         <activity android:name=".account.add.AddAccountActivity" />
         <activity android:name=".account.add.icon.ChooseAccountIconActivity" />
-        <activity android:name=".account.transfer.TransferAccountsActivity"></activity>
+        <activity android:name=".account.transfer.TransferAccountsActivity"/>
     </application>
 
 </manifest>

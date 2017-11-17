@@ -2,31 +2,21 @@ package org.lqwit.android.global.utils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class DateUtils {
 
-    /**
-     * 将日期类型转换成对应的模式字符串
-     * @param sourceDate  原日期
-     * @param pattern 转换模式
-     * @return
-     * @throws Exception
-     */
-    public static String format(Date sourceDate, String pattern) throws Exception{
-        SimpleDateFormat dateFormat = new SimpleDateFormat(pattern);
-        return dateFormat.format(sourceDate);
-    }
-
 
     public static String format(Date date){
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        return sdf.format(date);
+        return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA).format(date);
     }
 
     public static String formatNoYear(Date date){
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String format = sdf.format(date);
-        return format;
+        return new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA).format(date);
+    }
+
+    public static String formatNoDay(Date date){
+        return new SimpleDateFormat("yyyy-MM", Locale.CHINA).format(date);
     }
 
     public static String format2(String format) {

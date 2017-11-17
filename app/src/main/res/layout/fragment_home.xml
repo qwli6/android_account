@@ -1,5 +1,4 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:background="@drawable/menu_bg8"
     android:layout_width="match_parent"
@@ -13,12 +12,13 @@
                 <TextView
                     android:layout_centerInParent="true"
                     android:textSize="18sp"
-                    android:text="日常账本"
+                    android:text="@string/default_account_book"
                     android:textColor="@android:color/white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <ImageButton
                     android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
                     android:background="@android:color/transparent"
                     android:src="@drawable/ic_statictis_white_24dp"
                     android:layout_width="?attr/actionBarSize"
@@ -36,7 +36,7 @@
             android:layout_height="wrap_content">
 
                 <TextView
-                    android:text="流水结余"
+                    android:text="@string/account_total_balance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView
@@ -65,7 +65,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                         <TextView
-                            android:text="今日"
+                            android:text="@string/today"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
                         <ProgressBar
@@ -80,14 +80,16 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content" />
                         <TextView
-                            android:text="66"
-                            android:layout_width="wrap_content"
+                            android:id="@+id/tv_home_day_budget"
+                            android:textSize="14sp"
+                            android:layout_width="72dp"
                             android:layout_height="wrap_content" />
 
                 </LinearLayout>
                 <TextView
                     android:layout_gravity="center_horizontal"
                     android:text="今日已花费12元"
+                    android:textSize="14sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -97,7 +99,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                         <TextView
-                            android:text="本月"
+                            android:text="@string/month"
+                            android:textSize="14sp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
                         <ProgressBar
@@ -106,20 +109,25 @@
                             android:layout_marginStart="@dimen/activity_margin"
                             android:layout_marginEnd="@dimen/activity_margin"
                             style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+                            android:secondaryProgressTint="@color/colorPrimary"
                             android:layout_weight="1"
                             android:secondaryProgress="66"
                             android:scrollbars="horizontal"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content" />
                         <TextView
-                            android:text="2000"
+                            android:id="@+id/tv_home_set_budget"
+                            android:ellipsize="end"
+                            android:singleLine="true"
+                            android:textSize="14sp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
 
                 </LinearLayout>
                 <TextView
                     android:layout_gravity="center_horizontal"
-                    android:text="本月已花费1238.64元"
+                    android:text="本月已花费 1238.64 元"
+                    android:textSize="14sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -127,11 +135,11 @@
         </LinearLayout>
 
         <ImageButton
+            android:layout_marginTop="?attr/actionBarSize"
+            android:layout_below="@id/linearLayout"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="?attr/actionBarSize"
             android:id="@+id/home_button_keep_an_account"
             android:gravity="center"
             android:src="@drawable/ic_create_white_48dp"

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:tools="http://schemas.android.com/tools"
+                android:background="@color/toolbarColor"
                 android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
@@ -209,6 +210,7 @@
                 <TextView
                     android:id="@+id/number_key_clear"
                     android:text="@string/num_clear"
+                    android:textSize="@dimen/xx_normal_size"
                     style="@style/NumKeyStyle"/>
                 <View
                     android:layout_width="@dimen/divider_line_height"
@@ -238,6 +240,7 @@
             <TextView
                 android:id="@+id/number_key_delete"
                 android:text="@string/num_delete"
+                android:textSize="@dimen/xx_normal_size"
                 style="@style/NumDeleteConfirmStyle"
                 tools:ignore="NestedWeights"/>
             <TextView

@@ -23,7 +23,6 @@ public interface AccountDataSource {
                      String amount, String desc, String iconName);
 
 
-
     interface AccountCallback{
         void saveSuccess();
         void failed(String msg);
@@ -55,6 +54,16 @@ public interface AccountDataSource {
 
 
     void saveFundFlow(@NonNull FundFlow fundFlow);
+
+
+    void findMonthBudget(String noDay, BudgetCallback callback);
+    void saveMonthBudget(String amount, BudgetCallback callback);
+
+    interface BudgetCallback{
+       void queryBudgetSuccess(String budget);
+       void saveBudgetSuccess(String budget);
+    }
+
 
 
 }

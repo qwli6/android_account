@@ -1,17 +1,14 @@
 package org.lqwit.android.other.budget;
 
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
+import android.support.annotation.NonNull;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import org.lqwit.android.R;
-import org.lqwit.android.global.config.Config;
+import org.lqwit.android.global.base.AppBaseFragment;
+import org.lqwit.android.global.utils.ActivityUtils;
 import org.lqwit.android.global.utils.CurrencyUtils;
 import org.lqwit.android.global.utils.ViewUtils;
 
@@ -19,7 +16,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class SetBudgetFragment extends Fragment {
+public class SetBudgetFragment extends AppBaseFragment implements SetBudgetContract.View {
+
+    private SetBudgetContract.Presenter presenter;
 
     private StringBuilder content;
 
@@ -60,10 +59,10 @@ public class SetBudgetFragment extends Fragment {
     }
 
 
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_set_budget, container, false);
+    public View createView() {
+        View root = View.inflate(mActivity, R.layout.fragment_set_budget, null);
         ButterKnife.bind(this, root);
         content = new StringBuilder();
         return root;
@@ -148,15 +147,32 @@ public class SetBudgetFragment extends Fragment {
                 if(budget.equals(getString(R.string.num_zero)) || budget.equals("0.0") || budget.equals("0.00")){
                     ViewUtils.showToastSafe(R.string.money_not_blank);
                 }
-                Intent intent = new Intent();
-                intent.putExtra(Config.BUDGET, budget);
-//                setResult(RESULT_OK, intent);
-//                finish();
-//                Toast.makeText(this, "save to database", Toast.LENGTH_SHORT).show();
+                presenter.saveMonthBudget(budget);
                 break;
             default:
                 break;
         }
     }
 
+    @Override
+    public void setPresenter(@NonNull SetBudgetContract.Presenter presenter) {
+        this.presenter = ActivityUtils.checkNotNull(presenter);
+    }
+
+    @Override
+    public void showSuccessView(String budget, String flag) {
+        switch (flag){
+            case SetBudgetContract.QUERY:
+                content.append(budget);
+                showBudgetMoney.setText(budget);
+                break;
+            case SetBudgetContract.UPDATE:
+                ViewUtils.showCustomToast("预算更新成功");
+                mActivity.finish();
+                break;
+                default:
+                    break;
+        }
+
+    }
 }

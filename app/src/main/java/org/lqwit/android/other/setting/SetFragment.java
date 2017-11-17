@@ -67,10 +67,10 @@ public class SetFragment extends Fragment implements SetContract.View{
                     }
                 });
 
-                builder.setNegativeButton(R.string.confirm_text, new DialogInterface.OnClickListener() {
+                builder.setNegativeButton(R.string.cancel_text, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
+                        dialog.dismiss();
                     }
                 });
 

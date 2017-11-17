@@ -7,7 +7,7 @@
     <TextView
         android:id="@+id/choose_user_account_title"
         android:gravity="center"
-        android:text="选择账户"
+        android:text="@string/choose_account"
         android:textColor="@color/toolbarTextColor"
         android:textSize="18sp"
         android:layout_width="match_parent"

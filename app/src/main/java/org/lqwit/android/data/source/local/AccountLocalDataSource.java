@@ -12,8 +12,10 @@ import org.lqwit.android.data.entity.Type;
 import org.lqwit.android.data.schema.PersistenceContract;
 import org.lqwit.android.data.source.AccountDataSource;
 import org.lqwit.android.global.utils.ActivityUtils;
+import org.lqwit.android.global.utils.DateUtils;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import io.reactivex.Observable;
@@ -28,6 +30,8 @@ import io.reactivex.schedulers.Schedulers;
  * invoked sqlite database directy
  */
 public class AccountLocalDataSource implements AccountDataSource {
+
+    private static final String TAG = "AccountLocalDataSource";
 
     private static AccountLocalDataSource INSTANCE;
     private DataBaseHelper mDbHelper;
@@ -106,6 +110,67 @@ public class AccountLocalDataSource implements AccountDataSource {
         db.insert(PersistenceContract.AccountEntry.TABLE_NAME, null, contentValues);
         db.close();
         callback.saveSuccess();
+    }
+
+
+    /**
+     * query month budget
+     * @param noDay
+     */
+    @Override
+    public void findMonthBudget(final String noDay, final BudgetCallback callback) {
+
+        Observable.create(new ObservableOnSubscribe<String>() {
+            @Override
+            public void subscribe(ObservableEmitter<String> e) throws Exception {
+                String sql = "select * from month_budget where budget_date = ?";
+                SQLiteDatabase db = mDbHelper.openSqlDataBase();
+                Cursor cursor = db.rawQuery(sql, new String[]{noDay});
+                if(cursor != null && cursor.getCount() > 0) {
+                    while (cursor.moveToNext()) {
+                        String budget = cursor.getString(
+                                cursor.getColumnIndex("budget_amount"));
+                        e.onNext(budget);
+                        e.onComplete();
+                    }
+                    cursor.close();
+                }else{
+                    e.onNext("0");
+                    e.onComplete();
+                }
+            }
+        }).subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(String s) throws Exception {
+                        callback.queryBudgetSuccess(s);
+                    }
+                });
+
+    }
+
+    @Override
+    public void saveMonthBudget(final String amount , final BudgetCallback callback) {
+        Observable.create(new ObservableOnSubscribe<String>() {
+            @Override
+            public void subscribe(ObservableEmitter<String> e) throws Exception {
+                String sql = "update month_budget set budget_amount = ? where budget_date = ?";
+                String noday = DateUtils.formatNoDay(new Date());
+                SQLiteDatabase db = mDbHelper.openSqlDataBase();
+                db.execSQL(sql,  new String[]{amount, noday});
+                e.onNext(amount);
+                e.onComplete();
+            }
+        }).subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(String s) throws Exception {
+                        callback.saveBudgetSuccess(s);
+                    }
+                });
+
     }
 
     @Override

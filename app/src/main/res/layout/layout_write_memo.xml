@@ -1,34 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:clipToPadding="true"
-    android:fitsSystemWindows="true"
     android:background="@color/toolbarColor"
-    android:padding="@dimen/activity_margin"
     android:layout_height="wrap_content">
 
-    <EditText
-        android:id="@+id/feedback_content"
-        android:padding="@dimen/text_padding"
-        android:background="@android:color/transparent"
-        android:gravity="top"
+    <TextView
+        android:gravity="center"
+        android:text="@string/comment"
         android:textSize="18sp"
-        android:hint="输入备注(字数尽量简洁)"
         android:layout_width="match_parent"
-        android:layout_height="90dp"/>
+        android:layout_height="?attr/actionBarSize" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.3dp"
+        android:background="@color/lineDividerColor"/>
 
     <LinearLayout
         android:orientation="horizontal"
+        android:padding="@dimen/activity_margin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <Button
-            android:text="取消"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <Button
-            android:text="提交"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/comment_content"
+            android:background="@drawable/edittext_rect_border"
+            android:paddingLeft="@dimen/activity_margin"
+            android:paddingRight="@dimen/activity_margin"
+            android:paddingStart="@dimen/activity_margin"
+            android:paddingEnd="@dimen/activity_margin"
+            android:gravity="center|start"
+            android:textSize="16sp"
+            android:hint="@string/input_comments_hint"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="40dp"/>
+        <TextView
+            android:id="@+id/comment_complete"
+            android:layout_marginLeft="@dimen/text_padding"
+            android:layout_marginStart="@dimen/text_padding"
+            android:gravity="center"
+            android:text="@string/confirm_text"
+            android:background="@drawable/button_selector"
+            android:textColor="@android:color/white"
+            android:layout_width="?attr/actionBarSize"
+            android:layout_height="40dp" />
     </LinearLayout>
-
 </LinearLayout>

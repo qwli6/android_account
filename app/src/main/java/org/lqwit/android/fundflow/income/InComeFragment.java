@@ -3,28 +3,32 @@ package org.lqwit.android.fundflow.income;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
+import android.support.design.widget.BottomSheetDialog;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.lqwit.android.R;
-import org.lqwit.android.type.manager.TypeManagerActivity;
-import org.lqwit.android.type.adapter.TypeAdapter;
-import org.lqwit.android.data.source.local.DataBaseHelper;
+import org.lqwit.android.data.entity.AccountEntry;
 import org.lqwit.android.data.entity.Type;
-import org.lqwit.android.type.listenter.OnItemClickListener;
+import org.lqwit.android.data.source.local.DataBaseHelper;
+import org.lqwit.android.fundflow.ChooseAccountAdapter;
+import org.lqwit.android.fundflow.expend.ExpendFragment;
+import org.lqwit.android.global.base.AppBaseFragment;
 import org.lqwit.android.global.utils.CurrencyUtils;
 import org.lqwit.android.global.utils.DateUtils;
 import org.lqwit.android.global.utils.ViewUtils;
+import org.lqwit.android.type.adapter.TypeAdapter;
+import org.lqwit.android.type.listenter.OnItemClickListener;
+import org.lqwit.android.type.manager.TypeManagerActivity;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -33,6 +37,12 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Author: liqiwen
@@ -42,12 +52,11 @@ import butterknife.OnClick;
  * Desc:
  */
 
-public class InComeFragment extends Fragment {
+public class InComeFragment extends AppBaseFragment {
     private static final String TAG = "InComeFragment";
-    private static int consume_type = 1; //支出
+    private static int CONSUME_TYPE = 0; //支出
     private int curPosition = 0; //当前位置
 
-    private List<Type> typeList;
 
     @BindView(R.id.keep_an_account_income_type_recycleview)
     RecyclerView incomeTypeRecycleView;
@@ -89,56 +98,31 @@ public class InComeFragment extends Fragment {
     EditText showMoney;
 
 
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_property_income, null);
+    private List<Type> typeList;
+    private RecyclerView chooseUserAccountRecycler;
+    private List<AccountEntry> accounts;
+    private SQLiteDatabase dbHelper;
+    private TypeAdapter typeAdapter;
+    private ChooseAccountAdapter accountAdapter;
+    private BottomSheetDialog accountDialog;
+    private BottomSheetDialog dateDialog;
+    private BottomSheetDialog commentDialog;
 
+
+    @Override
+    public View createView() {
+
+        View view = View.inflate(mActivity, R.layout.fragment_property_income, null);
         ButterKnife.bind(this, view);
+        dbHelper = new DataBaseHelper(mActivity).openSqlDataBase();
         content  = new StringBuilder();
         incomeDate.setText(DateUtils.formatNoYear(new Date()));
-        initData();
         return view;
     }
 
     public void initData(){
-        typeList = new ArrayList<>();
-
-
-        DataBaseHelper dataBaseHelper = new DataBaseHelper(getActivity());
-        SQLiteDatabase sqLiteDatabase = dataBaseHelper.openSqlDataBase();
-        String sql = "select * from account_type where type = ?";
-        Cursor cursor = sqLiteDatabase.rawQuery(sql, new String[]{String.valueOf(0)});
-        while (cursor.moveToNext()){
-            String name = cursor.getString(cursor.getColumnIndex("name"));
-            String picName = cursor.getString(cursor.getColumnIndex("pic_name"));
-            typeList.add(new Type(picName, name, 0));
-        }
-
-        GridLayoutManager manager = new GridLayoutManager(getActivity(),5);
-        incomeTypeRecycleView.setLayoutManager(manager);
-        TypeAdapter adapter = new TypeAdapter(typeList);
-        incomeTypeRecycleView.setAdapter(adapter);
-
-        incomePic.setImageBitmap(ViewUtils.decodeBitmap(typeList.get(0).getPicName()));
-        incomeTitle.setText(typeList.get(0).getName());
-
-
-        adapter.setOnTypeClickListener(new OnItemClickListener() {
-            @Override
-            public void onTypeClick(View view, int postion) {
-                if(postion != typeList.size() - 1) {
-                    Type type = typeList.get(postion);
-                    incomePic.setImageBitmap(ViewUtils.decodeBitmap(type.getPicName()));
-                    incomeTitle.setText(type.getName());
-                    curPosition = postion;
-                }else{
-                    Intent intent = new Intent(getActivity(), TypeManagerActivity.class);
-                    intent.putExtra(TypeManagerActivity.TYPE_MANAGER, TypeManagerActivity.TYPE_MANAGER_INCOME);
-                    startActivity(intent);
-                }
-            }
-        });
+        initTypeData();
+        initAccountData();
     }
 
 
@@ -233,15 +217,181 @@ public class InComeFragment extends Fragment {
                 }
                 break;
             case R.id.income_type:
+                chooseAccount();
                 break;
             case R.id.income_date:
+                chooseDate();
                 break;
             case R.id.income_memo:
-                ViewUtils.showToastSafe(R.string.unsupport_memo);
+                Toast.makeText(mActivity, "xx", Toast.LENGTH_LONG).show();
+//                ViewUtils.showToastSafe(R.string.unsupport_comment);
                 break;
             default:
                 break;
         }
+    }
+
+    public static Fragment newInstance() {
+        return new InComeFragment();
+    }
+
+
+
+    private void initAccountData(){
+        Observable.create(new ObservableOnSubscribe<List<AccountEntry>>() {
+            @Override
+            public void subscribe(ObservableEmitter<List<AccountEntry>> e) throws Exception {
+                accounts = new ArrayList<>();
+                String sql = "select * from user_account";
+                Cursor cursor = dbHelper.rawQuery(sql, null);
+                while (cursor.moveToNext()){
+                    Integer accountId = cursor.getInt(
+                            cursor.getColumnIndex("_id"));
+                    String accountName = cursor.getString(
+                            cursor.getColumnIndex("name"));
+                    String accountPrice = cursor.getString(
+                            cursor.getColumnIndex("amount"));
+                    AccountEntry account = new AccountEntry();
+                    account.setId(accountId);
+                    account.setName(accountName);
+                    account.setAmount(accountPrice);
+                    accounts.add(account);
+                    e.onNext(accounts);
+                    e.onComplete();
+                }
+                cursor.close();
+            }
+        }).subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<List<AccountEntry>>() {
+                    @Override
+                    public void accept(List<AccountEntry> accountEntries) throws Exception {
+                        AccountEntry account = accounts.get(0);
+                        incomeType.setText(account.getName());
+                    }
+                });
+    }
+
+    /**
+     * 添加备注弹出框
+     */
+    private void completeComment(){
+        commentDialog = new BottomSheetDialog(mActivity);
+        View memoView = View.inflate(mActivity, R.layout.layout_write_memo, null);
+        TextView commentContent = memoView.findViewById(R.id.comment_content);
+        TextView commentComplete = memoView.findViewById(R.id.comment_complete);
+        commentComplete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        commentDialog.setContentView(memoView);
+        commentDialog.show();
+    }
+
+
+    /**
+     * 选择日期弹出框
+     */
+    private void chooseDate(){
+        dateDialog = new BottomSheetDialog(mActivity);
+        View dateView = View.inflate(mActivity, R.layout.layout_choose_date, null);
+        dateDialog.setContentView(dateView);
+        ViewPager viewPager = dateView.findViewById(R.id.date_choose_viewpager);
+        dateDialog.show();
+
+    }
+
+
+    /**
+     * 初始化收入消费类型
+     */
+    private void initTypeData(){
+        Observable.create(new ObservableOnSubscribe<List<Type>>() {
+            @Override
+            public void subscribe(ObservableEmitter<List<Type>> e) throws Exception {
+                typeList = new ArrayList<>();
+                String sql = "select * from income_expend_type where type = ?";
+                Cursor cursor = dbHelper.rawQuery(sql, new String[]{"0"});
+                while (cursor.moveToNext()){
+                    String name = cursor.getString(
+                            cursor.getColumnIndex("income_expend_name"));
+                    String imageName = cursor.getString(
+                            cursor.getColumnIndex("income_expend_image"));
+                    Type type = new Type(imageName, name, CONSUME_TYPE);
+                    typeList.add(type);
+                }
+                Type type = new Type();
+                type.setPicName(ExpendFragment.ADD_IMAGE_NAME);
+                type.setName(getString(R.string.add));
+                type.setConsumeType(CONSUME_TYPE);
+                typeList.add(type);
+                cursor.close();
+                e.onNext(typeList);
+                e.onComplete();
+            }
+        })
+        .subscribeOn(Schedulers.newThread())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new Consumer<List<Type>>() {
+            @Override
+            public void accept(List<Type> types) throws Exception {
+                GridLayoutManager manager =
+                        new GridLayoutManager(getActivity(),5);
+                incomeTypeRecycleView.setLayoutManager(manager);
+                typeAdapter = new TypeAdapter(types);
+                incomeTypeRecycleView.setAdapter(typeAdapter);
+
+                //初始化默认选中消费类型
+                Type type = typeList.get(0);
+                incomeTitle.setText(type.getName());
+                incomePic.setImageBitmap(ViewUtils.decodeBitmap(type.getPicName()));
+
+                typeAdapter.setOnTypeClickListener(new OnItemClickListener() {
+                    @Override
+                    public void onTypeClick(View view, int postion) {
+                        if (postion != typeList.size() - 1) {
+                            Type type = typeList.get(postion);
+                            incomePic.setImageBitmap(ViewUtils.decodeBitmap(type.getPicName()));
+                            incomeTitle.setText(type.getName());
+                            curPosition = postion;
+                        } else {
+                            Intent intent = new Intent(getActivity(), TypeManagerActivity.class);
+                            intent.putExtra(TypeManagerActivity.TYPE_MANAGER,
+                                    TypeManagerActivity.TYPE_MANAGER_EXPEND);
+                            startActivity(intent);
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+
+    /**
+     * 弹出底部选择账户框
+     */
+    private void chooseAccount() {
+        accountDialog = new BottomSheetDialog(mActivity);
+        View bottomView = View.inflate(mActivity,
+                R.layout.layout_choose_user_account, null);
+        chooseUserAccountRecycler = bottomView.findViewById(R.id.choose_user_account_recyclerview);
+        chooseUserAccountRecycler.setLayoutManager(new LinearLayoutManager(mActivity));
+        if(accounts != null && accounts.size() > 0) {
+            accountAdapter = new ChooseAccountAdapter(accounts);
+            chooseUserAccountRecycler.setAdapter(accountAdapter);
+
+            accountAdapter.setItemClickListener(new OnItemClickListener() {
+                @Override
+                public void onTypeClick(View view, int postion) {
+                    accountDialog.dismiss();
+                    incomeType.setText(accounts.get(postion).getName());
+                }
+            });
+        }
+        accountDialog.setContentView(bottomView);
+        accountDialog.show();
     }
 
 }

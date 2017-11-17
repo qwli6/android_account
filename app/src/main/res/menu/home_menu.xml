@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/home_one"
+        android:icon="@drawable/ic_fund_flow_white_24dp"
+        android:title="记账"/>
+    <item
+        android:id="@+id/home_two"
+        android:icon="@drawable/ic_account_white_24dp"
+        android:title="@string/account"/>
+    <item
+        android:id="@+id/home_three"
+        android:icon="@drawable/ic_chart_white_24dp"
+        android:title="统计"/>
+    <item
+        android:id="@+id/home_four"
+        android:icon="@drawable/ic_more_horiz_white_24dp"
+        android:title="@string/home_mine_bottom_button"/>
+</menu>
